@@ -2,5 +2,5 @@
     "title": "Data",
     "type": "string",
     "pattern": "^0x[a-fA-F0-9]+$",
-    "description": "tst"
+    "description": "test"
 }

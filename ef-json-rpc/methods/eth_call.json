@@ -1,20 +1,40 @@
 {
   "name": "eth_call",
-  "summary": "Executes a function without creating a transaction or mutating state",
-  "description": "",
+  "summary": "Executes a new message call immediately without submitting a transaction to the network",
   "params": [
     {
-      "name": "Address",
-      "required": true,
-      "description": "tst okay",
-      "properties": [{"name": "test" }],
-      "schema": { "$ref": "../schemas/Data.json" }
+      "name": "from",
+      "summary": "transaction sender",
+      "required": true
+    },
+    {
+      "name": "to",
+      "summary": "transaction recipient or null if deploying a contract"
+    },
+    {
+      "name": "gas",
+      "summary": "gas provided for transaction execution"
+    },
+    {
+      "name": "gasPrice",
+      "summary": "price in wei of each gas used"
+    },
+    {
+      "name": "value",
+      "summary": "value in wei sent with this transaction"
+    },
+    {
+      "name": "data",
+      "summary": "contract code or a hashed method call with encoded args"
     }
   ],
   "result": {
-    "name": "EncryptionKey",
+    "name": "test",
     "schema": {
-      "type": "string"
+      "type": "object",
+      "properties": [
+        {"name": "test", "type": "string"}
+      ]
     }
   }
 }
