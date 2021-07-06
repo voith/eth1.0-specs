@@ -1,0 +1,300 @@
+:mod:`ethereum.spec`
+====================
+
+.. py:module:: ethereum.spec
+
+Ethereum Specification
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Entry point for the Ethereum specification.
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.spec.BlockChain
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.spec.state_transition
+   ethereum.spec.verify_header
+   ethereum.spec.apply_body
+   ethereum.spec.compute_ommers_hash
+   ethereum.spec.process_transaction
+   ethereum.spec.validate_transaction
+   ethereum.spec.calculate_intrinsic_cost
+   ethereum.spec.recover_sender
+   ethereum.spec.signing_hash
+   ethereum.spec.print_state
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.spec.BLOCK_REWARD
+
+
+Module Details
+---------------
+
+BLOCK_REWARD
+~~~~~~~~~~~~
+
+.. data:: BLOCK_REWARD
+   
+
+   
+
+
+BlockChain
+~~~~~~~~~~
+
+
+History and current state of the block chain.
+
+
+.. class:: BlockChain
+
+   .. attribute:: blocks
+      :annotation: :List[ethereum.eth_types.Block]
+
+      
+
+   .. attribute:: state
+      :annotation: :ethereum.eth_types.State
+
+      
+
+
+
+state_transition
+~~~~~~~~~~~~~~~~
+
+
+.. function:: state_transition(chain: BlockChain, block: ethereum.eth_types.Block) -> None
+   :noindexentry:
+
+   Attempts to apply a block to an existing block chain.
+
+   :param chain: History and current state.
+   :param block: Block to apply to `chain`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 50-81
+
+verify_header
+~~~~~~~~~~~~~
+
+
+.. function:: verify_header(header: ethereum.eth_types.Header) -> bool
+   :noindexentry:
+
+   Verifies a block header.
+
+   :param header: Header to check for correctness.
+
+   :returns: **verified** -- True if the header is correct, False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 84-98
+
+apply_body
+~~~~~~~~~~
+
+
+.. function:: apply_body(state: ethereum.eth_types.State, coinbase: ethereum.eth_types.Address, block_number: ethereum.base_types.Uint, block_gas_limit: ethereum.base_types.Uint, block_time: ethereum.base_types.U256, block_difficulty: ethereum.base_types.Uint, transactions: List[ethereum.eth_types.Transaction], ommers: List[ethereum.eth_types.Header]) -> Tuple[ethereum.base_types.Uint, ethereum.eth_types.Root, ethereum.eth_types.Root, ethereum.eth_types.State]
+   :noindexentry:
+
+   Executes a block.
+
+   :param state: Current account state.
+   :param coinbase: Address of account which receives block reward and transaction fees.
+   :param block_number: Position of the block within the chain.
+   :param block_gas_limit: Initial amount of gas available for execution in this block.
+   :param block_time: Time the block was produced, measured in seconds since the epoch.
+   :param block_difficulty: Difficulty of the block.
+   :param transactions: Transactions included in the block.
+   :param ommers: Headers of ancestor blocks which are not direct parents (formerly
+                  uncles.)
+
+   :returns: * **gas_available** (`eth1spec.base_types.Uint`) -- Remaining gas after all transactions have been executed.
+             * **root** (`eth1spec.eth_types.Root`) -- State root after all transactions have been executed.
+             * **state** (`eth1spec.eth_types.State`) -- State after all transactions have been executed.
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 101-195
+
+compute_ommers_hash
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: compute_ommers_hash(block: ethereum.eth_types.Block) -> ethereum.eth_types.Hash32
+   :noindexentry:
+
+   Compute hash of ommers list for a block
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 198-202
+
+process_transaction
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: process_transaction(env: ethereum.vm.Environment, tx: ethereum.eth_types.Transaction) -> Tuple[ethereum.base_types.U256, List[ethereum.eth_types.Log]]
+   :noindexentry:
+
+   Execute a transaction against the provided environment.
+
+   :param env: Environment for the Ethereum Virtual Machine.
+   :param tx: Transaction to execute.
+
+   :returns: * **gas_left** (`eth1spec.base_types.U256`) -- Remaining gas after execution.
+             * **logs** (`List[eth1spec.eth_types.Log]`) -- Logs generated during execution.
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 205-250
+
+validate_transaction
+~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: validate_transaction(tx: ethereum.eth_types.Transaction) -> bool
+   :noindexentry:
+
+   Verifies a transaction.
+
+   :param tx: Transaction to validate.
+
+   :returns: **verified** -- True if the transaction can be executed, or False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 253-267
+
+calculate_intrinsic_cost
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: calculate_intrinsic_cost(tx: ethereum.eth_types.Transaction) -> ethereum.base_types.Uint
+   :noindexentry:
+
+   Calculates the intrinsic cost of the transaction that is charged before
+   execution is instantiated.
+
+   :param tx: Transaction to compute the intrinsic cost of.
+
+   :returns: **verified** -- The intrinsic cost of the transaction.
+   :rtype: `eth1spec.base_types.Uint`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 270-293
+
+recover_sender
+~~~~~~~~~~~~~~
+
+
+.. function:: recover_sender(tx: ethereum.eth_types.Transaction) -> ethereum.eth_types.Address
+   :noindexentry:
+
+   Extracts the sender address from a transaction.
+
+   :param tx: Transaction of interest.
+
+   :returns: **sender** -- The address of the account that signed the transaction.
+   :rtype: `eth1spec.eth_types.Address`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 296-326
+
+signing_hash
+~~~~~~~~~~~~
+
+
+.. function:: signing_hash(tx: ethereum.eth_types.Transaction) -> ethereum.eth_types.Hash32
+   :noindexentry:
+
+   Compute the hash of a transaction used in the signature.
+
+   :param tx: Transaction of interest.
+
+   :returns: **hash** -- Hash of the transaction.
+   :rtype: `eth1spec.eth_types.Hash32`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 329-351
+
+print_state
+~~~~~~~~~~~
+
+
+.. function:: print_state(state: ethereum.eth_types.State) -> None
+   :noindexentry:
+
+   Pretty prints the state.
+
+   :param state: Ethereum state.
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 357-378

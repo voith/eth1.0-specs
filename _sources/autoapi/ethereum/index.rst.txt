@@ -1,0 +1,34 @@
+:mod:`ethereum`
+===============
+
+.. py:module:: ethereum
+
+Ethereum Specification
+^^^^^^^^^^^^^^^^^^^^^^
+
+Core specifications for Ethereum clients.
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   vm/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   base_types/index.rst
+   crypto/index.rst
+   eth_types/index.rst
+   rlp/index.rst
+   spec/index.rst
+   trie/index.rst
+
+

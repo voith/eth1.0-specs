@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ethereum.vm.ops &#8212; Ethereum Specification  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="ethereum.vm.stack" href="../stack/index.html" />
+    <link rel="prev" title="ethereum.vm.interpreter" href="../interpreter/index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-ethereum.vm.ops">
+<span id="ethereum-vm-ops"></span><h1><a class="reference internal" href="#module-ethereum.vm.ops" title="ethereum.vm.ops"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.vm.ops</span></code></a><a class="headerlink" href="#module-ethereum.vm.ops" title="Permalink to this headline">¶</a></h1>
+<section id="instruction-encoding-opcodes">
+<h2>Instruction Encoding (Opcodes)<a class="headerlink" href="#instruction-encoding-opcodes" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#module-contents" id="id2">Module Contents</a></p>
+<ul>
+<li><p><a class="reference internal" href="#add" id="id3">ADD</a></p></li>
+<li><p><a class="reference internal" href="#push1" id="id4">PUSH1</a></p></li>
+<li><p><a class="reference internal" href="#sstore" id="id5">SSTORE</a></p></li>
+<li><p><a class="reference internal" href="#op-implementation" id="id6">op_implementation</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>Machine readable representations of EVM instructions, and a mapping to their
+implementations.</p>
+</section>
+<section id="module-contents">
+<h3>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h3>
+<section id="add">
+<h4>ADD<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.vm.ops.ADD">
+<span class="sig-prename descclassname"><span class="pre">ethereum.vm.ops.</span></span><span class="sig-name descname"><span class="pre">ADD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ethereum.vm.ops.ADD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="push1">
+<h4>PUSH1<a class="headerlink" href="#push1" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.vm.ops.PUSH1">
+<span class="sig-prename descclassname"><span class="pre">ethereum.vm.ops.</span></span><span class="sig-name descname"><span class="pre">PUSH1</span></span><em class="property"> <span class="pre">=</span> <span class="pre">96</span></em><a class="headerlink" href="#ethereum.vm.ops.PUSH1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="sstore">
+<h4>SSTORE<a class="headerlink" href="#sstore" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.vm.ops.SSTORE">
+<span class="sig-prename descclassname"><span class="pre">ethereum.vm.ops.</span></span><span class="sig-name descname"><span class="pre">SSTORE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">85</span></em><a class="headerlink" href="#ethereum.vm.ops.SSTORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="op-implementation">
+<h4>op_implementation<a class="headerlink" href="#op-implementation" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.vm.ops.op_implementation">
+<span class="sig-prename descclassname"><span class="pre">ethereum.vm.ops.</span></span><span class="sig-name descname"><span class="pre">op_implementation</span></span><a class="headerlink" href="#ethereum.vm.ops.op_implementation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">Ethereum Specification</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#ethereum-specification">Ethereum Specification</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">API Reference</a><ul>
+  <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
+  <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.vm</span></code></a><ul>
+      <li>Previous: <a href="../interpreter/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.vm.interpreter</span></code></a></li>
+      <li>Next: <a href="../stack/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.vm.stack</span></code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ethereum.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/ethereum/vm/ops/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,100 @@
+:mod:`ethereum.vm.instructions`
+===============================
+
+.. py:module:: ethereum.vm.instructions
+
+Ethereum Virtual Machine (EVM) Instructions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Implementations of the instructions understood by the EVM.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.vm.instructions.add
+   ethereum.vm.instructions.sstore
+   ethereum.vm.instructions.push1
+
+
+
+Module Details
+---------------
+
+add
+~~~
+
+
+.. function:: add(evm: ethereum.vm.Evm) -> None
+   :noindexentry:
+
+   Adds the top two elements of the stack together, and pushes the result back
+   on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/vm/instructions.py
+   :language: python
+   :lines: 28-52
+
+sstore
+~~~~~~
+
+
+.. function:: sstore(evm: ethereum.vm.Evm) -> None
+   :noindexentry:
+
+   Stores a value at a certain key in the current context's storage.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `20000`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/vm/instructions.py
+   :language: python
+   :lines: 55-93
+
+push1
+~~~~~
+
+
+.. function:: push1(evm: ethereum.vm.Evm) -> None
+   :noindexentry:
+
+   Pushes a one-byte immediate onto the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackOverflowError: If `len(stack)` is equals `1024`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/vm/instructions.py
+   :language: python
+   :lines: 96-114

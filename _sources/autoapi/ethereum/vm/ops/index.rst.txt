@@ -1,0 +1,58 @@
+:mod:`ethereum.vm.ops`
+======================
+
+.. py:module:: ethereum.vm.ops
+
+Instruction Encoding (Opcodes)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Machine readable representations of EVM instructions, and a mapping to their
+implementations.
+
+
+Module Contents
+---------------
+
+
+ADD
+~~~
+
+.. data:: ADD
+   :annotation: = 1
+
+   
+
+
+PUSH1
+~~~~~
+
+.. data:: PUSH1
+   :annotation: = 96
+
+   
+
+
+SSTORE
+~~~~~~
+
+.. data:: SSTORE
+   :annotation: = 85
+
+   
+
+
+op_implementation
+~~~~~~~~~~~~~~~~~
+
+.. data:: op_implementation
+   
+
+   
+

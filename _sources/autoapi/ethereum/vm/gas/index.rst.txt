@@ -1,0 +1,102 @@
+:mod:`ethereum.vm.gas`
+======================
+
+.. py:module:: ethereum.vm.gas
+
+Ethereum Virtual Machine (EVM) Gas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+EVM gas constants and calculators.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.vm.gas.subtract_gas
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.vm.gas.GAS_VERY_LOW
+   ethereum.vm.gas.GAS_STORAGE_SET
+   ethereum.vm.gas.GAS_STORAGE_UPDATE
+   ethereum.vm.gas.GAS_STORAGE_CLEAR_REFUND
+
+
+Module Details
+---------------
+
+GAS_VERY_LOW
+~~~~~~~~~~~~
+
+.. data:: GAS_VERY_LOW
+   
+
+   
+
+
+GAS_STORAGE_SET
+~~~~~~~~~~~~~~~
+
+.. data:: GAS_STORAGE_SET
+   
+
+   
+
+
+GAS_STORAGE_UPDATE
+~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_STORAGE_UPDATE
+   
+
+   
+
+
+GAS_STORAGE_CLEAR_REFUND
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_STORAGE_CLEAR_REFUND
+   
+
+   
+
+
+subtract_gas
+~~~~~~~~~~~~
+
+
+.. function:: subtract_gas(gas_left: ethereum.base_types.U256, amount: ethereum.base_types.U256) -> ethereum.base_types.U256
+   :noindexentry:
+
+   Subtracts `amount` from `gas_left`.
+
+   :param gas_left: The amount of gas left in the current frame.
+   :param amount: The amount of gas the current operation requires.
+
+   :raises OutOfGasError: If `gas_left` is less than `amount`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/vm/gas.py
+   :language: python
+   :lines: 24-43
