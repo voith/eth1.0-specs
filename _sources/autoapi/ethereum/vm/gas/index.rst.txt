@@ -39,6 +39,9 @@ Attributes
    ethereum.vm.gas.GAS_STORAGE_SET
    ethereum.vm.gas.GAS_STORAGE_UPDATE
    ethereum.vm.gas.GAS_STORAGE_CLEAR_REFUND
+   ethereum.vm.gas.GAS_LOW
+   ethereum.vm.gas.GAS_MID
+   ethereum.vm.gas.GAS_EXPONENTIATION
 
 
 Module Details
@@ -80,6 +83,33 @@ GAS_STORAGE_CLEAR_REFUND
    
 
 
+GAS_LOW
+~~~~~~~
+
+.. data:: GAS_LOW
+   
+
+   
+
+
+GAS_MID
+~~~~~~~
+
+.. data:: GAS_MID
+   
+
+   
+
+
+GAS_EXPONENTIATION
+~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_EXPONENTIATION
+   
+
+   
+
+
 subtract_gas
 ~~~~~~~~~~~~
 
@@ -99,4 +129,4 @@ subtract_gas
 
 .. undocinclude:: /../src/ethereum/vm/gas.py
    :language: python
-   :lines: 24-43
+   :lines: 27-46

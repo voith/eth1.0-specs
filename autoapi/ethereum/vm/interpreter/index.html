@@ -129,6 +129,7 @@ generated during execution.</p>
         <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
         <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
         <span class="n">refund_counter</span><span class="o">=</span><span class="n">Uint</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">running</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">logs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Log</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -137,10 +138,13 @@ generated during execution.</p>
         <span class="n">evm</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">caller</span><span class="p">]</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">evm</span><span class="o">.</span><span class="n">value</span>
         <span class="n">evm</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">current</span><span class="p">]</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">evm</span><span class="o">.</span><span class="n">value</span>
 
-    <span class="k">while</span> <span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">evm</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
         <span class="n">op</span> <span class="o">=</span> <span class="n">evm</span><span class="o">.</span><span class="n">code</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">pc</span><span class="p">]</span>
         <span class="n">op_implementation</span><span class="p">[</span><span class="n">op</span><span class="p">](</span><span class="n">evm</span><span class="p">)</span>
         <span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">code</span><span class="p">):</span>
+            <span class="n">evm</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="n">gas_used</span> <span class="o">=</span> <span class="n">gas</span> <span class="o">-</span> <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span>
     <span class="n">refund</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">gas_used</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">evm</span><span class="o">.</span><span class="n">refund_counter</span><span class="p">)</span>

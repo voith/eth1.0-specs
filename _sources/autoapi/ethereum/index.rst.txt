@@ -30,5 +30,6 @@ Submodules
    rlp/index.rst
    spec/index.rst
    trie/index.rst
+   utils/index.rst
 
 

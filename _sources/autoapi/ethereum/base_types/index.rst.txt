@@ -35,6 +35,10 @@ Attributes
 
 .. autoapisummary::
 
+   ethereum.base_types.U255_MAX_VALUE
+   ethereum.base_types.U255_CEIL_VALUE
+   ethereum.base_types.U256_MAX_VALUE
+   ethereum.base_types.U256_CEIL_VALUE
    ethereum.base_types.MAX_VALUE
    ethereum.base_types.Bytes
    ethereum.base_types.Bytes64
@@ -45,6 +49,42 @@ Attributes
 
 Module Details
 ---------------
+
+U255_MAX_VALUE
+~~~~~~~~~~~~~~
+
+.. data:: U255_MAX_VALUE
+   
+
+   
+
+
+U255_CEIL_VALUE
+~~~~~~~~~~~~~~~
+
+.. data:: U255_CEIL_VALUE
+   
+
+   
+
+
+U256_MAX_VALUE
+~~~~~~~~~~~~~~
+
+.. data:: U256_MAX_VALUE
+   
+
+   
+
+
+U256_CEIL_VALUE
+~~~~~~~~~~~~~~~
+
+.. data:: U256_CEIL_VALUE
+   
+
+   
+
 
 Uint
 ~~~~
@@ -218,6 +258,17 @@ inclusive.
       :rtype: `U256`
 
 
+   .. method:: from_signed(cls: Type, value: int) -> U256
+      :classmethod:
+
+      Converts a signed number into a 256-bit unsigned integer.
+
+      :param value: Signed number
+
+      :returns: **self** -- Unsigned integer obtained from `value`.
+      :rtype: `U256`
+
+
    .. method:: __radd__(self, left: int) -> U256
 
       Return value+self.
@@ -346,6 +397,14 @@ inclusive.
 
       :returns: **big_endian** -- Big endian (most significant bits first) representation.
       :rtype: `Bytes`
+
+
+   .. method:: to_signed(self) -> int
+
+      Converts this 256-bit unsigned integer into a signed integer.
+
+      :returns: **signed_int** -- Signed integer obtained from 256-bit unsigned integer.
+      :rtype: `int`
 
 
 

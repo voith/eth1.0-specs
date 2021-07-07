@@ -60,4 +60,4 @@ process_call
 
 .. undocinclude:: /../src/ethereum/vm/interpreter.py
    :language: python
-   :lines: 23-94
+   :lines: 23-98

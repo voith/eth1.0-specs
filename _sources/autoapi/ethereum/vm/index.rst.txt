@@ -178,4 +178,9 @@ The internal state of the virtual machine.
 
       
 
+   .. attribute:: running
+      :annotation: :bool
+
+      
+
 
