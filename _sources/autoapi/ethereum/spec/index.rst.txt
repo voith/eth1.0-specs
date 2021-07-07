@@ -35,7 +35,7 @@ Functions
    :nosignatures:
 
    ethereum.spec.state_transition
-   ethereum.spec.verify_header
+   ethereum.spec.validate_header
    ethereum.spec.apply_body
    ethereum.spec.compute_ommers_hash
    ethereum.spec.process_transaction
@@ -43,6 +43,11 @@ Functions
    ethereum.spec.calculate_intrinsic_cost
    ethereum.spec.recover_sender
    ethereum.spec.signing_hash
+   ethereum.spec.compute_header_hash
+   ethereum.spec.get_block_header_by_hash
+   ethereum.spec.check_proof_of_work
+   ethereum.spec.check_gas_limit
+   ethereum.spec.calculate_block_difficulty
    ethereum.spec.print_state
 
 
@@ -53,6 +58,9 @@ Attributes
 .. autoapisummary::
 
    ethereum.spec.BLOCK_REWARD
+   ethereum.spec.GAS_LIMIT_ADJUSTMENT_FACTOR
+   ethereum.spec.GAS_LIMIT_MINIMUM
+   ethereum.spec.GENESIS_DIFFICULTY
 
 
 Module Details
@@ -62,6 +70,33 @@ BLOCK_REWARD
 ~~~~~~~~~~~~
 
 .. data:: BLOCK_REWARD
+   
+
+   
+
+
+GAS_LIMIT_ADJUSTMENT_FACTOR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_LIMIT_ADJUSTMENT_FACTOR
+   :annotation: = 1024
+
+   
+
+
+GAS_LIMIT_MINIMUM
+~~~~~~~~~~~~~~~~~
+
+.. data:: GAS_LIMIT_MINIMUM
+   :annotation: = 125000
+
+   
+
+
+GENESIS_DIFFICULTY
+~~~~~~~~~~~~~~~~~~
+
+.. data:: GENESIS_DIFFICULTY
    
 
    
@@ -105,28 +140,26 @@ state_transition
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 50-81
+   :lines: 53-85
 
-verify_header
-~~~~~~~~~~~~~
+validate_header
+~~~~~~~~~~~~~~~
 
 
-.. function:: verify_header(header: ethereum.eth_types.Header) -> bool
+.. function:: validate_header(header: ethereum.eth_types.Header, parent_header: ethereum.eth_types.Header) -> None
    :noindexentry:
 
    Verifies a block header.
 
    :param header: Header to check for correctness.
-
-   :returns: **verified** -- True if the header is correct, False otherwise.
-   :rtype: `bool`
+   :param parent_header: Parent Header of the header to check for correctness
 
 
 
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 84-98
+   :lines: 88-111
 
 apply_body
 ~~~~~~~~~~
@@ -156,7 +189,7 @@ apply_body
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 101-195
+   :lines: 114-208
 
 compute_ommers_hash
 ~~~~~~~~~~~~~~~~~~~
@@ -172,7 +205,7 @@ compute_ommers_hash
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 198-202
+   :lines: 211-215
 
 process_transaction
 ~~~~~~~~~~~~~~~~~~~
@@ -194,7 +227,7 @@ process_transaction
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 205-250
+   :lines: 218-263
 
 validate_transaction
 ~~~~~~~~~~~~~~~~~~~~
@@ -215,7 +248,7 @@ validate_transaction
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 253-267
+   :lines: 266-280
 
 calculate_intrinsic_cost
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -237,7 +270,7 @@ calculate_intrinsic_cost
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 270-293
+   :lines: 283-306
 
 recover_sender
 ~~~~~~~~~~~~~~
@@ -258,7 +291,7 @@ recover_sender
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 296-326
+   :lines: 309-339
 
 signing_hash
 ~~~~~~~~~~~~
@@ -279,7 +312,116 @@ signing_hash
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 329-351
+   :lines: 342-364
+
+compute_header_hash
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: compute_header_hash(header: ethereum.eth_types.Header) -> ethereum.eth_types.Hash32
+   :noindexentry:
+
+   Computes the hash of a block header.
+
+   :param header: Header of interest.
+
+   :returns: **hash** -- Hash of the header.
+   :rtype: `ethereum.eth_types.Hash32`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 370-384
+
+get_block_header_by_hash
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: get_block_header_by_hash(hash: ethereum.eth_types.Hash32, chain: BlockChain) -> ethereum.eth_types.Header
+   :noindexentry:
+
+   Fetches the block header with the corresponding hash.
+
+   :param hash: Hash of the header of interest.
+   :param chain: History and current state.
+
+   :returns: **Header** -- Block header found by its hash.
+   :rtype: `ethereum.eth_types.Header`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 387-408
+
+check_proof_of_work
+~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: check_proof_of_work(header: ethereum.eth_types.Header) -> bool
+   :noindexentry:
+
+   Validates the Proof of Work constraints.
+
+   :param header: Header of interest.
+
+   :returns: **check** -- True if Proof of Work constraints are satisfied, False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 411-428
+
+check_gas_limit
+~~~~~~~~~~~~~~~
+
+
+.. function:: check_gas_limit(gas_limit: ethereum.base_types.Uint, parent_gas_limit: ethereum.base_types.Uint) -> bool
+   :noindexentry:
+
+   Validates the gas limit for a block.
+
+   :param gas_limit: Gas limit to validate.
+   :param parent_gas_limit: Gas limit of the parent block.
+
+   :returns: **check** -- True if gas limit constraints are satisfied, False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 431-456
+
+calculate_block_difficulty
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: calculate_block_difficulty(number: ethereum.base_types.Uint, timestamp: ethereum.base_types.U256, parent_timestamp: ethereum.base_types.U256, parent_difficulty: ethereum.base_types.Uint) -> ethereum.base_types.Uint
+   :noindexentry:
+
+   Computes difficulty of a block using its header and parent header.
+   :param number: Block number of the block
+   :param timestamp: Timestmap of the block
+   :param parent_timestamp: Timestanp of the parent block
+   :param parent_difficulty: difficulty of the parent block
+
+   :returns: **difficulty** -- Computed difficulty for a block.
+   :rtype: `ethereum.base_types.Uint`
+
+
+
+
+.. undocinclude:: /../src/ethereum/spec.py
+   :language: python
+   :lines: 459-490
 
 print_state
 ~~~~~~~~~~~
@@ -297,4 +439,4 @@ print_state
 
 .. undocinclude:: /../src/ethereum/spec.py
    :language: python
-   :lines: 357-378
+   :lines: 494-515

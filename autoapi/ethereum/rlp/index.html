@@ -579,8 +579,8 @@ data.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">encode_header</span><span class="p">(</span><span class="n">raw_header_data</span><span class="p">:</span> <span class="n">Header</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bytes</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">encode</span><span class="p">(</span>
         <span class="p">(</span>
-            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
-            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">ommers</span><span class="p">,</span>
+            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">parent_hash</span><span class="p">,</span>
+            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">ommers_hash</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">coinbase</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">state_root</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">transactions_root</span><span class="p">,</span>
@@ -590,8 +590,8 @@ data.</p>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">gas_used</span><span class="p">,</span>
-            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
-            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">extra</span><span class="p">,</span>
+            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+            <span class="n">raw_header_data</span><span class="o">.</span><span class="n">extra_data</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">mix_digest</span><span class="p">,</span>
             <span class="n">raw_header_data</span><span class="o">.</span><span class="n">nonce</span><span class="p">,</span>
 </pre></div>

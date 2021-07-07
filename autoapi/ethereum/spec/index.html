@@ -53,17 +53,25 @@
 <li><p><a class="reference internal" href="#module-details" id="id6">Module Details</a></p>
 <ul>
 <li><p><a class="reference internal" href="#block-reward" id="id7">BLOCK_REWARD</a></p></li>
-<li><p><a class="reference internal" href="#blockchain" id="id8">BlockChain</a></p></li>
-<li><p><a class="reference internal" href="#state-transition" id="id9">state_transition</a></p></li>
-<li><p><a class="reference internal" href="#verify-header" id="id10">verify_header</a></p></li>
-<li><p><a class="reference internal" href="#apply-body" id="id11">apply_body</a></p></li>
-<li><p><a class="reference internal" href="#compute-ommers-hash" id="id12">compute_ommers_hash</a></p></li>
-<li><p><a class="reference internal" href="#process-transaction" id="id13">process_transaction</a></p></li>
-<li><p><a class="reference internal" href="#validate-transaction" id="id14">validate_transaction</a></p></li>
-<li><p><a class="reference internal" href="#calculate-intrinsic-cost" id="id15">calculate_intrinsic_cost</a></p></li>
-<li><p><a class="reference internal" href="#recover-sender" id="id16">recover_sender</a></p></li>
-<li><p><a class="reference internal" href="#signing-hash" id="id17">signing_hash</a></p></li>
-<li><p><a class="reference internal" href="#print-state" id="id18">print_state</a></p></li>
+<li><p><a class="reference internal" href="#gas-limit-adjustment-factor" id="id8">GAS_LIMIT_ADJUSTMENT_FACTOR</a></p></li>
+<li><p><a class="reference internal" href="#gas-limit-minimum" id="id9">GAS_LIMIT_MINIMUM</a></p></li>
+<li><p><a class="reference internal" href="#genesis-difficulty" id="id10">GENESIS_DIFFICULTY</a></p></li>
+<li><p><a class="reference internal" href="#blockchain" id="id11">BlockChain</a></p></li>
+<li><p><a class="reference internal" href="#state-transition" id="id12">state_transition</a></p></li>
+<li><p><a class="reference internal" href="#validate-header" id="id13">validate_header</a></p></li>
+<li><p><a class="reference internal" href="#apply-body" id="id14">apply_body</a></p></li>
+<li><p><a class="reference internal" href="#compute-ommers-hash" id="id15">compute_ommers_hash</a></p></li>
+<li><p><a class="reference internal" href="#process-transaction" id="id16">process_transaction</a></p></li>
+<li><p><a class="reference internal" href="#validate-transaction" id="id17">validate_transaction</a></p></li>
+<li><p><a class="reference internal" href="#calculate-intrinsic-cost" id="id18">calculate_intrinsic_cost</a></p></li>
+<li><p><a class="reference internal" href="#recover-sender" id="id19">recover_sender</a></p></li>
+<li><p><a class="reference internal" href="#signing-hash" id="id20">signing_hash</a></p></li>
+<li><p><a class="reference internal" href="#compute-header-hash" id="id21">compute_header_hash</a></p></li>
+<li><p><a class="reference internal" href="#get-block-header-by-hash" id="id22">get_block_header_by_hash</a></p></li>
+<li><p><a class="reference internal" href="#check-proof-of-work" id="id23">check_proof_of_work</a></p></li>
+<li><p><a class="reference internal" href="#check-gas-limit" id="id24">check_gas_limit</a></p></li>
+<li><p><a class="reference internal" href="#calculate-block-difficulty" id="id25">calculate_block_difficulty</a></p></li>
+<li><p><a class="reference internal" href="#print-state" id="id26">print_state</a></p></li>
 </ul>
 </li>
 </ul>
@@ -99,7 +107,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.state_transition" title="ethereum.spec.state_transition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_transition</span></code></a></p></td>
 <td><p>Attempts to apply a block to an existing block chain.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.verify_header" title="ethereum.spec.verify_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">verify_header</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.validate_header" title="ethereum.spec.validate_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_header</span></code></a></p></td>
 <td><p>Verifies a block header.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.apply_body" title="ethereum.spec.apply_body"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_body</span></code></a></p></td>
@@ -123,7 +131,22 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.signing_hash" title="ethereum.spec.signing_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signing_hash</span></code></a></p></td>
 <td><p>Compute the hash of a transaction used in the signature.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.print_state" title="ethereum.spec.print_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_state</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.compute_header_hash" title="ethereum.spec.compute_header_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_header_hash</span></code></a></p></td>
+<td><p>Computes the hash of a block header.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.get_block_header_by_hash" title="ethereum.spec.get_block_header_by_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_header_by_hash</span></code></a></p></td>
+<td><p>Fetches the block header with the corresponding hash.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.check_proof_of_work" title="ethereum.spec.check_proof_of_work"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_proof_of_work</span></code></a></p></td>
+<td><p>Validates the Proof of Work constraints.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.check_gas_limit" title="ethereum.spec.check_gas_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_gas_limit</span></code></a></p></td>
+<td><p>Validates the gas limit for a block.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.calculate_block_difficulty" title="ethereum.spec.calculate_block_difficulty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_block_difficulty</span></code></a></p></td>
+<td><p>Computes difficulty of a block using its header and parent header.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.print_state" title="ethereum.spec.print_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_state</span></code></a></p></td>
 <td><p>Pretty prints the state.</p></td>
 </tr>
 </tbody>
@@ -140,6 +163,15 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.BLOCK_REWARD" title="ethereum.spec.BLOCK_REWARD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BLOCK_REWARD</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.GAS_LIMIT_ADJUSTMENT_FACTOR" title="ethereum.spec.GAS_LIMIT_ADJUSTMENT_FACTOR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_LIMIT_ADJUSTMENT_FACTOR</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.spec.GAS_LIMIT_MINIMUM" title="ethereum.spec.GAS_LIMIT_MINIMUM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_LIMIT_MINIMUM</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.spec.GENESIS_DIFFICULTY" title="ethereum.spec.GENESIS_DIFFICULTY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GENESIS_DIFFICULTY</span></code></a></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -151,6 +183,30 @@
 <dl class="py data">
 <dt class="sig sig-object py" id="ethereum.spec.BLOCK_REWARD">
 <span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">BLOCK_REWARD</span></span><a class="headerlink" href="#ethereum.spec.BLOCK_REWARD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="gas-limit-adjustment-factor">
+<h4>GAS_LIMIT_ADJUSTMENT_FACTOR<a class="headerlink" href="#gas-limit-adjustment-factor" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.spec.GAS_LIMIT_ADJUSTMENT_FACTOR">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">GAS_LIMIT_ADJUSTMENT_FACTOR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1024</span></em><a class="headerlink" href="#ethereum.spec.GAS_LIMIT_ADJUSTMENT_FACTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="gas-limit-minimum">
+<h4>GAS_LIMIT_MINIMUM<a class="headerlink" href="#gas-limit-minimum" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.spec.GAS_LIMIT_MINIMUM">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">GAS_LIMIT_MINIMUM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">125000</span></em><a class="headerlink" href="#ethereum.spec.GAS_LIMIT_MINIMUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="genesis-difficulty">
+<h4>GENESIS_DIFFICULTY<a class="headerlink" href="#genesis-difficulty" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.spec.GENESIS_DIFFICULTY">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">GENESIS_DIFFICULTY</span></span><a class="headerlink" href="#ethereum.spec.GENESIS_DIFFICULTY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -190,20 +246,21 @@
 </dd></dl>
 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">state_transition</span><span class="p">(</span><span class="n">chain</span><span class="p">:</span> <span class="n">BlockChain</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="n">Block</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="c1">#  assert verify_header(block.header)</span>
+    <span class="n">parent_header</span> <span class="o">=</span> <span class="n">get_block_header_by_hash</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">parent_hash</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
+    <span class="n">validate_header</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">parent_header</span><span class="p">)</span>
     <span class="n">gas_used</span><span class="p">,</span> <span class="n">transactions_root</span><span class="p">,</span> <span class="n">receipt_root</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">apply_body</span><span class="p">(</span>
         <span class="n">chain</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
         <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">coinbase</span><span class="p">,</span>
         <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
         <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">,</span>
-        <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+        <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
         <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">difficulty</span><span class="p">,</span>
         <span class="n">block</span><span class="o">.</span><span class="n">transactions</span><span class="p">,</span>
         <span class="n">block</span><span class="o">.</span><span class="n">ommers</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">gas_used</span> <span class="o">==</span> <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">gas_used</span>
-    <span class="k">assert</span> <span class="n">compute_ommers_hash</span><span class="p">(</span><span class="n">block</span><span class="p">)</span> <span class="o">==</span> <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">ommers</span>
+    <span class="k">assert</span> <span class="n">compute_ommers_hash</span><span class="p">(</span><span class="n">block</span><span class="p">)</span> <span class="o">==</span> <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">ommers_hash</span>
     <span class="c1"># TODO: Also need to verify that these ommers are indeed valid as per the</span>
     <span class="c1"># Nth generation</span>
     <span class="k">assert</span> <span class="n">transactions_root</span> <span class="o">==</span> <span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">transactions_root</span>
@@ -214,27 +271,36 @@
 </pre></div>
 </div>
 </section>
-<section id="verify-header">
-<h4>verify_header<a class="headerlink" href="#verify-header" title="Permalink to this headline">¶</a></h4>
+<section id="validate-header">
+<h4>validate_header<a class="headerlink" href="#validate-header" title="Permalink to this headline">¶</a></h4>
 <dl class="py function">
-<dt class="sig sig-object py" id="ethereum.spec.verify_header">
-<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">verify_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Header" title="ethereum.eth_types.Header"><span class="pre">ethereum.eth_types.Header</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="headerlink" href="#ethereum.spec.verify_header" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ethereum.spec.validate_header">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">validate_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Header" title="ethereum.eth_types.Header"><span class="pre">ethereum.eth_types.Header</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Header" title="ethereum.eth_types.Header"><span class="pre">ethereum.eth_types.Header</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.spec.validate_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verifies a block header.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>header</strong> – Header to check for correctness.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>verified</strong> – True if the header is correct, False otherwise.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><cite>bool</cite></p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> – Header to check for correctness.</p></li>
+<li><p><strong>parent_header</strong> – Parent Header of the header to check for correctness</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">verify_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="n">Header</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>  <span class="c1"># TODO</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">validate_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="n">Header</span><span class="p">,</span> <span class="n">parent_header</span><span class="p">:</span> <span class="n">Header</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># TODO: get rid of the comment below once</span>
+    <span class="c1">#  check_proof_of_work is implemented</span>
+    <span class="c1"># assert check_proof_of_work(header)</span>
+    <span class="k">assert</span> <span class="n">header</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">==</span> <span class="n">calculate_block_difficulty</span><span class="p">(</span>
+        <span class="n">header</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+        <span class="n">parent_header</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+        <span class="n">parent_header</span><span class="o">.</span><span class="n">difficulty</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">check_gas_limit</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">,</span> <span class="n">parent_header</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">header</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">parent_header</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="k">assert</span> <span class="n">header</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="n">parent_header</span><span class="o">.</span><span class="n">number</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">extra_data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">32</span>
 </pre></div>
 </div>
 </section>
@@ -529,6 +595,161 @@ execution is instantiated.</p>
                 <span class="n">tx</span><span class="o">.</span><span class="n">to</span><span class="p">,</span>
                 <span class="n">tx</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                 <span class="n">tx</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+</pre></div>
+</div>
+</section>
+<section id="compute-header-hash">
+<h4>compute_header_hash<a class="headerlink" href="#compute-header-hash" title="Permalink to this headline">¶</a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="ethereum.spec.compute_header_hash">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">compute_header_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Header" title="ethereum.eth_types.Header"><span class="pre">ethereum.eth_types.Header</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Hash32" title="ethereum.eth_types.Hash32"><span class="pre">ethereum.eth_types.Hash32</span></a><a class="headerlink" href="#ethereum.spec.compute_header_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the hash of a block header.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>header</strong> – Header of interest.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>hash</strong> – Hash of the header.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>ethereum.eth_types.Hash32</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_header_hash</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="n">Header</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Hash32</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">crypto</span><span class="o">.</span><span class="n">keccak256</span><span class="p">(</span><span class="n">rlp</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="get-block-header-by-hash">
+<h4>get_block_header_by_hash<a class="headerlink" href="#get-block-header-by-hash" title="Permalink to this headline">¶</a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="ethereum.spec.get_block_header_by_hash">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">get_block_header_by_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hash</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Hash32" title="ethereum.eth_types.Hash32"><span class="pre">ethereum.eth_types.Hash32</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#ethereum.spec.BlockChain" title="ethereum.spec.BlockChain"><span class="pre">BlockChain</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Header" title="ethereum.eth_types.Header"><span class="pre">ethereum.eth_types.Header</span></a><a class="headerlink" href="#ethereum.spec.get_block_header_by_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the block header with the corresponding hash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hash</strong> – Hash of the header of interest.</p></li>
+<li><p><strong>chain</strong> – History and current state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Header</strong> – Block header found by its hash.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>ethereum.eth_types.Header</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_block_header_by_hash</span><span class="p">(</span><span class="nb">hash</span><span class="p">:</span> <span class="n">Hash32</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="n">BlockChain</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Header</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">chain</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">compute_header_hash</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="p">)</span> <span class="o">==</span> <span class="nb">hash</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">block</span><span class="o">.</span><span class="n">header</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find header with hash=</span><span class="si">{</span><span class="nb">hash</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="check-proof-of-work">
+<h4>check_proof_of_work<a class="headerlink" href="#check-proof-of-work" title="Permalink to this headline">¶</a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="ethereum.spec.check_proof_of_work">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">check_proof_of_work</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Header" title="ethereum.eth_types.Header"><span class="pre">ethereum.eth_types.Header</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="headerlink" href="#ethereum.spec.check_proof_of_work" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the Proof of Work constraints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>header</strong> – Header of interest.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>check</strong> – True if Proof of Work constraints are satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>bool</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_proof_of_work</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="n">Header</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># TODO: Implement this method once proof of work</span>
+    <span class="c1">#  algorithm is implemented</span>
+    <span class="c1">#  https://github.com/quilt/eth1.0-specs/issues/43</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></div>
+</div>
+</section>
+<section id="check-gas-limit">
+<h4>check_gas_limit<a class="headerlink" href="#check-gas-limit" title="Permalink to this headline">¶</a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="ethereum.spec.check_gas_limit">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">check_gas_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gas_limit</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Uint" title="ethereum.base_types.Uint"><span class="pre">ethereum.base_types.Uint</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_gas_limit</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Uint" title="ethereum.base_types.Uint"><span class="pre">ethereum.base_types.Uint</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="headerlink" href="#ethereum.spec.check_gas_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the gas limit for a block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gas_limit</strong> – Gas limit to validate.</p></li>
+<li><p><strong>parent_gas_limit</strong> – Gas limit of the parent block.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>check</strong> – True if gas limit constraints are satisfied, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>bool</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_gas_limit</span><span class="p">(</span><span class="n">gas_limit</span><span class="p">:</span> <span class="n">Uint</span><span class="p">,</span> <span class="n">parent_gas_limit</span><span class="p">:</span> <span class="n">Uint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">max_adjustment_delta</span> <span class="o">=</span> <span class="n">parent_gas_limit</span> <span class="o">//</span> <span class="n">GAS_LIMIT_ADJUSTMENT_FACTOR</span>
+    <span class="k">if</span> <span class="n">gas_limit</span> <span class="o">&gt;=</span> <span class="n">parent_gas_limit</span> <span class="o">+</span> <span class="n">max_adjustment_delta</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">gas_limit</span> <span class="o">&lt;=</span> <span class="n">parent_gas_limit</span> <span class="o">-</span> <span class="n">max_adjustment_delta</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">gas_limit</span> <span class="o">&lt;</span> <span class="n">GAS_LIMIT_MINIMUM</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-block-difficulty">
+<h4>calculate_block_difficulty<a class="headerlink" href="#calculate-block-difficulty" title="Permalink to this headline">¶</a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="ethereum.spec.calculate_block_difficulty">
+<span class="sig-prename descclassname"><span class="pre">ethereum.spec.</span></span><span class="sig-name descname"><span class="pre">calculate_block_difficulty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Uint" title="ethereum.base_types.Uint"><span class="pre">ethereum.base_types.Uint</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_timestamp</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_difficulty</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Uint" title="ethereum.base_types.Uint"><span class="pre">ethereum.base_types.Uint</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../base_types/index.html#ethereum.base_types.Uint" title="ethereum.base_types.Uint"><span class="pre">ethereum.base_types.Uint</span></a><a class="headerlink" href="#ethereum.spec.calculate_block_difficulty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes difficulty of a block using its header and parent header.
+:param number: Block number of the block
+:param timestamp: Timestmap of the block
+:param parent_timestamp: Timestanp of the parent block
+:param parent_difficulty: difficulty of the parent block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>difficulty</strong> – Computed difficulty for a block.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><cite>ethereum.base_types.Uint</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_block_difficulty</span><span class="p">(</span>
+    <span class="n">number</span><span class="p">:</span> <span class="n">Uint</span><span class="p">,</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="n">U256</span><span class="p">,</span>
+    <span class="n">parent_timestamp</span><span class="p">:</span> <span class="n">U256</span><span class="p">,</span>
+    <span class="n">parent_difficulty</span><span class="p">:</span> <span class="n">Uint</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Uint</span><span class="p">:</span>
+    <span class="n">max_adjustment_delta</span> <span class="o">=</span> <span class="n">parent_difficulty</span> <span class="o">//</span> <span class="n">Uint</span><span class="p">(</span><span class="mi">2048</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GENESIS_DIFFICULTY</span>
+    <span class="k">elif</span> <span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">parent_timestamp</span> <span class="o">+</span> <span class="mi">13</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">parent_difficulty</span> <span class="o">+</span> <span class="n">max_adjustment_delta</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># timestamp &gt;= parent_timestamp + 13</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="n">GENESIS_DIFFICULTY</span><span class="p">,</span>
+            <span class="n">parent_difficulty</span> <span class="o">-</span> <span class="n">max_adjustment_delta</span><span class="p">,</span>
 </pre></div>
 </div>
 </section>

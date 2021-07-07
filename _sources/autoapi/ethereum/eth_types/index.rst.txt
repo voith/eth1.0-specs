@@ -241,12 +241,12 @@ Header portion of a block on the chain.
 
 .. class:: Header
 
-   .. attribute:: parent
+   .. attribute:: parent_hash
       :annotation: :Hash32
 
       
 
-   .. attribute:: ommers
+   .. attribute:: ommers_hash
       :annotation: :Hash32
 
       
@@ -296,12 +296,12 @@ Header portion of a block on the chain.
 
       
 
-   .. attribute:: time
+   .. attribute:: timestamp
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: extra
+   .. attribute:: extra_data
       :annotation: :ethereum.base_types.Bytes
 
       
