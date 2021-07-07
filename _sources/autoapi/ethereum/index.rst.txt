@@ -15,7 +15,7 @@ Subpackages
    :titlesonly:
    :maxdepth: 3
 
-   vm/index.rst
+   frontier/index.rst
 
 
 Submodules
@@ -26,10 +26,6 @@ Submodules
 
    base_types/index.rst
    crypto/index.rst
-   eth_types/index.rst
-   rlp/index.rst
-   spec/index.rst
-   trie/index.rst
    utils/index.rst
 
 

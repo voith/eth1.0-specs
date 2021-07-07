@@ -32,14 +32,41 @@ Functions
 
 
 
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.crypto.Hash32
+   ethereum.crypto.Hash64
+
+
 Module Details
 ---------------
+
+Hash32
+~~~~~~
+
+.. data:: Hash32
+   
+
+   
+
+
+Hash64
+~~~~~~
+
+.. data:: Hash64
+   
+
+   
+
 
 keccak256
 ~~~~~~~~~
 
 
-.. function:: keccak256(buffer: ethereum.base_types.Bytes) -> ethereum.eth_types.Hash32
+.. function:: keccak256(buffer: ethereum.base_types.Bytes) -> Hash32
    :noindexentry:
 
    Computes the keccak256 hash of the input `buffer`.
@@ -54,13 +81,13 @@ keccak256
 
 .. undocinclude:: /../src/ethereum/crypto.py
    :language: python
-   :lines: 22-36
+   :lines: 24-38
 
 keccak512
 ~~~~~~~~~
 
 
-.. function:: keccak512(buffer: ethereum.base_types.Bytes) -> ethereum.eth_types.Hash64
+.. function:: keccak512(buffer: ethereum.base_types.Bytes) -> Hash64
    :noindexentry:
 
    Computes the keccak512 hash of the input `buffer`.
@@ -75,13 +102,13 @@ keccak512
 
 .. undocinclude:: /../src/ethereum/crypto.py
    :language: python
-   :lines: 39-53
+   :lines: 41-55
 
 secp256k1_recover
 ~~~~~~~~~~~~~~~~~
 
 
-.. function:: secp256k1_recover(r: ethereum.base_types.U256, s: ethereum.base_types.U256, v: ethereum.base_types.U256, msg_hash: ethereum.eth_types.Hash32) -> ethereum.base_types.Bytes
+.. function:: secp256k1_recover(r: ethereum.base_types.U256, s: ethereum.base_types.U256, v: ethereum.base_types.U256, msg_hash: Hash32) -> ethereum.base_types.Bytes
    :noindexentry:
 
    Recovers the public key from a given signature.
@@ -99,4 +126,4 @@ secp256k1_recover
 
 .. undocinclude:: /../src/ethereum/crypto.py
    :language: python
-   :lines: 56-87
+   :lines: 58-89

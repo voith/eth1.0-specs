@@ -17,7 +17,7 @@
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="ethereum.eth_types" href="../eth_types/index.html" />
+    <link rel="next" title="ethereum.utils" href="../utils/index.html" />
     <link rel="prev" title="ethereum.base_types" href="../base_types/index.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
@@ -75,14 +75,47 @@
 </tbody>
 </table>
 </section>
+<section id="attributes">
+<h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h4>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.crypto.Hash32" title="ethereum.crypto.Hash32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hash32</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.crypto.Hash64" title="ethereum.crypto.Hash64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hash64</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="module-details">
 <h3>Module Details<a class="headerlink" href="#module-details" title="Permalink to this headline">¶</a></h3>
+<section id="hash32">
+<h4>Hash32<a class="headerlink" href="#hash32" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.crypto.Hash32">
+<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">Hash32</span></span><a class="headerlink" href="#ethereum.crypto.Hash32" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="hash64">
+<h4>Hash64<a class="headerlink" href="#hash64" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.crypto.Hash64">
+<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">Hash64</span></span><a class="headerlink" href="#ethereum.crypto.Hash64" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="keccak256">
 <h4>keccak256<a class="headerlink" href="#keccak256" title="Permalink to this headline">¶</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.crypto.keccak256">
-<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">keccak256</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Bytes" title="ethereum.base_types.Bytes"><span class="pre">ethereum.base_types.Bytes</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Hash32" title="ethereum.eth_types.Hash32"><span class="pre">ethereum.eth_types.Hash32</span></a><a class="headerlink" href="#ethereum.crypto.keccak256" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">keccak256</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Bytes" title="ethereum.base_types.Bytes"><span class="pre">ethereum.base_types.Bytes</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#ethereum.crypto.Hash32" title="ethereum.crypto.Hash32"><span class="pre">Hash32</span></a><a class="headerlink" href="#ethereum.crypto.keccak256" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the keccak256 hash of the input <cite>buffer</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -106,7 +139,7 @@
 <h4>keccak512<a class="headerlink" href="#keccak512" title="Permalink to this headline">¶</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.crypto.keccak512">
-<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">keccak512</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Bytes" title="ethereum.base_types.Bytes"><span class="pre">ethereum.base_types.Bytes</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Hash64" title="ethereum.eth_types.Hash64"><span class="pre">ethereum.eth_types.Hash64</span></a><a class="headerlink" href="#ethereum.crypto.keccak512" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">keccak512</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.Bytes" title="ethereum.base_types.Bytes"><span class="pre">ethereum.base_types.Bytes</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#ethereum.crypto.Hash64" title="ethereum.crypto.Hash64"><span class="pre">Hash64</span></a><a class="headerlink" href="#ethereum.crypto.keccak512" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the keccak512 hash of the input <cite>buffer</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -130,7 +163,7 @@
 <h4>secp256k1_recover<a class="headerlink" href="#secp256k1-recover" title="Permalink to this headline">¶</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.crypto.secp256k1_recover">
-<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">secp256k1_recover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_hash</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../eth_types/index.html#ethereum.eth_types.Hash32" title="ethereum.eth_types.Hash32"><span class="pre">ethereum.eth_types.Hash32</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../base_types/index.html#ethereum.base_types.Bytes" title="ethereum.base_types.Bytes"><span class="pre">ethereum.base_types.Bytes</span></a><a class="headerlink" href="#ethereum.crypto.secp256k1_recover" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ethereum.crypto.</span></span><span class="sig-name descname"><span class="pre">secp256k1_recover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base_types/index.html#ethereum.base_types.U256" title="ethereum.base_types.U256"><span class="pre">ethereum.base_types.U256</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_hash</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#ethereum.crypto.Hash32" title="ethereum.crypto.Hash32"><span class="pre">Hash32</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../base_types/index.html#ethereum.base_types.Bytes" title="ethereum.base_types.Bytes"><span class="pre">ethereum.base_types.Bytes</span></a><a class="headerlink" href="#ethereum.crypto.secp256k1_recover" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recovers the public key from a given signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -209,7 +242,7 @@
   <li><a href="../../index.html">API Reference</a><ul>
   <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
       <li>Previous: <a href="../base_types/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.base_types</span></code></a></li>
-      <li>Next: <a href="../eth_types/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.eth_types</span></code></a></li>
+      <li>Next: <a href="../utils/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.utils</span></code></a></li>
   </ul></li>
   </ul></li>
   </ul></li>

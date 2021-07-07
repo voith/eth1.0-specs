@@ -1,0 +1,679 @@
+:mod:`ethereum.frontier.vm.instructions`
+========================================
+
+.. py:module:: ethereum.frontier.vm.instructions
+
+Ethereum Virtual Machine (EVM) Instructions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+Implementations of the instructions understood by the EVM.
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+   :nosignatures:
+
+   ethereum.frontier.vm.instructions.stop
+   ethereum.frontier.vm.instructions.add
+   ethereum.frontier.vm.instructions.sub
+   ethereum.frontier.vm.instructions.mul
+   ethereum.frontier.vm.instructions.div
+   ethereum.frontier.vm.instructions.sdiv
+   ethereum.frontier.vm.instructions.mod
+   ethereum.frontier.vm.instructions.smod
+   ethereum.frontier.vm.instructions.addmod
+   ethereum.frontier.vm.instructions.mulmod
+   ethereum.frontier.vm.instructions.exp
+   ethereum.frontier.vm.instructions.signextend
+   ethereum.frontier.vm.instructions.sstore
+   ethereum.frontier.vm.instructions.push_n
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ethereum.frontier.vm.instructions.push1
+   ethereum.frontier.vm.instructions.push2
+   ethereum.frontier.vm.instructions.push3
+   ethereum.frontier.vm.instructions.push4
+   ethereum.frontier.vm.instructions.push5
+   ethereum.frontier.vm.instructions.push6
+   ethereum.frontier.vm.instructions.push7
+   ethereum.frontier.vm.instructions.push8
+   ethereum.frontier.vm.instructions.push9
+   ethereum.frontier.vm.instructions.push10
+   ethereum.frontier.vm.instructions.push11
+   ethereum.frontier.vm.instructions.push12
+   ethereum.frontier.vm.instructions.push13
+   ethereum.frontier.vm.instructions.push14
+   ethereum.frontier.vm.instructions.push15
+   ethereum.frontier.vm.instructions.push16
+   ethereum.frontier.vm.instructions.push17
+   ethereum.frontier.vm.instructions.push18
+   ethereum.frontier.vm.instructions.push19
+   ethereum.frontier.vm.instructions.push20
+   ethereum.frontier.vm.instructions.push21
+   ethereum.frontier.vm.instructions.push22
+   ethereum.frontier.vm.instructions.push23
+   ethereum.frontier.vm.instructions.push24
+   ethereum.frontier.vm.instructions.push25
+   ethereum.frontier.vm.instructions.push26
+   ethereum.frontier.vm.instructions.push27
+   ethereum.frontier.vm.instructions.push28
+   ethereum.frontier.vm.instructions.push29
+   ethereum.frontier.vm.instructions.push30
+   ethereum.frontier.vm.instructions.push31
+   ethereum.frontier.vm.instructions.push32
+
+
+Module Details
+---------------
+
+stop
+~~~~
+
+
+.. function:: stop(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Stop further execution of EVM code.
+
+   :param evm: The current EVM frame.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 35-44
+
+add
+~~~
+
+
+.. function:: add(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Adds the top two elements of the stack together, and pushes the result back
+   on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 52-75
+
+sub
+~~~
+
+
+.. function:: sub(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Subtracts the top two elements of the stack, and pushes the result back
+   on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 78-101
+
+mul
+~~~
+
+
+.. function:: mul(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Multiply the top two elements of the stack, and pushes the result back
+   on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 104-127
+
+div
+~~~
+
+
+.. function:: div(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Integer division of the top two elements of the stack. Pushes the result
+   back on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 130-156
+
+sdiv
+~~~~
+
+
+.. function:: sdiv(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Signed integer division of the top two elements of the stack. Pushes the
+   result back on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 159-189
+
+mod
+~~~
+
+
+.. function:: mod(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Modulo remainder of the top two elements of the stack. Pushes the result
+   back on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 192-218
+
+smod
+~~~~
+
+
+.. function:: smod(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Signed modulo remainder of the top two elements of the stack. Pushes the
+   result back on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 221-248
+
+addmod
+~~~~~~
+
+
+.. function:: addmod(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Modulo addition of the top 2 elements with the 3rd element. Pushes the
+   result back on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `3`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_MID`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 251-279
+
+mulmod
+~~~~~~
+
+
+.. function:: mulmod(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Modulo multiplication of the top 2 elements with the 3rd element. Pushes
+   the result back on the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `3`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_MID`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 282-310
+
+exp
+~~~
+
+
+.. function:: exp(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Exponential operation of the top 2 elements. Pushes the result back on
+   the stack.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_MID`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 313-344
+
+signextend
+~~~~~~~~~~
+
+
+.. function:: signextend(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Sign extend operation. In other words, extend a signed number which
+   fits in N bytes to 32 bytes.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 347-389
+
+sstore
+~~~~~~
+
+
+.. function:: sstore(evm: ethereum.frontier.vm.Evm) -> None
+   :noindexentry:
+
+   Stores a value at a certain key in the current context's storage.
+
+   :param evm: The current EVM frame.
+
+   :raises StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `20000`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 392-431
+
+push_n
+~~~~~~
+
+
+.. function:: push_n(evm: ethereum.frontier.vm.Evm, num_bytes: int) -> None
+   :noindexentry:
+
+   Pushes a N-byte immediate onto the stack.
+
+   :param evm: The current EVM frame.
+   :param num_bytes: The number of immediate bytes to be read from the code and pushed to
+                     the stack.
+   :type num_bytes: `int`
+
+   :raises StackOverflowError: If `len(stack)` is equals `1024`.
+   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+   :language: python
+   :lines: 434-462
+
+push1
+~~~~~
+
+.. data:: push1
+   
+
+   
+
+
+push2
+~~~~~
+
+.. data:: push2
+   
+
+   
+
+
+push3
+~~~~~
+
+.. data:: push3
+   
+
+   
+
+
+push4
+~~~~~
+
+.. data:: push4
+   
+
+   
+
+
+push5
+~~~~~
+
+.. data:: push5
+   
+
+   
+
+
+push6
+~~~~~
+
+.. data:: push6
+   
+
+   
+
+
+push7
+~~~~~
+
+.. data:: push7
+   
+
+   
+
+
+push8
+~~~~~
+
+.. data:: push8
+   
+
+   
+
+
+push9
+~~~~~
+
+.. data:: push9
+   
+
+   
+
+
+push10
+~~~~~~
+
+.. data:: push10
+   
+
+   
+
+
+push11
+~~~~~~
+
+.. data:: push11
+   
+
+   
+
+
+push12
+~~~~~~
+
+.. data:: push12
+   
+
+   
+
+
+push13
+~~~~~~
+
+.. data:: push13
+   
+
+   
+
+
+push14
+~~~~~~
+
+.. data:: push14
+   
+
+   
+
+
+push15
+~~~~~~
+
+.. data:: push15
+   
+
+   
+
+
+push16
+~~~~~~
+
+.. data:: push16
+   
+
+   
+
+
+push17
+~~~~~~
+
+.. data:: push17
+   
+
+   
+
+
+push18
+~~~~~~
+
+.. data:: push18
+   
+
+   
+
+
+push19
+~~~~~~
+
+.. data:: push19
+   
+
+   
+
+
+push20
+~~~~~~
+
+.. data:: push20
+   
+
+   
+
+
+push21
+~~~~~~
+
+.. data:: push21
+   
+
+   
+
+
+push22
+~~~~~~
+
+.. data:: push22
+   
+
+   
+
+
+push23
+~~~~~~
+
+.. data:: push23
+   
+
+   
+
+
+push24
+~~~~~~
+
+.. data:: push24
+   
+
+   
+
+
+push25
+~~~~~~
+
+.. data:: push25
+   
+
+   
+
+
+push26
+~~~~~~
+
+.. data:: push26
+   
+
+   
+
+
+push27
+~~~~~~
+
+.. data:: push27
+   
+
+   
+
+
+push28
+~~~~~~
+
+.. data:: push28
+   
+
+   
+
+
+push29
+~~~~~~
+
+.. data:: push29
+   
+
+   
+
+
+push30
+~~~~~~
+
+.. data:: push30
+   
+
+   
+
+
+push31
+~~~~~~
+
+.. data:: push31
+   
+
+   
+
+
+push32
+~~~~~~
+
+.. data:: push32
+   
+
+   
+
