@@ -74,6 +74,9 @@ def prepare_message(
     else:
         raise TypeError()
 
+    if code_address is None:
+        code_address = target
+
     return Message(
         caller=caller,
         target=target,
