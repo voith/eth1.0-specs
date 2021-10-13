@@ -45,7 +45,7 @@ def ecrecover(evm: Evm) -> None:
         return
     if 0 >= r or r >= SECP256K1N:
         return
-    if 0 >= s or s >= SECP256K1N:
+    if 0 >= s or s >= SECP256K1N // 2 + 1:
         return
 
     try:
