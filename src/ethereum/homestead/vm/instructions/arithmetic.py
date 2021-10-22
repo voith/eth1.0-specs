@@ -359,27 +359,18 @@ def signextend(evm: Evm) -> None:
     evm.gas_left = subtract_gas(evm.gas_left, GAS_LOW)
 
     # byte_num would be 0-indexed when inserted to the stack.
-    byte_num = pop(evm.stack)
+    bits = pop(evm.stack)
     value = pop(evm.stack)
 
-    if byte_num > 31:
-        # Can't extend any further
-        result = value
-    else:
-        # U256(0).to_be_bytes() gives b'' instead b'\x00'. # noqa: SC100
-        value_bytes = value.to_be_bytes() or b"\x00"
-
-        # Now among the obtained value bytes, consider only
-        # N `least significant bytes`, where N is `byte_num + 1`.
-        value_bytes = value_bytes[len(value_bytes) - 1 - int(byte_num) :]
-        sign_bit = value_bytes[0] >> 7
-        if sign_bit == 0:
-            result = U256.from_be_bytes(value_bytes)
+    if bits <= 31:
+        testbit = bits * 8 + 7
+        sign_bit = (1 << testbit)
+        if value & sign_bit:
+            result = value | (2**256 - sign_bit)
         else:
-            num_bytes_prepend = 32 - (byte_num + 1)
-            result = U256.from_be_bytes(
-                bytearray([0xFF] * num_bytes_prepend) + value_bytes
-            )
+            result = value & (sign_bit - 1)
+    else:
+        result = value
 
     push(evm.stack, result)
 

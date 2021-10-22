@@ -394,16 +394,9 @@ def delegatecall(evm: Evm) -> None:
     call_data = memory_read_bytes(
         evm.memory, memory_input_start_position, memory_input_size
     )
-    sender_balance = get_account(
-        evm.env.state, evm.message.current_target
-    ).balance
 
     evm.pc += 1
 
-    if sender_balance < value:
-        push(evm.stack, U256(0))
-        evm.gas_left += message_call_gas_fee
-        return None
     if evm.message.depth + 1 > STACK_DEPTH_LIMIT:
         push(evm.stack, U256(0))
         evm.gas_left += message_call_gas_fee

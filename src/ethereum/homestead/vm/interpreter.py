@@ -114,8 +114,8 @@ def process_create_message(message: Message, env: Environment) -> Evm:
     begin_transaction(env.state)
 
     evm = process_message(message, env)
-    contract_code = evm.output
-    if contract_code:
+    if not evm.has_erred:
+        contract_code = evm.output
         contract_code_gas = len(contract_code) * GAS_CODE_DEPOSIT
         try:
             evm.gas_left = subtract_gas(evm.gas_left, contract_code_gas)
@@ -126,6 +126,8 @@ def process_create_message(message: Message, env: Environment) -> Evm:
         else:
             set_code(env.state, message.current_target, contract_code)
             commit_transaction(env.state)
+    else:
+        rollback_transaction(env.state)
     return evm
 
 
@@ -195,7 +197,7 @@ def execute_code(message: Message, env: Environment) -> Evm:
     valid_jump_destinations = get_valid_jump_destinations(code)
     evm = Evm(
         pc=Uint(0),
-        stack=[],
+        stack=list(),
         memory=bytearray(),
         code=code,
         gas_left=message.gas,
