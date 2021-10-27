@@ -14,7 +14,8 @@ test_dir = (
 
 run_general_state_tests = partial(run_homestead_blockchain_st_tests, test_dir)
 
-# Every test below take more 60s to run and hence they've been marked as slow
+# Every test below takes more than  60s to run and
+# hence they've been marked as slow
 SLOW_TESTS = (
     "stRandom/randomStatetest177_d0g0v0.json",
     "stQuadraticComplexityTest/Call50000_d0g1v0.json",
@@ -98,6 +99,7 @@ def get_test_files():
         test_file_path = os.path.join(test_dir, _dir)
         for _file in os.listdir(test_file_path):
             _test_file = os.path.join(_dir, _file)
+            # TODO: provide a way to run slow tests
             if _test_file in SLOW_TESTS:
                 continue
             else:

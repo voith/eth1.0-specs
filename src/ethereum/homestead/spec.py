@@ -737,19 +737,16 @@ def calculate_block_difficulty(
         Computed difficulty for a block.
     """
     offset = int(parent_difficulty) // 2048
-    sign = max(
-        1 - (int(timestamp) - int(parent_timestamp)) // 10,
-        -99
-    )
+    sign = max(1 - (int(timestamp) - int(parent_timestamp)) // 10, -99)
 
     difficulty = max(
         int(parent_difficulty) + offset * sign,
-        min(parent_difficulty, GENESIS_DIFFICULTY)
+        min(parent_difficulty, GENESIS_DIFFICULTY),
     )
-    num_bomb_periods = (
-       (int(parent_block_number) + 1) // 100000
-    ) - 2
+    num_bomb_periods = ((int(parent_block_number) + 1) // 100000) - 2
     if num_bomb_periods >= 0:
-        return Uint(max(difficulty + 2 ** num_bomb_periods, GENESIS_DIFFICULTY))
+        return Uint(
+            max(difficulty + 2 ** num_bomb_periods, GENESIS_DIFFICULTY)
+        )
     else:
         return Uint(difficulty)

@@ -364,9 +364,9 @@ def signextend(evm: Evm) -> None:
 
     if bits <= 31:
         testbit = bits * 8 + 7
-        sign_bit = (1 << testbit)
+        sign_bit = 1 << testbit
         if value & sign_bit:
-            result = value | (2**256 - sign_bit)
+            result = value | (2 ** 256 - sign_bit)
         else:
             result = value & (sign_bit - 1)
     else:
