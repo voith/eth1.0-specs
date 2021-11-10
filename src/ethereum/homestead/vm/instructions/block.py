@@ -40,20 +40,13 @@ def block_hash(evm: Evm) -> None:
 
     block_number = pop(evm.stack)
 
-    is_ancestor_depth_out_of_range = (
-        evm.env.number < block_number + 1
-        or evm.env.number - block_number - 1 >= 256
-        or evm.env.number - block_number - 1 < 0
-    )
-
-    if is_ancestor_depth_out_of_range:
+    if evm.env.number <= block_number or evm.env.number > block_number + 256:
+        # Default hash to 0, if the block of interest is not yet on the chain
+        # (including the block which has the current executing transaction),
+        # or if the block's age is more than 256.
         _hash = b"\x00"
     else:
-        try:
-            _hash = evm.env.block_hashes[evm.env.number - block_number - 1]
-        except IndexError:
-            # Ancestor with specified depth not present
-            _hash = b"\x00"
+        _hash = evm.env.block_hashes[evm.env.number - block_number - 1]
 
     push(evm.stack, U256.from_be_bytes(_hash))
 
