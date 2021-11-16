@@ -17,8 +17,8 @@
     <script src="../../../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="ethereum.frontier.vm.interpreter" href="../interpreter/index.html" />
-    <link rel="prev" title="ethereum.frontier.vm.gas" href="../gas/index.html" />
+    <link rel="next" title="ethereum.frontier.vm.instructions.arithmetic" href="arithmetic/index.html" />
+    <link rel="prev" title="ethereum.frontier.vm" href="../index.html" />
    
   <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
   
@@ -26,6 +26,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
+<div id="disclaimer">
+    The documentation tools are undergoing heavy development and may introduce
+    subtle bugs while rendering, especially in hard fork comparisons. Until this
+    warning is removed, <em>always</em> double check against the
+    <a href="https://github.com/ethereum/execution-specs/">original source</a>.
+</div>
+
+
   
 
     <div class="document">
@@ -37,125 +45,63 @@
             
   <section id="module-ethereum.frontier.vm.instructions">
 <span id="ethereum-frontier-vm-instructions"></span><h1><a class="reference internal" href="#module-ethereum.frontier.vm.instructions" title="ethereum.frontier.vm.instructions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions</span></code></a><a class="headerlink" href="#module-ethereum.frontier.vm.instructions" title="Permalink to this headline">¶</a></h1>
-<section id="ethereum-virtual-machine-evm-instructions">
-<h2>Ethereum Virtual Machine (EVM) Instructions<a class="headerlink" href="#ethereum-virtual-machine-evm-instructions" title="Permalink to this headline">¶</a></h2>
+<section id="evm-instruction-encoding-opcodes">
+<h2>EVM Instruction Encoding (Opcodes)<a class="headerlink" href="#evm-instruction-encoding-opcodes" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#module-contents" id="id2">Module Contents</a></p>
+<li><p><a class="reference internal" href="#submodules" id="id2">Submodules</a></p></li>
+<li><p><a class="reference internal" href="#package-contents" id="id3">Package Contents</a></p>
 <ul>
-<li><p><a class="reference internal" href="#functions" id="id3">Functions</a></p></li>
-<li><p><a class="reference internal" href="#attributes" id="id4">Attributes</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id4">Classes</a></p></li>
+<li><p><a class="reference internal" href="#attributes" id="id5">Attributes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#module-details" id="id5">Module Details</a></p>
+<li><p><a class="reference internal" href="#package-details" id="id6">Package Details</a></p>
 <ul>
-<li><p><a class="reference internal" href="#stop" id="id6">stop</a></p></li>
-<li><p><a class="reference internal" href="#add" id="id7">add</a></p></li>
-<li><p><a class="reference internal" href="#sub" id="id8">sub</a></p></li>
-<li><p><a class="reference internal" href="#mul" id="id9">mul</a></p></li>
-<li><p><a class="reference internal" href="#div" id="id10">div</a></p></li>
-<li><p><a class="reference internal" href="#sdiv" id="id11">sdiv</a></p></li>
-<li><p><a class="reference internal" href="#mod" id="id12">mod</a></p></li>
-<li><p><a class="reference internal" href="#smod" id="id13">smod</a></p></li>
-<li><p><a class="reference internal" href="#addmod" id="id14">addmod</a></p></li>
-<li><p><a class="reference internal" href="#mulmod" id="id15">mulmod</a></p></li>
-<li><p><a class="reference internal" href="#exp" id="id16">exp</a></p></li>
-<li><p><a class="reference internal" href="#signextend" id="id17">signextend</a></p></li>
-<li><p><a class="reference internal" href="#sstore" id="id18">sstore</a></p></li>
-<li><p><a class="reference internal" href="#push-n" id="id19">push_n</a></p></li>
-<li><p><a class="reference internal" href="#push1" id="id20">push1</a></p></li>
-<li><p><a class="reference internal" href="#push2" id="id21">push2</a></p></li>
-<li><p><a class="reference internal" href="#push3" id="id22">push3</a></p></li>
-<li><p><a class="reference internal" href="#push4" id="id23">push4</a></p></li>
-<li><p><a class="reference internal" href="#push5" id="id24">push5</a></p></li>
-<li><p><a class="reference internal" href="#push6" id="id25">push6</a></p></li>
-<li><p><a class="reference internal" href="#push7" id="id26">push7</a></p></li>
-<li><p><a class="reference internal" href="#push8" id="id27">push8</a></p></li>
-<li><p><a class="reference internal" href="#push9" id="id28">push9</a></p></li>
-<li><p><a class="reference internal" href="#push10" id="id29">push10</a></p></li>
-<li><p><a class="reference internal" href="#push11" id="id30">push11</a></p></li>
-<li><p><a class="reference internal" href="#push12" id="id31">push12</a></p></li>
-<li><p><a class="reference internal" href="#push13" id="id32">push13</a></p></li>
-<li><p><a class="reference internal" href="#push14" id="id33">push14</a></p></li>
-<li><p><a class="reference internal" href="#push15" id="id34">push15</a></p></li>
-<li><p><a class="reference internal" href="#push16" id="id35">push16</a></p></li>
-<li><p><a class="reference internal" href="#push17" id="id36">push17</a></p></li>
-<li><p><a class="reference internal" href="#push18" id="id37">push18</a></p></li>
-<li><p><a class="reference internal" href="#push19" id="id38">push19</a></p></li>
-<li><p><a class="reference internal" href="#push20" id="id39">push20</a></p></li>
-<li><p><a class="reference internal" href="#push21" id="id40">push21</a></p></li>
-<li><p><a class="reference internal" href="#push22" id="id41">push22</a></p></li>
-<li><p><a class="reference internal" href="#push23" id="id42">push23</a></p></li>
-<li><p><a class="reference internal" href="#push24" id="id43">push24</a></p></li>
-<li><p><a class="reference internal" href="#push25" id="id44">push25</a></p></li>
-<li><p><a class="reference internal" href="#push26" id="id45">push26</a></p></li>
-<li><p><a class="reference internal" href="#push27" id="id46">push27</a></p></li>
-<li><p><a class="reference internal" href="#push28" id="id47">push28</a></p></li>
-<li><p><a class="reference internal" href="#push29" id="id48">push29</a></p></li>
-<li><p><a class="reference internal" href="#push30" id="id49">push30</a></p></li>
-<li><p><a class="reference internal" href="#push31" id="id50">push31</a></p></li>
-<li><p><a class="reference internal" href="#push32" id="id51">push32</a></p></li>
+<li><p><a class="reference internal" href="#ops" id="id7">Ops</a></p></li>
+<li><p><a class="reference internal" href="#op-implementation" id="id8">op_implementation</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
 <section id="introduction">
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
-<p>Implementations of the instructions understood by the EVM.</p>
+<p>Machine readable representations of EVM instructions, and a mapping to their
+implementations.</p>
 </section>
-<section id="module-contents">
-<h3>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h3>
-<section id="functions">
-<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
+<section id="submodules">
+<h3>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arithmetic/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.arithmetic</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="bitwise/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.bitwise</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="block/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.block</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="comparison/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.comparison</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_flow/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.control_flow</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.environment</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="keccak/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.keccak</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="log/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.log</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.memory</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="stack/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.stack</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="storage/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.storage</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="system/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.system</span></code></a></li>
+</ul>
+</div>
+</section>
+<section id="package-contents">
+<h3>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h3>
+<section id="classes">
+<h4>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h4>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.stop" title="ethereum.frontier.vm.instructions.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a></p></td>
-<td><p>Stop further execution of EVM code.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.add" title="ethereum.frontier.vm.instructions.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a></p></td>
-<td><p>Adds the top two elements of the stack together, and pushes the result back</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.sub" title="ethereum.frontier.vm.instructions.sub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sub</span></code></a></p></td>
-<td><p>Subtracts the top two elements of the stack, and pushes the result back</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.mul" title="ethereum.frontier.vm.instructions.mul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mul</span></code></a></p></td>
-<td><p>Multiply the top two elements of the stack, and pushes the result back</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.div" title="ethereum.frontier.vm.instructions.div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">div</span></code></a></p></td>
-<td><p>Integer division of the top two elements of the stack. Pushes the result</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.sdiv" title="ethereum.frontier.vm.instructions.sdiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sdiv</span></code></a></p></td>
-<td><p>Signed integer division of the top two elements of the stack. Pushes the</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.mod" title="ethereum.frontier.vm.instructions.mod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mod</span></code></a></p></td>
-<td><p>Modulo remainder of the top two elements of the stack. Pushes the result</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.smod" title="ethereum.frontier.vm.instructions.smod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smod</span></code></a></p></td>
-<td><p>Signed modulo remainder of the top two elements of the stack. Pushes the</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.addmod" title="ethereum.frontier.vm.instructions.addmod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addmod</span></code></a></p></td>
-<td><p>Modulo addition of the top 2 elements with the 3rd element. Pushes the</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.mulmod" title="ethereum.frontier.vm.instructions.mulmod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mulmod</span></code></a></p></td>
-<td><p>Modulo multiplication of the top 2 elements with the 3rd element. Pushes</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.exp" title="ethereum.frontier.vm.instructions.exp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exp</span></code></a></p></td>
-<td><p>Exponential operation of the top 2 elements. Pushes the result back on</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.signextend" title="ethereum.frontier.vm.instructions.signextend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signextend</span></code></a></p></td>
-<td><p>Sign extend operation. In other words, extend a signed number which</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.sstore" title="ethereum.frontier.vm.instructions.sstore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sstore</span></code></a></p></td>
-<td><p>Stores a value at a certain key in the current context’s storage.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push_n" title="ethereum.frontier.vm.instructions.push_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push_n</span></code></a></p></td>
-<td><p>Pushes a N-byte immediate onto the stack.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.Ops" title="ethereum.frontier.vm.instructions.Ops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ops</span></code></a></p></td>
+<td><p>Enum for EVM Opcodes</p></td>
 </tr>
 </tbody>
 </table>
@@ -168,859 +114,809 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push1" title="ethereum.frontier.vm.instructions.push1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push1</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push2" title="ethereum.frontier.vm.instructions.push2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push2</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push3" title="ethereum.frontier.vm.instructions.push3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push3</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push4" title="ethereum.frontier.vm.instructions.push4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push4</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push5" title="ethereum.frontier.vm.instructions.push5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push5</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push6" title="ethereum.frontier.vm.instructions.push6"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push6</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push7" title="ethereum.frontier.vm.instructions.push7"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push7</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push8" title="ethereum.frontier.vm.instructions.push8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push8</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push9" title="ethereum.frontier.vm.instructions.push9"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push9</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push10" title="ethereum.frontier.vm.instructions.push10"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push10</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push11" title="ethereum.frontier.vm.instructions.push11"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push11</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push12" title="ethereum.frontier.vm.instructions.push12"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push12</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push13" title="ethereum.frontier.vm.instructions.push13"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push13</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push14" title="ethereum.frontier.vm.instructions.push14"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push14</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push15" title="ethereum.frontier.vm.instructions.push15"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push15</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push16" title="ethereum.frontier.vm.instructions.push16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push16</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push17" title="ethereum.frontier.vm.instructions.push17"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push17</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push18" title="ethereum.frontier.vm.instructions.push18"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push18</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push19" title="ethereum.frontier.vm.instructions.push19"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push19</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push20" title="ethereum.frontier.vm.instructions.push20"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push20</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push21" title="ethereum.frontier.vm.instructions.push21"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push21</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push22" title="ethereum.frontier.vm.instructions.push22"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push22</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push23" title="ethereum.frontier.vm.instructions.push23"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push23</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push24" title="ethereum.frontier.vm.instructions.push24"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push24</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push25" title="ethereum.frontier.vm.instructions.push25"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push25</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push26" title="ethereum.frontier.vm.instructions.push26"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push26</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push27" title="ethereum.frontier.vm.instructions.push27"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push27</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push28" title="ethereum.frontier.vm.instructions.push28"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push28</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push29" title="ethereum.frontier.vm.instructions.push29"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push29</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push30" title="ethereum.frontier.vm.instructions.push30"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push30</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push31" title="ethereum.frontier.vm.instructions.push31"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push31</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.push32" title="ethereum.frontier.vm.instructions.push32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">push32</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.instructions.op_implementation" title="ethereum.frontier.vm.instructions.op_implementation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">op_implementation</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
 </section>
 </section>
-<section id="module-details">
-<h3>Module Details<a class="headerlink" href="#module-details" title="Permalink to this headline">¶</a></h3>
-<section id="stop">
-<h4>stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.stop">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop further execution of EVM code.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-</dl>
+<section id="package-details">
+<h3>Package Details<a class="headerlink" href="#package-details" title="Permalink to this headline">¶</a></h3>
+<section id="ops">
+<h4>Ops<a class="headerlink" href="#ops" title="Permalink to this headline">¶</a></h4>
+<p>Enum for EVM Opcodes</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Ops</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.ADD">
+<span class="sig-name descname"><span class="pre">ADD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.ADD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MUL">
+<span class="sig-name descname"><span class="pre">MUL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MUL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SUB">
+<span class="sig-name descname"><span class="pre">SUB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DIV">
+<span class="sig-name descname"><span class="pre">DIV</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SDIV">
+<span class="sig-name descname"><span class="pre">SDIV</span></span><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SDIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MOD">
+<span class="sig-name descname"><span class="pre">MOD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SMOD">
+<span class="sig-name descname"><span class="pre">SMOD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SMOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.ADDMOD">
+<span class="sig-name descname"><span class="pre">ADDMOD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.ADDMOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MULMOD">
+<span class="sig-name descname"><span class="pre">MULMOD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MULMOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.EXP">
+<span class="sig-name descname"><span class="pre">EXP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.EXP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SIGNEXTEND">
+<span class="sig-name descname"><span class="pre">SIGNEXTEND</span></span><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SIGNEXTEND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.LT">
+<span class="sig-name descname"><span class="pre">LT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.LT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.GT">
+<span class="sig-name descname"><span class="pre">GT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">17</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.GT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SLT">
+<span class="sig-name descname"><span class="pre">SLT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">18</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SLT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SGT">
+<span class="sig-name descname"><span class="pre">SGT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">19</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SGT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.EQ">
+<span class="sig-name descname"><span class="pre">EQ</span></span><em class="property"> <span class="pre">=</span> <span class="pre">20</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.EQ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.ISZERO">
+<span class="sig-name descname"><span class="pre">ISZERO</span></span><em class="property"> <span class="pre">=</span> <span class="pre">21</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.ISZERO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.AND">
+<span class="sig-name descname"><span class="pre">AND</span></span><em class="property"> <span class="pre">=</span> <span class="pre">22</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.AND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.OR">
+<span class="sig-name descname"><span class="pre">OR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">23</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.OR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.XOR">
+<span class="sig-name descname"><span class="pre">XOR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">24</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.XOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.NOT">
+<span class="sig-name descname"><span class="pre">NOT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">25</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.NOT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.BYTE">
+<span class="sig-name descname"><span class="pre">BYTE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">26</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.BYTE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.KECCAK">
+<span class="sig-name descname"><span class="pre">KECCAK</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.KECCAK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.ADDRESS">
+<span class="sig-name descname"><span class="pre">ADDRESS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">48</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.ADDRESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.BALANCE">
+<span class="sig-name descname"><span class="pre">BALANCE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">49</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.BALANCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.ORIGIN">
+<span class="sig-name descname"><span class="pre">ORIGIN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">50</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.ORIGIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALLER">
+<span class="sig-name descname"><span class="pre">CALLER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">51</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALLER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALLVALUE">
+<span class="sig-name descname"><span class="pre">CALLVALUE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">52</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALLVALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALLDATALOAD">
+<span class="sig-name descname"><span class="pre">CALLDATALOAD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">53</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALLDATALOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALLDATASIZE">
+<span class="sig-name descname"><span class="pre">CALLDATASIZE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">54</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALLDATASIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALLDATACOPY">
+<span class="sig-name descname"><span class="pre">CALLDATACOPY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">55</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALLDATACOPY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CODESIZE">
+<span class="sig-name descname"><span class="pre">CODESIZE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">56</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CODESIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CODECOPY">
+<span class="sig-name descname"><span class="pre">CODECOPY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">57</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CODECOPY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.GASPRICE">
+<span class="sig-name descname"><span class="pre">GASPRICE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">58</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.GASPRICE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.EXTCODESIZE">
+<span class="sig-name descname"><span class="pre">EXTCODESIZE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">59</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.EXTCODESIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.EXTCODECOPY">
+<span class="sig-name descname"><span class="pre">EXTCODECOPY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">60</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.EXTCODECOPY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.BLOCKHASH">
+<span class="sig-name descname"><span class="pre">BLOCKHASH</span></span><em class="property"> <span class="pre">=</span> <span class="pre">64</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.BLOCKHASH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.COINBASE">
+<span class="sig-name descname"><span class="pre">COINBASE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">65</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.COINBASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.TIMESTAMP">
+<span class="sig-name descname"><span class="pre">TIMESTAMP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">66</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.TIMESTAMP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.NUMBER">
+<span class="sig-name descname"><span class="pre">NUMBER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">67</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DIFFICULTY">
+<span class="sig-name descname"><span class="pre">DIFFICULTY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">68</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DIFFICULTY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.GASLIMIT">
+<span class="sig-name descname"><span class="pre">GASLIMIT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">69</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.GASLIMIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.STOP">
+<span class="sig-name descname"><span class="pre">STOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.JUMP">
+<span class="sig-name descname"><span class="pre">JUMP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">86</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.JUMP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.JUMPI">
+<span class="sig-name descname"><span class="pre">JUMPI</span></span><em class="property"> <span class="pre">=</span> <span class="pre">87</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.JUMPI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PC">
+<span class="sig-name descname"><span class="pre">PC</span></span><em class="property"> <span class="pre">=</span> <span class="pre">88</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.GAS">
+<span class="sig-name descname"><span class="pre">GAS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">90</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.GAS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.JUMPDEST">
+<span class="sig-name descname"><span class="pre">JUMPDEST</span></span><em class="property"> <span class="pre">=</span> <span class="pre">91</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.JUMPDEST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SLOAD">
+<span class="sig-name descname"><span class="pre">SLOAD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">84</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SLOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SSTORE">
+<span class="sig-name descname"><span class="pre">SSTORE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">85</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SSTORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.POP">
+<span class="sig-name descname"><span class="pre">POP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">80</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.POP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH1">
+<span class="sig-name descname"><span class="pre">PUSH1</span></span><em class="property"> <span class="pre">=</span> <span class="pre">96</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH2">
+<span class="sig-name descname"><span class="pre">PUSH2</span></span><em class="property"> <span class="pre">=</span> <span class="pre">97</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH3">
+<span class="sig-name descname"><span class="pre">PUSH3</span></span><em class="property"> <span class="pre">=</span> <span class="pre">98</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH4">
+<span class="sig-name descname"><span class="pre">PUSH4</span></span><em class="property"> <span class="pre">=</span> <span class="pre">99</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH5">
+<span class="sig-name descname"><span class="pre">PUSH5</span></span><em class="property"> <span class="pre">=</span> <span class="pre">100</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH6">
+<span class="sig-name descname"><span class="pre">PUSH6</span></span><em class="property"> <span class="pre">=</span> <span class="pre">101</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH7">
+<span class="sig-name descname"><span class="pre">PUSH7</span></span><em class="property"> <span class="pre">=</span> <span class="pre">102</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH8">
+<span class="sig-name descname"><span class="pre">PUSH8</span></span><em class="property"> <span class="pre">=</span> <span class="pre">103</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH9">
+<span class="sig-name descname"><span class="pre">PUSH9</span></span><em class="property"> <span class="pre">=</span> <span class="pre">104</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH10">
+<span class="sig-name descname"><span class="pre">PUSH10</span></span><em class="property"> <span class="pre">=</span> <span class="pre">105</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH11">
+<span class="sig-name descname"><span class="pre">PUSH11</span></span><em class="property"> <span class="pre">=</span> <span class="pre">106</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH12">
+<span class="sig-name descname"><span class="pre">PUSH12</span></span><em class="property"> <span class="pre">=</span> <span class="pre">107</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH13">
+<span class="sig-name descname"><span class="pre">PUSH13</span></span><em class="property"> <span class="pre">=</span> <span class="pre">108</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH14">
+<span class="sig-name descname"><span class="pre">PUSH14</span></span><em class="property"> <span class="pre">=</span> <span class="pre">109</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH15">
+<span class="sig-name descname"><span class="pre">PUSH15</span></span><em class="property"> <span class="pre">=</span> <span class="pre">110</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH16">
+<span class="sig-name descname"><span class="pre">PUSH16</span></span><em class="property"> <span class="pre">=</span> <span class="pre">111</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH17">
+<span class="sig-name descname"><span class="pre">PUSH17</span></span><em class="property"> <span class="pre">=</span> <span class="pre">112</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH17" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH18">
+<span class="sig-name descname"><span class="pre">PUSH18</span></span><em class="property"> <span class="pre">=</span> <span class="pre">113</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH18" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH19">
+<span class="sig-name descname"><span class="pre">PUSH19</span></span><em class="property"> <span class="pre">=</span> <span class="pre">114</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH19" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH20">
+<span class="sig-name descname"><span class="pre">PUSH20</span></span><em class="property"> <span class="pre">=</span> <span class="pre">115</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH21">
+<span class="sig-name descname"><span class="pre">PUSH21</span></span><em class="property"> <span class="pre">=</span> <span class="pre">116</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH22">
+<span class="sig-name descname"><span class="pre">PUSH22</span></span><em class="property"> <span class="pre">=</span> <span class="pre">117</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH22" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH23">
+<span class="sig-name descname"><span class="pre">PUSH23</span></span><em class="property"> <span class="pre">=</span> <span class="pre">118</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH24">
+<span class="sig-name descname"><span class="pre">PUSH24</span></span><em class="property"> <span class="pre">=</span> <span class="pre">119</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH25">
+<span class="sig-name descname"><span class="pre">PUSH25</span></span><em class="property"> <span class="pre">=</span> <span class="pre">120</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH25" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH26">
+<span class="sig-name descname"><span class="pre">PUSH26</span></span><em class="property"> <span class="pre">=</span> <span class="pre">121</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH26" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH27">
+<span class="sig-name descname"><span class="pre">PUSH27</span></span><em class="property"> <span class="pre">=</span> <span class="pre">122</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH27" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH28">
+<span class="sig-name descname"><span class="pre">PUSH28</span></span><em class="property"> <span class="pre">=</span> <span class="pre">123</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH28" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH29">
+<span class="sig-name descname"><span class="pre">PUSH29</span></span><em class="property"> <span class="pre">=</span> <span class="pre">124</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH29" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH30">
+<span class="sig-name descname"><span class="pre">PUSH30</span></span><em class="property"> <span class="pre">=</span> <span class="pre">125</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH30" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH31">
+<span class="sig-name descname"><span class="pre">PUSH31</span></span><em class="property"> <span class="pre">=</span> <span class="pre">126</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH31" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.PUSH32">
+<span class="sig-name descname"><span class="pre">PUSH32</span></span><em class="property"> <span class="pre">=</span> <span class="pre">127</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.PUSH32" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP1">
+<span class="sig-name descname"><span class="pre">DUP1</span></span><em class="property"> <span class="pre">=</span> <span class="pre">128</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP2">
+<span class="sig-name descname"><span class="pre">DUP2</span></span><em class="property"> <span class="pre">=</span> <span class="pre">129</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP3">
+<span class="sig-name descname"><span class="pre">DUP3</span></span><em class="property"> <span class="pre">=</span> <span class="pre">130</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP4">
+<span class="sig-name descname"><span class="pre">DUP4</span></span><em class="property"> <span class="pre">=</span> <span class="pre">131</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP5">
+<span class="sig-name descname"><span class="pre">DUP5</span></span><em class="property"> <span class="pre">=</span> <span class="pre">132</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP6">
+<span class="sig-name descname"><span class="pre">DUP6</span></span><em class="property"> <span class="pre">=</span> <span class="pre">133</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP7">
+<span class="sig-name descname"><span class="pre">DUP7</span></span><em class="property"> <span class="pre">=</span> <span class="pre">134</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP8">
+<span class="sig-name descname"><span class="pre">DUP8</span></span><em class="property"> <span class="pre">=</span> <span class="pre">135</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP9">
+<span class="sig-name descname"><span class="pre">DUP9</span></span><em class="property"> <span class="pre">=</span> <span class="pre">136</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP10">
+<span class="sig-name descname"><span class="pre">DUP10</span></span><em class="property"> <span class="pre">=</span> <span class="pre">137</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP11">
+<span class="sig-name descname"><span class="pre">DUP11</span></span><em class="property"> <span class="pre">=</span> <span class="pre">138</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP12">
+<span class="sig-name descname"><span class="pre">DUP12</span></span><em class="property"> <span class="pre">=</span> <span class="pre">139</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP13">
+<span class="sig-name descname"><span class="pre">DUP13</span></span><em class="property"> <span class="pre">=</span> <span class="pre">140</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP14">
+<span class="sig-name descname"><span class="pre">DUP14</span></span><em class="property"> <span class="pre">=</span> <span class="pre">141</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP15">
+<span class="sig-name descname"><span class="pre">DUP15</span></span><em class="property"> <span class="pre">=</span> <span class="pre">142</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.DUP16">
+<span class="sig-name descname"><span class="pre">DUP16</span></span><em class="property"> <span class="pre">=</span> <span class="pre">143</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.DUP16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP1">
+<span class="sig-name descname"><span class="pre">SWAP1</span></span><em class="property"> <span class="pre">=</span> <span class="pre">144</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP2">
+<span class="sig-name descname"><span class="pre">SWAP2</span></span><em class="property"> <span class="pre">=</span> <span class="pre">145</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP3">
+<span class="sig-name descname"><span class="pre">SWAP3</span></span><em class="property"> <span class="pre">=</span> <span class="pre">146</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP4">
+<span class="sig-name descname"><span class="pre">SWAP4</span></span><em class="property"> <span class="pre">=</span> <span class="pre">147</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP5">
+<span class="sig-name descname"><span class="pre">SWAP5</span></span><em class="property"> <span class="pre">=</span> <span class="pre">148</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP6">
+<span class="sig-name descname"><span class="pre">SWAP6</span></span><em class="property"> <span class="pre">=</span> <span class="pre">149</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP7">
+<span class="sig-name descname"><span class="pre">SWAP7</span></span><em class="property"> <span class="pre">=</span> <span class="pre">150</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP8">
+<span class="sig-name descname"><span class="pre">SWAP8</span></span><em class="property"> <span class="pre">=</span> <span class="pre">151</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP9">
+<span class="sig-name descname"><span class="pre">SWAP9</span></span><em class="property"> <span class="pre">=</span> <span class="pre">152</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP10">
+<span class="sig-name descname"><span class="pre">SWAP10</span></span><em class="property"> <span class="pre">=</span> <span class="pre">153</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP11">
+<span class="sig-name descname"><span class="pre">SWAP11</span></span><em class="property"> <span class="pre">=</span> <span class="pre">154</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP12">
+<span class="sig-name descname"><span class="pre">SWAP12</span></span><em class="property"> <span class="pre">=</span> <span class="pre">155</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP13">
+<span class="sig-name descname"><span class="pre">SWAP13</span></span><em class="property"> <span class="pre">=</span> <span class="pre">156</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP14">
+<span class="sig-name descname"><span class="pre">SWAP14</span></span><em class="property"> <span class="pre">=</span> <span class="pre">157</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP15">
+<span class="sig-name descname"><span class="pre">SWAP15</span></span><em class="property"> <span class="pre">=</span> <span class="pre">158</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SWAP16">
+<span class="sig-name descname"><span class="pre">SWAP16</span></span><em class="property"> <span class="pre">=</span> <span class="pre">159</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SWAP16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MLOAD">
+<span class="sig-name descname"><span class="pre">MLOAD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">81</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MLOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MSTORE">
+<span class="sig-name descname"><span class="pre">MSTORE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">82</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MSTORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MSTORE8">
+<span class="sig-name descname"><span class="pre">MSTORE8</span></span><em class="property"> <span class="pre">=</span> <span class="pre">83</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MSTORE8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.MSIZE">
+<span class="sig-name descname"><span class="pre">MSIZE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">89</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.MSIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.LOG0">
+<span class="sig-name descname"><span class="pre">LOG0</span></span><em class="property"> <span class="pre">=</span> <span class="pre">160</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.LOG0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.LOG1">
+<span class="sig-name descname"><span class="pre">LOG1</span></span><em class="property"> <span class="pre">=</span> <span class="pre">161</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.LOG1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.LOG2">
+<span class="sig-name descname"><span class="pre">LOG2</span></span><em class="property"> <span class="pre">=</span> <span class="pre">162</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.LOG2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.LOG3">
+<span class="sig-name descname"><span class="pre">LOG3</span></span><em class="property"> <span class="pre">=</span> <span class="pre">163</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.LOG3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.LOG4">
+<span class="sig-name descname"><span class="pre">LOG4</span></span><em class="property"> <span class="pre">=</span> <span class="pre">164</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.LOG4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CREATE">
+<span class="sig-name descname"><span class="pre">CREATE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">240</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CREATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.RETURN">
+<span class="sig-name descname"><span class="pre">RETURN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">243</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALL">
+<span class="sig-name descname"><span class="pre">CALL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">241</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.CALLCODE">
+<span class="sig-name descname"><span class="pre">CALLCODE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">242</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.CALLCODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.Ops.SELFDESTRUCT">
+<span class="sig-name descname"><span class="pre">SELFDESTRUCT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">255</span></em><a class="headerlink" href="#ethereum.frontier.vm.instructions.Ops.SELFDESTRUCT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+</section>
+<section id="op-implementation">
+<h4>op_implementation<a class="headerlink" href="#op-implementation" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.op_implementation">
+<span class="sig-name descname"><span class="pre">op_implementation</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.op_implementation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">op_implementation</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Ops</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">STOP</span><span class="p">:</span> <span class="n">control_flow_instructions</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">ADD</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">add</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MUL</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SUB</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">sub</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DIV</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">div</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SDIV</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">sdiv</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MOD</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">mod</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SMOD</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">smod</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">ADDMOD</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">addmod</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MULMOD</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">mulmod</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">EXP</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SIGNEXTEND</span><span class="p">:</span> <span class="n">arithmetic_instructions</span><span class="o">.</span><span class="n">signextend</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">LT</span><span class="p">:</span> <span class="n">comparison_instructions</span><span class="o">.</span><span class="n">less_than</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">GT</span><span class="p">:</span> <span class="n">comparison_instructions</span><span class="o">.</span><span class="n">greater_than</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SLT</span><span class="p">:</span> <span class="n">comparison_instructions</span><span class="o">.</span><span class="n">signed_less_than</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SGT</span><span class="p">:</span> <span class="n">comparison_instructions</span><span class="o">.</span><span class="n">signed_greater_than</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">EQ</span><span class="p">:</span> <span class="n">comparison_instructions</span><span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">ISZERO</span><span class="p">:</span> <span class="n">comparison_instructions</span><span class="o">.</span><span class="n">is_zero</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">AND</span><span class="p">:</span> <span class="n">bitwise_instructions</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">OR</span><span class="p">:</span> <span class="n">bitwise_instructions</span><span class="o">.</span><span class="n">bitwise_or</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">XOR</span><span class="p">:</span> <span class="n">bitwise_instructions</span><span class="o">.</span><span class="n">bitwise_xor</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">NOT</span><span class="p">:</span> <span class="n">bitwise_instructions</span><span class="o">.</span><span class="n">bitwise_not</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">BYTE</span><span class="p">:</span> <span class="n">bitwise_instructions</span><span class="o">.</span><span class="n">get_byte</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">KECCAK</span><span class="p">:</span> <span class="n">keccak_instructions</span><span class="o">.</span><span class="n">keccak</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SLOAD</span><span class="p">:</span> <span class="n">storage_instructions</span><span class="o">.</span><span class="n">sload</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">BLOCKHASH</span><span class="p">:</span> <span class="n">block_instructions</span><span class="o">.</span><span class="n">block_hash</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">COINBASE</span><span class="p">:</span> <span class="n">block_instructions</span><span class="o">.</span><span class="n">coinbase</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="p">:</span> <span class="n">block_instructions</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">NUMBER</span><span class="p">:</span> <span class="n">block_instructions</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DIFFICULTY</span><span class="p">:</span> <span class="n">block_instructions</span><span class="o">.</span><span class="n">difficulty</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">GASLIMIT</span><span class="p">:</span> <span class="n">block_instructions</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MLOAD</span><span class="p">:</span> <span class="n">memory_instructions</span><span class="o">.</span><span class="n">mload</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MSTORE</span><span class="p">:</span> <span class="n">memory_instructions</span><span class="o">.</span><span class="n">mstore</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MSTORE8</span><span class="p">:</span> <span class="n">memory_instructions</span><span class="o">.</span><span class="n">mstore8</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">MSIZE</span><span class="p">:</span> <span class="n">memory_instructions</span><span class="o">.</span><span class="n">msize</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">ADDRESS</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">BALANCE</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">ORIGIN</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">origin</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALLER</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">caller</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALLVALUE</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">callvalue</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALLDATALOAD</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">calldataload</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALLDATASIZE</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">calldatasize</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALLDATACOPY</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">calldatacopy</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CODESIZE</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">codesize</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CODECOPY</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">codecopy</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">GASPRICE</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">gasprice</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">EXTCODESIZE</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">extcodesize</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">EXTCODECOPY</span><span class="p">:</span> <span class="n">environment_instructions</span><span class="o">.</span><span class="n">extcodecopy</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SSTORE</span><span class="p">:</span> <span class="n">storage_instructions</span><span class="o">.</span><span class="n">sstore</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">JUMP</span><span class="p">:</span> <span class="n">control_flow_instructions</span><span class="o">.</span><span class="n">jump</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">JUMPI</span><span class="p">:</span> <span class="n">control_flow_instructions</span><span class="o">.</span><span class="n">jumpi</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PC</span><span class="p">:</span> <span class="n">control_flow_instructions</span><span class="o">.</span><span class="n">pc</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">GAS</span><span class="p">:</span> <span class="n">control_flow_instructions</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">JUMPDEST</span><span class="p">:</span> <span class="n">control_flow_instructions</span><span class="o">.</span><span class="n">jumpdest</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">POP</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">pop</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH1</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push1</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH2</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push2</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH3</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push3</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH4</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push4</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH5</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push5</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH6</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push6</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH7</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push7</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH8</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push8</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH9</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push9</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH10</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push10</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH11</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push11</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH12</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push12</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH13</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push13</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH14</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push14</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH15</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push15</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH16</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push16</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH17</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push17</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH18</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push18</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH19</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push19</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH20</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push20</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH21</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push21</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH22</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push22</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH23</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push23</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH24</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push24</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH25</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push25</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH26</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push26</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH27</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push27</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH28</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push28</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH29</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push29</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH30</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push30</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH31</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push31</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">PUSH32</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">push32</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP1</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup1</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP2</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup2</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP3</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup3</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP4</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup4</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP5</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup5</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP6</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup6</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP7</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup7</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP8</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup8</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP9</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup9</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP10</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup10</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP11</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup11</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP12</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup12</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP13</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup13</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP14</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup14</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP15</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup15</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">DUP16</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">dup16</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP1</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap1</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP2</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap2</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP3</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap3</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP4</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap4</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP5</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap5</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP6</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap6</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP7</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap7</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP8</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap8</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP9</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap9</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP10</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap10</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP11</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap11</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP12</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap12</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP13</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap13</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP14</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap14</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP15</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap15</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SWAP16</span><span class="p">:</span> <span class="n">stack_instructions</span><span class="o">.</span><span class="n">swap16</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">LOG0</span><span class="p">:</span> <span class="n">log_instructions</span><span class="o">.</span><span class="n">log0</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">LOG1</span><span class="p">:</span> <span class="n">log_instructions</span><span class="o">.</span><span class="n">log1</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">LOG2</span><span class="p">:</span> <span class="n">log_instructions</span><span class="o">.</span><span class="n">log2</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">LOG3</span><span class="p">:</span> <span class="n">log_instructions</span><span class="o">.</span><span class="n">log3</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">LOG4</span><span class="p">:</span> <span class="n">log_instructions</span><span class="o">.</span><span class="n">log4</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CREATE</span><span class="p">:</span> <span class="n">system_instructions</span><span class="o">.</span><span class="n">create</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">RETURN</span><span class="p">:</span> <span class="n">system_instructions</span><span class="o">.</span><span class="n">return_</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALL</span><span class="p">:</span> <span class="n">system_instructions</span><span class="o">.</span><span class="n">call</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">CALLCODE</span><span class="p">:</span> <span class="n">system_instructions</span><span class="o">.</span><span class="n">callcode</span><span class="p">,</span>
+    <span class="n">Ops</span><span class="o">.</span><span class="n">SELFDESTRUCT</span><span class="p">:</span> <span class="n">system_instructions</span><span class="o">.</span><span class="n">selfdestruct</span><span class="p">,</span>
 </pre></div>
 </div>
-</section>
-<section id="add">
-<h4>add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.add">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds the top two elements of the stack together, and pushes the result back
-on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_VERY_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_VERY_LOW</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">wrapping_add</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="sub">
-<h4>sub<a class="headerlink" href="#sub" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.sub">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">sub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.sub" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subtracts the top two elements of the stack, and pushes the result back
-on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_VERY_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_VERY_LOW</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">wrapping_sub</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="mul">
-<h4>mul<a class="headerlink" href="#mul" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.mul">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">mul</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiply the top two elements of the stack, and pushes the result back
-on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_LOW</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">wrapping_mul</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="div">
-<h4>div<a class="headerlink" href="#div" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.div">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Integer division of the top two elements of the stack. Pushes the result
-back on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_LOW</span><span class="p">)</span>
-
-    <span class="n">dividend</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">divisor</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">quotient</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">quotient</span> <span class="o">=</span> <span class="n">dividend</span> <span class="o">//</span> <span class="n">divisor</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">quotient</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="sdiv">
-<h4>sdiv<a class="headerlink" href="#sdiv" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.sdiv">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">sdiv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.sdiv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Signed integer division of the top two elements of the stack. Pushes the
-result back on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sdiv</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_LOW</span><span class="p">)</span>
-
-    <span class="n">dividend</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span><span class="o">.</span><span class="n">to_signed</span><span class="p">()</span>
-    <span class="n">divisor</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span><span class="o">.</span><span class="n">to_signed</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">quotient</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">elif</span> <span class="n">dividend</span> <span class="o">==</span> <span class="o">-</span><span class="n">U255_CEIL_VALUE</span> <span class="ow">and</span> <span class="n">divisor</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">quotient</span> <span class="o">=</span> <span class="o">-</span><span class="n">U255_CEIL_VALUE</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">sign</span> <span class="o">=</span> <span class="n">get_sign</span><span class="p">(</span><span class="n">dividend</span> <span class="o">*</span> <span class="n">divisor</span><span class="p">)</span>
-        <span class="n">quotient</span> <span class="o">=</span> <span class="n">sign</span> <span class="o">*</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dividend</span><span class="p">)</span> <span class="o">//</span> <span class="nb">abs</span><span class="p">(</span><span class="n">divisor</span><span class="p">))</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">U256</span><span class="o">.</span><span class="n">from_signed</span><span class="p">(</span><span class="n">quotient</span><span class="p">))</span>
-</pre></div>
-</div>
-</section>
-<section id="mod">
-<h4>mod<a class="headerlink" href="#mod" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.mod">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.mod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo remainder of the top two elements of the stack. Pushes the result
-back on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mod</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_LOW</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">remainder</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="smod">
-<h4>smod<a class="headerlink" href="#smod" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.smod">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">smod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.smod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Signed modulo remainder of the top two elements of the stack. Pushes the
-result back on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">smod</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_LOW</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span><span class="o">.</span><span class="n">to_signed</span><span class="p">()</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span><span class="o">.</span><span class="n">to_signed</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">get_sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">U256</span><span class="o">.</span><span class="n">from_signed</span><span class="p">(</span><span class="n">remainder</span><span class="p">))</span>
-</pre></div>
-</div>
-</section>
-<section id="addmod">
-<h4>addmod<a class="headerlink" href="#addmod" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.addmod">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">addmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.addmod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo addition of the top 2 elements with the 3rd element. Pushes the
-result back on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>3</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_MID</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addmod</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_MID</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="n">z</span><span class="p">)</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="mulmod">
-<h4>mulmod<a class="headerlink" href="#mulmod" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.mulmod">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">mulmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.mulmod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo multiplication of the top 2 elements with the 3rd element. Pushes
-the result back on the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>3</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_MID</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mulmod</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_MID</span><span class="p">)</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="p">((</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="n">z</span><span class="p">)</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="exp">
-<h4>exp<a class="headerlink" href="#exp" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.exp">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.exp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exponential operation of the top 2 elements. Pushes the result back on
-the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_MID</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">base</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-    <span class="n">exponent</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
-
-    <span class="n">gas_used</span> <span class="o">=</span> <span class="n">GAS_EXPONENTIATION</span>
-    <span class="k">if</span> <span class="n">exponent</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># This is equivalent to 1 + floor(log(y, 256)). But in python the log</span>
-        <span class="c1"># function is inaccurate leading to wrong results.</span>
-        <span class="n">exponent_bits</span> <span class="o">=</span> <span class="n">exponent</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span>
-        <span class="n">exponent_bytes</span> <span class="o">=</span> <span class="p">(</span><span class="n">exponent_bits</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span>
-        <span class="n">gas_used</span> <span class="o">+=</span> <span class="n">GAS_EXPONENTIATION</span> <span class="o">*</span> <span class="n">exponent_bytes</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">gas_used</span><span class="p">)</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">U256_CEIL_VALUE</span><span class="p">))</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="signextend">
-<h4>signextend<a class="headerlink" href="#signextend" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.signextend">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">signextend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.signextend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sign extend operation. In other words, extend a signed number which
-fits in N bytes to 32 bytes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">signextend</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_LOW</span><span class="p">)</span>
-
-    <span class="c1"># byte_num would be 0-indexed when inserted to the stack.</span>
-    <span class="n">byte_num</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">byte_num</span> <span class="o">&gt;</span> <span class="mi">31</span><span class="p">:</span>
-        <span class="c1"># Can&#39;t extend any further</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">value</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># U256(0).to_be_bytes() gives b&#39;&#39; instead b&#39;\x00&#39;. # noqa: SC100</span>
-        <span class="n">value_bytes</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_be_bytes</span><span class="p">()</span> <span class="ow">or</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span>
-
-        <span class="c1"># Now among the obtained value bytes, consider only</span>
-        <span class="c1"># N `least significant bytes`, where N is `byte_num + 1`.</span>
-        <span class="n">value_bytes</span> <span class="o">=</span> <span class="n">value_bytes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">value_bytes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">byte_num</span> <span class="p">:]</span>
-        <span class="n">sign_bit</span> <span class="o">=</span> <span class="n">value_bytes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">7</span>
-        <span class="k">if</span> <span class="n">sign_bit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="o">.</span><span class="n">from_be_bytes</span><span class="p">(</span><span class="n">value_bytes</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">num_bytes_prepend</span> <span class="o">=</span> <span class="mi">32</span> <span class="o">-</span> <span class="p">(</span><span class="n">byte_num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">U256</span><span class="o">.</span><span class="n">from_be_bytes</span><span class="p">(</span>
-                <span class="nb">bytearray</span><span class="p">([</span><span class="mh">0xFF</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_bytes_prepend</span><span class="p">)</span> <span class="o">+</span> <span class="n">value_bytes</span>
-            <span class="p">)</span>
-
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="sstore">
-<h4>sstore<a class="headerlink" href="#sstore" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.sstore">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">sstore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.sstore" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stores a value at a certain key in the current context’s storage.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>evm</strong> – The current EVM frame.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackUnderflowError" title="ethereum.frontier.vm.error.StackUnderflowError"><strong>StackUnderflowError</strong></a> – If <cite>len(stack)</cite> is less than <cite>2</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>20000</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sstore</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span><span class="o">.</span><span class="n">to_be_bytes32</span><span class="p">()</span>
-    <span class="n">new_value</span> <span class="o">=</span> <span class="n">pop</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-    <span class="n">current_value</span> <span class="o">=</span> <span class="n">evm</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">current</span><span class="p">]</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">U256</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-
-    <span class="c1"># TODO: SSTORE gas usage hasn&#39;t been tested yet. Testing this needs</span>
-    <span class="c1"># other opcodes to be implemented.</span>
-    <span class="c1"># Calculating the gas needed for the storage</span>
-    <span class="k">if</span> <span class="n">new_value</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">current_value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">gas_cost</span> <span class="o">=</span> <span class="n">GAS_STORAGE_SET</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">gas_cost</span> <span class="o">=</span> <span class="n">GAS_STORAGE_UPDATE</span>
-
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">gas_cost</span><span class="p">)</span>
-
-    <span class="c1"># TODO: Refund counter hasn&#39;t been tested yet. Testing this needs other</span>
-    <span class="c1"># Opcodes to be implemented</span>
-    <span class="k">if</span> <span class="n">new_value</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">current_value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">evm</span><span class="o">.</span><span class="n">refund_counter</span> <span class="o">+=</span> <span class="n">GAS_STORAGE_CLEAR_REFUND</span>
-
-    <span class="k">if</span> <span class="n">new_value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># Deletes a k-v pair from dict if key is present, else does nothing</span>
-        <span class="n">evm</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">current</span><span class="p">]</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">evm</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">current</span><span class="p">]</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_value</span>
-</pre></div>
-</div>
-</section>
-<section id="push-n">
-<h4>push_n<a class="headerlink" href="#push-n" title="Permalink to this headline">¶</a></h4>
-<dl class="py function">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push_n">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../index.html#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><span class="pre">ethereum.frontier.vm.Evm</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_bytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push_n" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pushes a N-byte immediate onto the stack.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>evm</strong> – The current EVM frame.</p></li>
-<li><p><strong>num_bytes</strong> (<cite>int</cite>) – The number of immediate bytes to be read from the code and pushed to
-the stack.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.StackOverflowError" title="ethereum.frontier.vm.error.StackOverflowError"><strong>StackOverflowError</strong></a> – If <cite>len(stack)</cite> is equals <cite>1024</cite>.</p></li>
-<li><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>evm.gas_left</cite> is less than <cite>GAS_VERY_LOW</cite>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">push_n</span><span class="p">(</span><span class="n">evm</span><span class="p">:</span> <span class="n">Evm</span><span class="p">,</span> <span class="n">num_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">assert</span> <span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">+</span> <span class="n">num_bytes</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
-    <span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span> <span class="o">=</span> <span class="n">subtract_gas</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">gas_left</span><span class="p">,</span> <span class="n">GAS_VERY_LOW</span><span class="p">)</span>
-
-    <span class="n">data_to_push</span> <span class="o">=</span> <span class="n">U256</span><span class="o">.</span><span class="n">from_be_bytes</span><span class="p">(</span>
-        <span class="n">evm</span><span class="o">.</span><span class="n">code</span><span class="p">[</span><span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">+</span> <span class="n">num_bytes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="p">)</span>
-    <span class="n">push</span><span class="p">(</span><span class="n">evm</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="n">data_to_push</span><span class="p">)</span>
-
-    <span class="n">evm</span><span class="o">.</span><span class="n">pc</span> <span class="o">+=</span> <span class="n">num_bytes</span>
-</pre></div>
-</div>
-</section>
-<section id="push1">
-<h4>push1<a class="headerlink" href="#push1" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push1">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push1</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push2">
-<h4>push2<a class="headerlink" href="#push2" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push2">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push2</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push3">
-<h4>push3<a class="headerlink" href="#push3" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push3">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push3</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push4">
-<h4>push4<a class="headerlink" href="#push4" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push4">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push4</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push4" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push5">
-<h4>push5<a class="headerlink" href="#push5" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push5">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push5</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push5" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push6">
-<h4>push6<a class="headerlink" href="#push6" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push6">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push6</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push6" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push7">
-<h4>push7<a class="headerlink" href="#push7" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push7">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push7</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push7" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push8">
-<h4>push8<a class="headerlink" href="#push8" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push8">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push8</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push8" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push9">
-<h4>push9<a class="headerlink" href="#push9" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push9">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push9</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push9" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push10">
-<h4>push10<a class="headerlink" href="#push10" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push10">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push10</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push10" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push11">
-<h4>push11<a class="headerlink" href="#push11" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push11">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push11</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push11" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push12">
-<h4>push12<a class="headerlink" href="#push12" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push12">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push12</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push12" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push13">
-<h4>push13<a class="headerlink" href="#push13" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push13">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push13</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push13" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push14">
-<h4>push14<a class="headerlink" href="#push14" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push14">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push14</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push14" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push15">
-<h4>push15<a class="headerlink" href="#push15" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push15">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push15</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push15" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push16">
-<h4>push16<a class="headerlink" href="#push16" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push16">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push16</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push16" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push17">
-<h4>push17<a class="headerlink" href="#push17" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push17">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push17</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push17" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push18">
-<h4>push18<a class="headerlink" href="#push18" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push18">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push18</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push18" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push19">
-<h4>push19<a class="headerlink" href="#push19" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push19">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push19</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push19" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push20">
-<h4>push20<a class="headerlink" href="#push20" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push20">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push20</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push20" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push21">
-<h4>push21<a class="headerlink" href="#push21" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push21">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push21</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push21" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push22">
-<h4>push22<a class="headerlink" href="#push22" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push22">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push22</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push22" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push23">
-<h4>push23<a class="headerlink" href="#push23" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push23">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push23</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push23" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push24">
-<h4>push24<a class="headerlink" href="#push24" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push24">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push24</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push24" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push25">
-<h4>push25<a class="headerlink" href="#push25" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push25">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push25</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push25" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push26">
-<h4>push26<a class="headerlink" href="#push26" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push26">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push26</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push26" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push27">
-<h4>push27<a class="headerlink" href="#push27" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push27">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push27</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push27" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push28">
-<h4>push28<a class="headerlink" href="#push28" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push28">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push28</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push28" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push29">
-<h4>push29<a class="headerlink" href="#push29" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push29">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push29</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push29" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push30">
-<h4>push30<a class="headerlink" href="#push30" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push30">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push30</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push30" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push31">
-<h4>push31<a class="headerlink" href="#push31" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push31">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push31</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push31" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="push32">
-<h4>push32<a class="headerlink" href="#push32" title="Permalink to this headline">¶</a></h4>
-<dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.instructions.push32">
-<span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.instructions.</span></span><span class="sig-name descname"><span class="pre">push32</span></span><a class="headerlink" href="#ethereum.frontier.vm.instructions.push32" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </section>
 </section>
 </section>
@@ -1050,12 +946,17 @@ the stack.</p></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#ethereum-specification">Ethereum Specification</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../../../index.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../index.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Comparisons:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../diffs/index.html">Comparisons</a></li>
 </ul>
 
 <div class="relations">
@@ -1066,8 +967,8 @@ the stack.</p></li>
   <li><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
   <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier</span></code></a><ul>
   <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm</span></code></a><ul>
-      <li>Previous: <a href="../gas/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.gas</span></code></a></li>
-      <li>Next: <a href="../interpreter/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.interpreter</span></code></a></li>
+      <li>Previous: <a href="../index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm</span></code></a></li>
+      <li>Next: <a href="arithmetic/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.arithmetic</span></code></a></li>
   </ul></li>
   </ul></li>
   </ul></li>

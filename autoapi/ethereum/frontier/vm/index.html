@@ -17,8 +17,8 @@
     <script src="../../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="ethereum.frontier.vm.error" href="error/index.html" />
-    <link rel="prev" title="ethereum.frontier" href="../index.html" />
+    <link rel="next" title="ethereum.frontier.vm.instructions" href="instructions/index.html" />
+    <link rel="prev" title="ethereum.frontier.utils.message" href="../utils/message/index.html" />
    
   <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
   
@@ -26,6 +26,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
+<div id="disclaimer">
+    The documentation tools are undergoing heavy development and may introduce
+    subtle bugs while rendering, especially in hard fork comparisons. Until this
+    warning is removed, <em>always</em> double check against the
+    <a href="https://github.com/ethereum/execution-specs/">original source</a>.
+</div>
+
+
   
 
     <div class="document">
@@ -43,16 +51,18 @@
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#submodules" id="id2">Submodules</a></p></li>
-<li><p><a class="reference internal" href="#package-contents" id="id3">Package Contents</a></p>
+<li><p><a class="reference internal" href="#subpackages" id="id2">Subpackages</a></p></li>
+<li><p><a class="reference internal" href="#submodules" id="id3">Submodules</a></p></li>
+<li><p><a class="reference internal" href="#package-contents" id="id4">Package Contents</a></p>
 <ul>
-<li><p><a class="reference internal" href="#classes" id="id4">Classes</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id5">Classes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#package-details" id="id5">Package Details</a></p>
+<li><p><a class="reference internal" href="#package-details" id="id6">Package Details</a></p>
 <ul>
-<li><p><a class="reference internal" href="#environment" id="id6">Environment</a></p></li>
-<li><p><a class="reference internal" href="#evm" id="id7">Evm</a></p></li>
+<li><p><a class="reference internal" href="#environment" id="id7">Environment</a></p></li>
+<li><p><a class="reference internal" href="#message" id="id8">Message</a></p></li>
+<li><p><a class="reference internal" href="#evm" id="id9">Evm</a></p></li>
 </ul>
 </li>
 </ul>
@@ -62,15 +72,45 @@
 <p>The abstract computer which runs the code stored in an
 <cite>eth1spec.eth_types.Account</cite>.</p>
 </section>
+<section id="subpackages">
+<h3>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instructions/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="instructions/arithmetic/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.arithmetic</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/bitwise/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.bitwise</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/block/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.block</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/comparison/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.comparison</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/control_flow/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.control_flow</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/environment/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.environment</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/keccak/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.keccak</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/log/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.log</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/memory/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.memory</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/stack/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.stack</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/storage/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.storage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="instructions/system/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions.system</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="precompiled_contracts/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="precompiled_contracts/ecrecover/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts.ecrecover</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="precompiled_contracts/identity/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts.identity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="precompiled_contracts/mapping/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts.mapping</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="precompiled_contracts/ripemd160/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts.ripemd160</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="precompiled_contracts/sha256/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts.sha256</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
 <section id="submodules">
 <h3>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="error/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.error</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="gas/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.gas</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="instructions/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.interpreter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="ops/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.ops</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.memory</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="runtime/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.runtime</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="stack/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.stack</span></code></a></li>
 </ul>
 </div>
@@ -88,7 +128,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.Environment" title="ethereum.frontier.vm.Environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Environment</span></code></a></p></td>
 <td><p>Items external to the virtual machine itself, provided by the environment.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Evm</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.Message" title="ethereum.frontier.vm.Message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Message</span></code></a></p></td>
+<td><p>Items that are used by contract creation or message call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.Evm" title="ethereum.frontier.vm.Evm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Evm</span></code></a></p></td>
 <td><p>The internal state of the virtual machine.</p></td>
 </tr>
 </tbody>
@@ -102,7 +145,7 @@
 <p>Items external to the virtual machine itself, provided by the environment.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Environment">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.</span></span><span class="sig-name descname"><span class="pre">Environment</span></span><a class="headerlink" href="#ethereum.frontier.vm.Environment" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Environment</span></span><a class="headerlink" href="#ethereum.frontier.vm.Environment" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Environment.caller">
 <span class="sig-name descname"><span class="pre">caller</span></span><em class="property"> <span class="pre">:ethereum.frontier.eth_types.Address</span></em><a class="headerlink" href="#ethereum.frontier.vm.Environment.caller" title="Permalink to this definition">¶</a></dt>
@@ -150,7 +193,61 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Environment.state">
-<span class="sig-name descname"><span class="pre">state</span></span><em class="property"> <span class="pre">:ethereum.frontier.eth_types.State</span></em><a class="headerlink" href="#ethereum.frontier.vm.Environment.state" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"> <span class="pre">:ethereum.frontier.state.State</span></em><a class="headerlink" href="#ethereum.frontier.vm.Environment.state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="message">
+<h4>Message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h4>
+<p>Items that are used by contract creation or message call.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Message</span></span><a class="headerlink" href="#ethereum.frontier.vm.Message" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.caller">
+<span class="sig-name descname"><span class="pre">caller</span></span><em class="property"> <span class="pre">:ethereum.frontier.eth_types.Address</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.caller" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.target">
+<span class="sig-name descname"><span class="pre">target</span></span><em class="property"> <span class="pre">:Union[ethereum.base_types.Bytes0,</span> <span class="pre">ethereum.frontier.eth_types.Address]</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.current_target">
+<span class="sig-name descname"><span class="pre">current_target</span></span><em class="property"> <span class="pre">:ethereum.frontier.eth_types.Address</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.current_target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.gas">
+<span class="sig-name descname"><span class="pre">gas</span></span><em class="property"> <span class="pre">:ethereum.base_types.U256</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.gas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"> <span class="pre">:ethereum.base_types.U256</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.data">
+<span class="sig-name descname"><span class="pre">data</span></span><em class="property"> <span class="pre">:ethereum.base_types.Bytes</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.code_address">
+<span class="sig-name descname"><span class="pre">code_address</span></span><em class="property"> <span class="pre">:Optional[ethereum.frontier.eth_types.Address]</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.code_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.code">
+<span class="sig-name descname"><span class="pre">code</span></span><em class="property"> <span class="pre">:ethereum.base_types.Bytes</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Message.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"> <span class="pre">:ethereum.base_types.Uint</span></em><a class="headerlink" href="#ethereum.frontier.vm.Message.depth" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -161,7 +258,7 @@
 <p>The internal state of the virtual machine.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Evm">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.</span></span><span class="sig-name descname"><span class="pre">Evm</span></span><a class="headerlink" href="#ethereum.frontier.vm.Evm" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Evm</span></span><a class="headerlink" href="#ethereum.frontier.vm.Evm" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.pc">
 <span class="sig-name descname"><span class="pre">pc</span></span><em class="property"> <span class="pre">:ethereum.base_types.Uint</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.pc" title="Permalink to this definition">¶</a></dt>
@@ -179,7 +276,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.code">
-<span class="sig-name descname"><span class="pre">code</span></span><em class="property"> <span class="pre">:bytes</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.code" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">code</span></span><em class="property"> <span class="pre">:ethereum.base_types.Bytes</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.code" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -188,43 +285,48 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.current">
-<span class="sig-name descname"><span class="pre">current</span></span><em class="property"> <span class="pre">:ethereum.frontier.eth_types.Address</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.current" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.caller">
-<span class="sig-name descname"><span class="pre">caller</span></span><em class="property"> <span class="pre">:ethereum.frontier.eth_types.Address</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.caller" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.data">
-<span class="sig-name descname"><span class="pre">data</span></span><em class="property"> <span class="pre">:bytes</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"> <span class="pre">:ethereum.base_types.U256</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.depth">
-<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"> <span class="pre">:ethereum.base_types.Uint</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.depth" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.env">
 <span class="sig-name descname"><span class="pre">env</span></span><em class="property"> <span class="pre">:Environment</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.env" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.valid_jump_destinations">
+<span class="sig-name descname"><span class="pre">valid_jump_destinations</span></span><em class="property"> <span class="pre">:Set[ethereum.base_types.Uint]</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.valid_jump_destinations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.logs">
+<span class="sig-name descname"><span class="pre">logs</span></span><em class="property"> <span class="pre">:Tuple[ethereum.frontier.eth_types.Log,</span> <span class="pre">Ellipsis]</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.logs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.refund_counter">
-<span class="sig-name descname"><span class="pre">refund_counter</span></span><em class="property"> <span class="pre">:ethereum.base_types.Uint</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.refund_counter" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">refund_counter</span></span><em class="property"> <span class="pre">:ethereum.base_types.U256</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.refund_counter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.running">
 <span class="sig-name descname"><span class="pre">running</span></span><em class="property"> <span class="pre">:bool</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.running" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"> <span class="pre">:Message</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.output">
+<span class="sig-name descname"><span class="pre">output</span></span><em class="property"> <span class="pre">:ethereum.base_types.Bytes</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.accounts_to_delete">
+<span class="sig-name descname"><span class="pre">accounts_to_delete</span></span><em class="property"> <span class="pre">:Set[ethereum.frontier.eth_types.Address]</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.accounts_to_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.Evm.has_erred">
+<span class="sig-name descname"><span class="pre">has_erred</span></span><em class="property"> <span class="pre">:bool</span></em><a class="headerlink" href="#ethereum.frontier.vm.Evm.has_erred" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -258,12 +360,17 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../../index.html#ethereum-specification">Ethereum Specification</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../index.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Comparisons:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../diffs/index.html">Comparisons</a></li>
 </ul>
 
 <div class="relations">
@@ -273,8 +380,8 @@
   <li><a href="../../../index.html">API Reference</a><ul>
   <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
   <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier</span></code></a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier</span></code></a></li>
-      <li>Next: <a href="error/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.error</span></code></a></li>
+      <li>Previous: <a href="../utils/message/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.utils.message</span></code></a></li>
+      <li>Next: <a href="instructions/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.instructions</span></code></a></li>
   </ul></li>
   </ul></li>
   </ul></li>

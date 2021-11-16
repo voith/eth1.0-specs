@@ -3,8 +3,8 @@
 
 .. py:module:: ethereum.frontier.vm.instructions
 
-Ethereum Virtual Machine (EVM) Instructions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EVM Instruction Encoding (Opcodes)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -13,33 +13,40 @@ Ethereum Virtual Machine (EVM) Instructions
 Introduction
 ------------
 
-Implementations of the instructions understood by the EVM.
+Machine readable representations of EVM instructions, and a mapping to their
+implementations.
 
 
-Module Contents
----------------
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   arithmetic/index.rst
+   bitwise/index.rst
+   block/index.rst
+   comparison/index.rst
+   control_flow/index.rst
+   environment/index.rst
+   keccak/index.rst
+   log/index.rst
+   memory/index.rst
+   stack/index.rst
+   storage/index.rst
+   system/index.rst
 
 
-Functions
-~~~~~~~~~
+Package Contents
+----------------
+
+Classes
+~~~~~~~
 
 .. autoapisummary::
-   :nosignatures:
 
-   ethereum.frontier.vm.instructions.stop
-   ethereum.frontier.vm.instructions.add
-   ethereum.frontier.vm.instructions.sub
-   ethereum.frontier.vm.instructions.mul
-   ethereum.frontier.vm.instructions.div
-   ethereum.frontier.vm.instructions.sdiv
-   ethereum.frontier.vm.instructions.mod
-   ethereum.frontier.vm.instructions.smod
-   ethereum.frontier.vm.instructions.addmod
-   ethereum.frontier.vm.instructions.mulmod
-   ethereum.frontier.vm.instructions.exp
-   ethereum.frontier.vm.instructions.signextend
-   ethereum.frontier.vm.instructions.sstore
-   ethereum.frontier.vm.instructions.push_n
+   ethereum.frontier.vm.instructions.Ops
+
 
 
 
@@ -48,632 +55,938 @@ Attributes
 
 .. autoapisummary::
 
-   ethereum.frontier.vm.instructions.push1
-   ethereum.frontier.vm.instructions.push2
-   ethereum.frontier.vm.instructions.push3
-   ethereum.frontier.vm.instructions.push4
-   ethereum.frontier.vm.instructions.push5
-   ethereum.frontier.vm.instructions.push6
-   ethereum.frontier.vm.instructions.push7
-   ethereum.frontier.vm.instructions.push8
-   ethereum.frontier.vm.instructions.push9
-   ethereum.frontier.vm.instructions.push10
-   ethereum.frontier.vm.instructions.push11
-   ethereum.frontier.vm.instructions.push12
-   ethereum.frontier.vm.instructions.push13
-   ethereum.frontier.vm.instructions.push14
-   ethereum.frontier.vm.instructions.push15
-   ethereum.frontier.vm.instructions.push16
-   ethereum.frontier.vm.instructions.push17
-   ethereum.frontier.vm.instructions.push18
-   ethereum.frontier.vm.instructions.push19
-   ethereum.frontier.vm.instructions.push20
-   ethereum.frontier.vm.instructions.push21
-   ethereum.frontier.vm.instructions.push22
-   ethereum.frontier.vm.instructions.push23
-   ethereum.frontier.vm.instructions.push24
-   ethereum.frontier.vm.instructions.push25
-   ethereum.frontier.vm.instructions.push26
-   ethereum.frontier.vm.instructions.push27
-   ethereum.frontier.vm.instructions.push28
-   ethereum.frontier.vm.instructions.push29
-   ethereum.frontier.vm.instructions.push30
-   ethereum.frontier.vm.instructions.push31
-   ethereum.frontier.vm.instructions.push32
+   ethereum.frontier.vm.instructions.op_implementation
 
 
-Module Details
----------------
+Package Details
+----------------
 
-stop
-~~~~
-
-
-.. function:: stop(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Stop further execution of EVM code.
-
-   :param evm: The current EVM frame.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 35-44
-
-add
+Ops
 ~~~
 
 
-.. function:: add(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Adds the top two elements of the stack together, and pushes the result back
-   on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
+Enum for EVM Opcodes
 
 
+.. class:: Ops
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+
+   .. py:attribute:: ADD
+      :annotation: = 1
+
+      
+
+   
+
+   .. py:attribute:: MUL
+      :annotation: = 2
+
+      
+
+   
+
+   .. py:attribute:: SUB
+      :annotation: = 3
+
+      
+
+   
+
+   .. py:attribute:: DIV
+      :annotation: = 4
+
+      
+
+   
+
+   .. py:attribute:: SDIV
+      :annotation: = 5
+
+      
+
+   
+
+   .. py:attribute:: MOD
+      :annotation: = 6
+
+      
+
+   
+
+   .. py:attribute:: SMOD
+      :annotation: = 7
+
+      
+
+   
+
+   .. py:attribute:: ADDMOD
+      :annotation: = 8
+
+      
+
+   
+
+   .. py:attribute:: MULMOD
+      :annotation: = 9
+
+      
+
+   
+
+   .. py:attribute:: EXP
+      :annotation: = 10
+
+      
+
+   
+
+   .. py:attribute:: SIGNEXTEND
+      :annotation: = 11
+
+      
+
+   
+
+   .. py:attribute:: LT
+      :annotation: = 16
+
+      
+
+   
+
+   .. py:attribute:: GT
+      :annotation: = 17
+
+      
+
+   
+
+   .. py:attribute:: SLT
+      :annotation: = 18
+
+      
+
+   
+
+   .. py:attribute:: SGT
+      :annotation: = 19
+
+      
+
+   
+
+   .. py:attribute:: EQ
+      :annotation: = 20
+
+      
+
+   
+
+   .. py:attribute:: ISZERO
+      :annotation: = 21
+
+      
+
+   
+
+   .. py:attribute:: AND
+      :annotation: = 22
+
+      
+
+   
+
+   .. py:attribute:: OR
+      :annotation: = 23
+
+      
+
+   
+
+   .. py:attribute:: XOR
+      :annotation: = 24
+
+      
+
+   
+
+   .. py:attribute:: NOT
+      :annotation: = 25
+
+      
+
+   
+
+   .. py:attribute:: BYTE
+      :annotation: = 26
+
+      
+
+   
+
+   .. py:attribute:: KECCAK
+      :annotation: = 32
+
+      
+
+   
+
+   .. py:attribute:: ADDRESS
+      :annotation: = 48
+
+      
+
+   
+
+   .. py:attribute:: BALANCE
+      :annotation: = 49
+
+      
+
+   
+
+   .. py:attribute:: ORIGIN
+      :annotation: = 50
+
+      
+
+   
+
+   .. py:attribute:: CALLER
+      :annotation: = 51
+
+      
+
+   
+
+   .. py:attribute:: CALLVALUE
+      :annotation: = 52
+
+      
+
+   
+
+   .. py:attribute:: CALLDATALOAD
+      :annotation: = 53
+
+      
+
+   
+
+   .. py:attribute:: CALLDATASIZE
+      :annotation: = 54
+
+      
+
+   
+
+   .. py:attribute:: CALLDATACOPY
+      :annotation: = 55
+
+      
+
+   
+
+   .. py:attribute:: CODESIZE
+      :annotation: = 56
+
+      
+
+   
+
+   .. py:attribute:: CODECOPY
+      :annotation: = 57
+
+      
+
+   
+
+   .. py:attribute:: GASPRICE
+      :annotation: = 58
+
+      
+
+   
+
+   .. py:attribute:: EXTCODESIZE
+      :annotation: = 59
+
+      
+
+   
+
+   .. py:attribute:: EXTCODECOPY
+      :annotation: = 60
+
+      
+
+   
+
+   .. py:attribute:: BLOCKHASH
+      :annotation: = 64
+
+      
+
+   
+
+   .. py:attribute:: COINBASE
+      :annotation: = 65
+
+      
+
+   
+
+   .. py:attribute:: TIMESTAMP
+      :annotation: = 66
+
+      
+
+   
+
+   .. py:attribute:: NUMBER
+      :annotation: = 67
+
+      
+
+   
+
+   .. py:attribute:: DIFFICULTY
+      :annotation: = 68
+
+      
+
+   
+
+   .. py:attribute:: GASLIMIT
+      :annotation: = 69
+
+      
+
+   
+
+   .. py:attribute:: STOP
+      :annotation: = 0
+
+      
+
+   
+
+   .. py:attribute:: JUMP
+      :annotation: = 86
+
+      
+
+   
+
+   .. py:attribute:: JUMPI
+      :annotation: = 87
+
+      
+
+   
+
+   .. py:attribute:: PC
+      :annotation: = 88
+
+      
+
+   
+
+   .. py:attribute:: GAS
+      :annotation: = 90
+
+      
+
+   
+
+   .. py:attribute:: JUMPDEST
+      :annotation: = 91
+
+      
+
+   
+
+   .. py:attribute:: SLOAD
+      :annotation: = 84
+
+      
+
+   
+
+   .. py:attribute:: SSTORE
+      :annotation: = 85
+
+      
+
+   
+
+   .. py:attribute:: POP
+      :annotation: = 80
+
+      
+
+   
+
+   .. py:attribute:: PUSH1
+      :annotation: = 96
+
+      
+
+   
+
+   .. py:attribute:: PUSH2
+      :annotation: = 97
+
+      
+
+   
+
+   .. py:attribute:: PUSH3
+      :annotation: = 98
+
+      
+
+   
+
+   .. py:attribute:: PUSH4
+      :annotation: = 99
+
+      
+
+   
+
+   .. py:attribute:: PUSH5
+      :annotation: = 100
+
+      
+
+   
+
+   .. py:attribute:: PUSH6
+      :annotation: = 101
+
+      
+
+   
+
+   .. py:attribute:: PUSH7
+      :annotation: = 102
+
+      
+
+   
+
+   .. py:attribute:: PUSH8
+      :annotation: = 103
+
+      
+
+   
+
+   .. py:attribute:: PUSH9
+      :annotation: = 104
+
+      
+
+   
+
+   .. py:attribute:: PUSH10
+      :annotation: = 105
+
+      
+
+   
+
+   .. py:attribute:: PUSH11
+      :annotation: = 106
+
+      
+
+   
+
+   .. py:attribute:: PUSH12
+      :annotation: = 107
+
+      
+
+   
+
+   .. py:attribute:: PUSH13
+      :annotation: = 108
+
+      
+
+   
+
+   .. py:attribute:: PUSH14
+      :annotation: = 109
+
+      
+
+   
+
+   .. py:attribute:: PUSH15
+      :annotation: = 110
+
+      
+
+   
+
+   .. py:attribute:: PUSH16
+      :annotation: = 111
+
+      
+
+   
+
+   .. py:attribute:: PUSH17
+      :annotation: = 112
+
+      
+
+   
+
+   .. py:attribute:: PUSH18
+      :annotation: = 113
+
+      
+
+   
+
+   .. py:attribute:: PUSH19
+      :annotation: = 114
+
+      
+
+   
+
+   .. py:attribute:: PUSH20
+      :annotation: = 115
+
+      
+
+   
+
+   .. py:attribute:: PUSH21
+      :annotation: = 116
+
+      
+
+   
+
+   .. py:attribute:: PUSH22
+      :annotation: = 117
+
+      
+
+   
+
+   .. py:attribute:: PUSH23
+      :annotation: = 118
+
+      
+
+   
+
+   .. py:attribute:: PUSH24
+      :annotation: = 119
+
+      
+
+   
+
+   .. py:attribute:: PUSH25
+      :annotation: = 120
+
+      
+
+   
+
+   .. py:attribute:: PUSH26
+      :annotation: = 121
+
+      
+
+   
+
+   .. py:attribute:: PUSH27
+      :annotation: = 122
+
+      
+
+   
+
+   .. py:attribute:: PUSH28
+      :annotation: = 123
+
+      
+
+   
+
+   .. py:attribute:: PUSH29
+      :annotation: = 124
+
+      
+
+   
+
+   .. py:attribute:: PUSH30
+      :annotation: = 125
+
+      
+
+   
+
+   .. py:attribute:: PUSH31
+      :annotation: = 126
+
+      
+
+   
+
+   .. py:attribute:: PUSH32
+      :annotation: = 127
+
+      
+
+   
+
+   .. py:attribute:: DUP1
+      :annotation: = 128
+
+      
+
+   
+
+   .. py:attribute:: DUP2
+      :annotation: = 129
+
+      
+
+   
+
+   .. py:attribute:: DUP3
+      :annotation: = 130
+
+      
+
+   
+
+   .. py:attribute:: DUP4
+      :annotation: = 131
+
+      
+
+   
+
+   .. py:attribute:: DUP5
+      :annotation: = 132
+
+      
+
+   
+
+   .. py:attribute:: DUP6
+      :annotation: = 133
+
+      
+
+   
+
+   .. py:attribute:: DUP7
+      :annotation: = 134
+
+      
+
+   
+
+   .. py:attribute:: DUP8
+      :annotation: = 135
+
+      
+
+   
+
+   .. py:attribute:: DUP9
+      :annotation: = 136
+
+      
+
+   
+
+   .. py:attribute:: DUP10
+      :annotation: = 137
+
+      
+
+   
+
+   .. py:attribute:: DUP11
+      :annotation: = 138
+
+      
+
+   
+
+   .. py:attribute:: DUP12
+      :annotation: = 139
+
+      
+
+   
+
+   .. py:attribute:: DUP13
+      :annotation: = 140
+
+      
+
+   
+
+   .. py:attribute:: DUP14
+      :annotation: = 141
+
+      
+
+   
+
+   .. py:attribute:: DUP15
+      :annotation: = 142
+
+      
+
+   
+
+   .. py:attribute:: DUP16
+      :annotation: = 143
+
+      
+
+   
+
+   .. py:attribute:: SWAP1
+      :annotation: = 144
+
+      
+
+   
+
+   .. py:attribute:: SWAP2
+      :annotation: = 145
+
+      
+
+   
+
+   .. py:attribute:: SWAP3
+      :annotation: = 146
+
+      
+
+   
+
+   .. py:attribute:: SWAP4
+      :annotation: = 147
+
+      
+
+   
+
+   .. py:attribute:: SWAP5
+      :annotation: = 148
+
+      
+
+   
+
+   .. py:attribute:: SWAP6
+      :annotation: = 149
+
+      
+
+   
+
+   .. py:attribute:: SWAP7
+      :annotation: = 150
+
+      
+
+   
+
+   .. py:attribute:: SWAP8
+      :annotation: = 151
+
+      
+
+   
+
+   .. py:attribute:: SWAP9
+      :annotation: = 152
+
+      
+
+   
+
+   .. py:attribute:: SWAP10
+      :annotation: = 153
+
+      
+
+   
+
+   .. py:attribute:: SWAP11
+      :annotation: = 154
+
+      
+
+   
+
+   .. py:attribute:: SWAP12
+      :annotation: = 155
+
+      
+
+   
+
+   .. py:attribute:: SWAP13
+      :annotation: = 156
+
+      
+
+   
+
+   .. py:attribute:: SWAP14
+      :annotation: = 157
+
+      
+
+   
+
+   .. py:attribute:: SWAP15
+      :annotation: = 158
+
+      
+
+   
+
+   .. py:attribute:: SWAP16
+      :annotation: = 159
+
+      
+
+   
+
+   .. py:attribute:: MLOAD
+      :annotation: = 81
+
+      
+
+   
+
+   .. py:attribute:: MSTORE
+      :annotation: = 82
+
+      
+
+   
+
+   .. py:attribute:: MSTORE8
+      :annotation: = 83
+
+      
+
+   
+
+   .. py:attribute:: MSIZE
+      :annotation: = 89
+
+      
+
+   
+
+   .. py:attribute:: LOG0
+      :annotation: = 160
+
+      
+
+   
+
+   .. py:attribute:: LOG1
+      :annotation: = 161
+
+      
+
+   
+
+   .. py:attribute:: LOG2
+      :annotation: = 162
+
+      
+
+   
+
+   .. py:attribute:: LOG3
+      :annotation: = 163
+
+      
+
+   
+
+   .. py:attribute:: LOG4
+      :annotation: = 164
+
+      
+
+   
+
+   .. py:attribute:: CREATE
+      :annotation: = 240
+
+      
+
+   
+
+   .. py:attribute:: RETURN
+      :annotation: = 243
+
+      
+
+   
+
+   .. py:attribute:: CALL
+      :annotation: = 241
+
+      
+
+   
+
+   .. py:attribute:: CALLCODE
+      :annotation: = 242
+
+      
+
+   
+
+   .. py:attribute:: SELFDESTRUCT
+      :annotation: = 255
+
+      
 
 
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
+
+op_implementation
+~~~~~~~~~~~~~~~~~
+
+
+
+.. py:data:: op_implementation
+
+   
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions/__init__.py
    :language: python
-   :lines: 52-75
-
-sub
-~~~
-
-
-.. function:: sub(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Subtracts the top two elements of the stack, and pushes the result back
-   on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 78-101
-
-mul
-~~~
-
-
-.. function:: mul(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Multiply the top two elements of the stack, and pushes the result back
-   on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 104-127
-
-div
-~~~
-
-
-.. function:: div(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Integer division of the top two elements of the stack. Pushes the result
-   back on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 130-156
-
-sdiv
-~~~~
-
-
-.. function:: sdiv(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Signed integer division of the top two elements of the stack. Pushes the
-   result back on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 159-189
-
-mod
-~~~
-
-
-.. function:: mod(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Modulo remainder of the top two elements of the stack. Pushes the result
-   back on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 192-218
-
-smod
-~~~~
-
-
-.. function:: smod(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Signed modulo remainder of the top two elements of the stack. Pushes the
-   result back on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 221-248
-
-addmod
-~~~~~~
-
-
-.. function:: addmod(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Modulo addition of the top 2 elements with the 3rd element. Pushes the
-   result back on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `3`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_MID`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 251-279
-
-mulmod
-~~~~~~
-
-
-.. function:: mulmod(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Modulo multiplication of the top 2 elements with the 3rd element. Pushes
-   the result back on the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `3`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_MID`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 282-310
-
-exp
-~~~
-
-
-.. function:: exp(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Exponential operation of the top 2 elements. Pushes the result back on
-   the stack.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_MID`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 313-344
-
-signextend
-~~~~~~~~~~
-
-
-.. function:: signextend(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Sign extend operation. In other words, extend a signed number which
-   fits in N bytes to 32 bytes.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 347-389
-
-sstore
-~~~~~~
-
-
-.. function:: sstore(evm: ethereum.frontier.vm.Evm) -> None
-   :noindexentry:
-
-   Stores a value at a certain key in the current context's storage.
-
-   :param evm: The current EVM frame.
-
-   :raises StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `20000`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 392-431
-
-push_n
-~~~~~~
-
-
-.. function:: push_n(evm: ethereum.frontier.vm.Evm, num_bytes: int) -> None
-   :noindexentry:
-
-   Pushes a N-byte immediate onto the stack.
-
-   :param evm: The current EVM frame.
-   :param num_bytes: The number of immediate bytes to be read from the code and pushed to
-                     the stack.
-   :type num_bytes: `int`
-
-   :raises StackOverflowError: If `len(stack)` is equals `1024`.
-   :raises OutOfGasError: If `evm.gas_left` is less than `GAS_VERY_LOW`.
-
-
-
-
-.. undocinclude:: /../src/ethereum/frontier/vm/instructions.py
-   :language: python
-   :lines: 434-462
-
-push1
-~~~~~
-
-.. data:: push1
-   
-
-   
-
-
-push2
-~~~~~
-
-.. data:: push2
-   
-
-   
-
-
-push3
-~~~~~
-
-.. data:: push3
-   
-
-   
-
-
-push4
-~~~~~
-
-.. data:: push4
-   
-
-   
-
-
-push5
-~~~~~
-
-.. data:: push5
-   
-
-   
-
-
-push6
-~~~~~
-
-.. data:: push6
-   
-
-   
-
-
-push7
-~~~~~
-
-.. data:: push7
-   
-
-   
-
-
-push8
-~~~~~
-
-.. data:: push8
-   
-
-   
-
-
-push9
-~~~~~
-
-.. data:: push9
-   
-
-   
-
-
-push10
-~~~~~~
-
-.. data:: push10
-   
-
-   
-
-
-push11
-~~~~~~
-
-.. data:: push11
-   
-
-   
-
-
-push12
-~~~~~~
-
-.. data:: push12
-   
-
-   
-
-
-push13
-~~~~~~
-
-.. data:: push13
-   
-
-   
-
-
-push14
-~~~~~~
-
-.. data:: push14
-   
-
-   
-
-
-push15
-~~~~~~
-
-.. data:: push15
-   
-
-   
-
-
-push16
-~~~~~~
-
-.. data:: push16
-   
-
-   
-
-
-push17
-~~~~~~
-
-.. data:: push17
-   
-
-   
-
-
-push18
-~~~~~~
-
-.. data:: push18
-   
-
-   
-
-
-push19
-~~~~~~
-
-.. data:: push19
-   
-
-   
-
-
-push20
-~~~~~~
-
-.. data:: push20
-   
-
-   
-
-
-push21
-~~~~~~
-
-.. data:: push21
-   
-
-   
-
-
-push22
-~~~~~~
-
-.. data:: push22
-   
-
-   
-
-
-push23
-~~~~~~
-
-.. data:: push23
-   
-
-   
-
-
-push24
-~~~~~~
-
-.. data:: push24
-   
-
-   
-
-
-push25
-~~~~~~
-
-.. data:: push25
-   
-
-   
-
-
-push26
-~~~~~~
-
-.. data:: push26
-   
-
-   
-
-
-push27
-~~~~~~
-
-.. data:: push27
-   
-
-   
-
-
-push28
-~~~~~~
-
-.. data:: push28
-   
-
-   
-
-
-push29
-~~~~~~
-
-.. data:: push29
-   
-
-   
-
-
-push30
-~~~~~~
-
-.. data:: push30
-   
-
-   
-
-
-push31
-~~~~~~
-
-.. data:: push31
-   
-
-   
-
-
-push32
-~~~~~~
-
-.. data:: push32
-   
-
-   
+   :lines: 198-327
 

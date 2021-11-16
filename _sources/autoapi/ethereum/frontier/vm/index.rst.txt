@@ -17,6 +17,16 @@ The abstract computer which runs the code stored in an
 `eth1spec.eth_types.Account`.
 
 
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   instructions/index.rst
+   precompiled_contracts/index.rst
+
+
 Submodules
 ----------
 .. toctree::
@@ -25,9 +35,9 @@ Submodules
 
    error/index.rst
    gas/index.rst
-   instructions/index.rst
    interpreter/index.rst
-   ops/index.rst
+   memory/index.rst
+   runtime/index.rst
    stack/index.rst
 
 
@@ -40,6 +50,7 @@ Classes
 .. autoapisummary::
 
    ethereum.frontier.vm.Environment
+   ethereum.frontier.vm.Message
    ethereum.frontier.vm.Evm
 
 
@@ -57,53 +68,147 @@ Items external to the virtual machine itself, provided by the environment.
 
 .. class:: Environment
 
-   .. attribute:: caller
+   
+
+   .. py:attribute:: caller
       :annotation: :ethereum.frontier.eth_types.Address
 
       
 
-   .. attribute:: block_hashes
+   
+
+   .. py:attribute:: block_hashes
       :annotation: :List[ethereum.crypto.Hash32]
 
       
 
-   .. attribute:: origin
+   
+
+   .. py:attribute:: origin
       :annotation: :ethereum.frontier.eth_types.Address
 
       
 
-   .. attribute:: coinbase
+   
+
+   .. py:attribute:: coinbase
       :annotation: :ethereum.frontier.eth_types.Address
 
       
 
-   .. attribute:: number
+   
+
+   .. py:attribute:: number
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: gas_limit
+   
+
+   .. py:attribute:: gas_limit
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: gas_price
+   
+
+   .. py:attribute:: gas_price
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: time
+   
+
+   .. py:attribute:: time
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: difficulty
+   
+
+   .. py:attribute:: difficulty
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: state
-      :annotation: :ethereum.frontier.eth_types.State
+   
+
+   .. py:attribute:: state
+      :annotation: :ethereum.frontier.state.State
+
+      
+
+
+
+Message
+~~~~~~~
+
+
+Items that are used by contract creation or message call.
+
+
+.. class:: Message
+
+   
+
+   .. py:attribute:: caller
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   
+
+   .. py:attribute:: target
+      :annotation: :Union[ethereum.base_types.Bytes0, ethereum.frontier.eth_types.Address]
+
+      
+
+   
+
+   .. py:attribute:: current_target
+      :annotation: :ethereum.frontier.eth_types.Address
+
+      
+
+   
+
+   .. py:attribute:: gas
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   
+
+   .. py:attribute:: value
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   
+
+   .. py:attribute:: data
+      :annotation: :ethereum.base_types.Bytes
+
+      
+
+   
+
+   .. py:attribute:: code_address
+      :annotation: :Optional[ethereum.frontier.eth_types.Address]
+
+      
+
+   
+
+   .. py:attribute:: code
+      :annotation: :ethereum.base_types.Bytes
+
+      
+
+   
+
+   .. py:attribute:: depth
+      :annotation: :ethereum.base_types.Uint
 
       
 
@@ -118,67 +223,100 @@ The internal state of the virtual machine.
 
 .. class:: Evm
 
-   .. attribute:: pc
+   
+
+   .. py:attribute:: pc
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: stack
+   
+
+   .. py:attribute:: stack
       :annotation: :List[ethereum.base_types.U256]
 
       
 
-   .. attribute:: memory
+   
+
+   .. py:attribute:: memory
       :annotation: :bytearray
 
       
 
-   .. attribute:: code
-      :annotation: :bytes
+   
+
+   .. py:attribute:: code
+      :annotation: :ethereum.base_types.Bytes
 
       
 
-   .. attribute:: gas_left
+   
+
+   .. py:attribute:: gas_left
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: current
-      :annotation: :ethereum.frontier.eth_types.Address
+   
 
-      
-
-   .. attribute:: caller
-      :annotation: :ethereum.frontier.eth_types.Address
-
-      
-
-   .. attribute:: data
-      :annotation: :bytes
-
-      
-
-   .. attribute:: value
-      :annotation: :ethereum.base_types.U256
-
-      
-
-   .. attribute:: depth
-      :annotation: :ethereum.base_types.Uint
-
-      
-
-   .. attribute:: env
+   .. py:attribute:: env
       :annotation: :Environment
 
       
 
-   .. attribute:: refund_counter
-      :annotation: :ethereum.base_types.Uint
+   
+
+   .. py:attribute:: valid_jump_destinations
+      :annotation: :Set[ethereum.base_types.Uint]
 
       
 
-   .. attribute:: running
+   
+
+   .. py:attribute:: logs
+      :annotation: :Tuple[ethereum.frontier.eth_types.Log, Ellipsis]
+
+      
+
+   
+
+   .. py:attribute:: refund_counter
+      :annotation: :ethereum.base_types.U256
+
+      
+
+   
+
+   .. py:attribute:: running
+      :annotation: :bool
+
+      
+
+   
+
+   .. py:attribute:: message
+      :annotation: :Message
+
+      
+
+   
+
+   .. py:attribute:: output
+      :annotation: :ethereum.base_types.Bytes
+
+      
+
+   
+
+   .. py:attribute:: accounts_to_delete
+      :annotation: :Set[ethereum.frontier.eth_types.Address]
+
+      
+
+   
+
+   .. py:attribute:: has_erred
       :annotation: :bool
 
       

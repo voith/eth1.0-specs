@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="ethereum.frontier.vm.gas" href="../gas/index.html" />
-    <link rel="prev" title="ethereum.frontier.vm" href="../index.html" />
+    <link rel="prev" title="ethereum.frontier.vm.precompiled_contracts.sha256" href="../precompiled_contracts/sha256/index.html" />
    
   <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
   
@@ -26,6 +26,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
+<div id="disclaimer">
+    The documentation tools are undergoing heavy development and may introduce
+    subtle bugs while rendering, especially in hard fork comparisons. Until this
+    warning is removed, <em>always</em> double check against the
+    <a href="https://github.com/ethereum/execution-specs/">original source</a>.
+</div>
+
+
   
 
     <div class="document">
@@ -48,6 +56,10 @@
 <li><p><a class="reference internal" href="#stackunderflowerror" id="id3">StackUnderflowError</a></p></li>
 <li><p><a class="reference internal" href="#stackoverflowerror" id="id4">StackOverflowError</a></p></li>
 <li><p><a class="reference internal" href="#outofgaserror" id="id5">OutOfGasError</a></p></li>
+<li><p><a class="reference internal" href="#invalidopcode" id="id6">InvalidOpcode</a></p></li>
+<li><p><a class="reference internal" href="#invalidjumpdesterror" id="id7">InvalidJumpDestError</a></p></li>
+<li><p><a class="reference internal" href="#stackdepthlimiterror" id="id8">StackDepthLimitError</a></p></li>
+<li><p><a class="reference internal" href="#insufficientfunds" id="id9">InsufficientFunds</a></p></li>
 </ul>
 </li>
 </ul>
@@ -63,7 +75,7 @@
 <p>Occurs when a pop is executed on an empty stack.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.error.StackUnderflowError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.error.</span></span><span class="sig-name descname"><span class="pre">StackUnderflowError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.StackUnderflowError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">StackUnderflowError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.StackUnderflowError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
@@ -73,7 +85,7 @@
 <p>Occurs when a push is executed on a stack at max capacity.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.error.StackOverflowError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.error.</span></span><span class="sig-name descname"><span class="pre">StackOverflowError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.StackOverflowError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">StackOverflowError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.StackOverflowError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
@@ -84,7 +96,57 @@
 frame.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="ethereum.frontier.vm.error.OutOfGasError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">ethereum.frontier.vm.error.</span></span><span class="sig-name descname"><span class="pre">OutOfGasError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.OutOfGasError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">OutOfGasError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.OutOfGasError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</section>
+<section id="invalidopcode">
+<h4>InvalidOpcode<a class="headerlink" href="#invalidopcode" title="Permalink to this headline">¶</a></h4>
+<p>Raised when an invalid opcode is encountered.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.error.InvalidOpcode">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">InvalidOpcode</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.InvalidOpcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</section>
+<section id="invalidjumpdesterror">
+<h4>InvalidJumpDestError<a class="headerlink" href="#invalidjumpdesterror" title="Permalink to this headline">¶</a></h4>
+<p>Occurs when the destination of a jump operation doesn’t meet any of the
+following criteria:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The jump destination is less than the length of the code.</p></li>
+<li><p>The jump destination should have the <cite>JUMPDEST</cite> opcode (0x5B).</p></li>
+<li><p>The jump destination shouldn’t be part of the data corresponding to
+<cite>PUSH-N</cite> opcodes.</p></li>
+</ul>
+</div></blockquote>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.error.InvalidJumpDestError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">InvalidJumpDestError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.InvalidJumpDestError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</section>
+<section id="stackdepthlimiterror">
+<h4>StackDepthLimitError<a class="headerlink" href="#stackdepthlimiterror" title="Permalink to this headline">¶</a></h4>
+<p>Raised when the message depth is greater than <cite>1024</cite></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.error.StackDepthLimitError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">StackDepthLimitError</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.StackDepthLimitError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</section>
+<section id="insufficientfunds">
+<h4>InsufficientFunds<a class="headerlink" href="#insufficientfunds" title="Permalink to this headline">¶</a></h4>
+<p>Raised when an account has insufficient funds to transfer the
+requested value.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.error.InsufficientFunds">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">InsufficientFunds</span></span><a class="headerlink" href="#ethereum.frontier.vm.error.InsufficientFunds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
@@ -117,12 +179,17 @@ frame.</p>
 <li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#ethereum-specification">Ethereum Specification</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../../../index.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../index.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Comparisons:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../diffs/index.html">Comparisons</a></li>
 </ul>
 
 <div class="relations">
@@ -133,7 +200,7 @@ frame.</p>
   <li><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
   <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier</span></code></a><ul>
   <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm</span></code></a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm</span></code></a></li>
+      <li>Previous: <a href="../precompiled_contracts/sha256/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.precompiled_contracts.sha256</span></code></a></li>
       <li>Next: <a href="../gas/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.vm.gas</span></code></a></li>
   </ul></li>
   </ul></li>

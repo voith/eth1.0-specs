@@ -62,3 +62,66 @@ frame.
    Bases: :py:obj:`Exception`
 
 
+
+InvalidOpcode
+~~~~~~~~~~~~~
+
+
+Raised when an invalid opcode is encountered.
+
+
+.. exception:: InvalidOpcode
+
+
+   Bases: :py:obj:`Exception`
+
+
+
+InvalidJumpDestError
+~~~~~~~~~~~~~~~~~~~~
+
+
+Occurs when the destination of a jump operation doesn't meet any of the
+following criteria:
+
+  * The jump destination is less than the length of the code.
+  * The jump destination should have the `JUMPDEST` opcode (0x5B).
+  * The jump destination shouldn't be part of the data corresponding to
+    `PUSH-N` opcodes.
+
+
+.. exception:: InvalidJumpDestError
+
+
+   Bases: :py:obj:`Exception`
+
+
+
+StackDepthLimitError
+~~~~~~~~~~~~~~~~~~~~
+
+
+Raised when the message depth is greater than `1024`
+
+
+.. exception:: StackDepthLimitError
+
+
+   Bases: :py:obj:`Exception`
+
+
+
+InsufficientFunds
+~~~~~~~~~~~~~~~~~
+
+
+Raised when an account has insufficient funds to transfer the
+requested value.
+
+
+.. exception:: InsufficientFunds
+
+
+   Bases: :py:obj:`Exception`
+
+

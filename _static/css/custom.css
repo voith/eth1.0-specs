@@ -20,7 +20,7 @@ pre {
 
 /* Functions */
 .function .sig {
-    background: #d0eed0;
+    background: #d0e7ee;
     padding: 1.5em;
     margin: 1em 0;
 }
@@ -44,4 +44,58 @@ dl.field-list > dt {
 .sig-param + .sig-paren::before {
     content: '\A';
     white-space: pre;
+}
+
+*[class*="change-"] + *[class*="change-"] {
+    margin-left: 0.1em;
+}
+
+/* Diff / Comparisons between hardforks */
+.change-added, .change-removed, .change-replacement, .change-replaced {
+    padding: 0.2em;
+    border: 1px solid;
+    border-left: none;
+    border-right: none;
+}
+
+.change-added, .change-replacement {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: green;
+}
+
+.change-removed, .change-replaced {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: red;
+}
+
+/* Stability warning */
+#disclaimer {
+    background: #ffa501;
+    color: white;
+    border-bottom: 1px solid #f5a005;
+    padding: 0.5em;
+    text-align: center;
+    font-family: sans-serif;
+    box-shadow: 0px 3px 2px -2px rgba(0,0,0,0.3);
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#disclaimer a, #disclaimer a:visited {
+    color: white;
+}
+
+@media (min-width: 876px) {
+    #disclaimer {
+        position: fixed;
+    }
+
+    body {
+        margin-top: 4em;
+    }
+
+    html {
+        scroll-padding-top: 4em;
+    }
 }

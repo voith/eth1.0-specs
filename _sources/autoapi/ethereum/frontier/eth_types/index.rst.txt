@@ -41,13 +41,11 @@ Attributes
 
    ethereum.frontier.eth_types.Address
    ethereum.frontier.eth_types.Root
-   ethereum.frontier.eth_types.Storage
    ethereum.frontier.eth_types.Bloom
    ethereum.frontier.eth_types.TX_BASE_COST
    ethereum.frontier.eth_types.TX_DATA_COST_PER_NON_ZERO
    ethereum.frontier.eth_types.TX_DATA_COST_PER_ZERO
    ethereum.frontier.eth_types.EMPTY_ACCOUNT
-   ethereum.frontier.eth_types.State
 
 
 Module Details
@@ -56,64 +54,85 @@ Module Details
 Address
 ~~~~~~~
 
-.. data:: Address
-   
+
+
+.. py:data:: Address
 
    
+
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 31-31
 
 
 Root
 ~~~~
 
-.. data:: Root
-   
+
+
+.. py:data:: Root
 
    
 
-
-Storage
-~~~~~~~
-
-.. data:: Storage
-   
-
-   
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 32-32
 
 
 Bloom
 ~~~~~
 
-.. data:: Bloom
-   
+
+
+.. py:data:: Bloom
 
    
+
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 34-34
 
 
 TX_BASE_COST
 ~~~~~~~~~~~~
 
-.. data:: TX_BASE_COST
-   :annotation: = 21000
+
+
+.. py:data:: TX_BASE_COST
 
    
+
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 36-36
 
 
 TX_DATA_COST_PER_NON_ZERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. data:: TX_DATA_COST_PER_NON_ZERO
-   :annotation: = 68
+
+
+.. py:data:: TX_DATA_COST_PER_NON_ZERO
 
    
+
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 37-37
 
 
 TX_DATA_COST_PER_ZERO
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. data:: TX_DATA_COST_PER_ZERO
-   :annotation: = 4
+
+
+.. py:data:: TX_DATA_COST_PER_ZERO
 
    
+
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 38-38
 
 
 Transaction
@@ -125,47 +144,65 @@ Atomic operation performed on the block chain.
 
 .. class:: Transaction
 
-   .. attribute:: nonce
+   
+
+   .. py:attribute:: nonce
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: gas_price
+   
+
+   .. py:attribute:: gas_price
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: gas
+   
+
+   .. py:attribute:: gas
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: to
-      :annotation: :Optional[Address]
+   
+
+   .. py:attribute:: to
+      :annotation: :Union[ethereum.base_types.Bytes0, Address]
 
       
 
-   .. attribute:: value
+   
+
+   .. py:attribute:: value
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: data
+   
+
+   .. py:attribute:: data
       :annotation: :ethereum.base_types.Bytes
 
       
 
-   .. attribute:: v
+   
+
+   .. py:attribute:: v
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: r
+   
+
+   .. py:attribute:: r
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: s
+   
+
+   .. py:attribute:: s
       :annotation: :ethereum.base_types.U256
 
       
@@ -181,23 +218,24 @@ State associated with an address.
 
 .. class:: Account
 
-   .. attribute:: nonce
+   
+
+   .. py:attribute:: nonce
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: balance
-      :annotation: :ethereum.base_types.Uint
+   
+
+   .. py:attribute:: balance
+      :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: code
+   
+
+   .. py:attribute:: code
       :annotation: :bytes
-
-      
-
-   .. attribute:: storage
-      :annotation: :Storage
 
       
 
@@ -206,10 +244,15 @@ State associated with an address.
 EMPTY_ACCOUNT
 ~~~~~~~~~~~~~
 
-.. data:: EMPTY_ACCOUNT
-   
+
+
+.. py:data:: EMPTY_ACCOUNT
 
    
+
+.. undocinclude:: /../src/ethereum/frontier/eth_types.py
+   :language: python
+   :lines: 71-74
 
 
 Header
@@ -221,77 +264,107 @@ Header portion of a block on the chain.
 
 .. class:: Header
 
-   .. attribute:: parent_hash
+   
+
+   .. py:attribute:: parent_hash
       :annotation: :ethereum.crypto.Hash32
 
       
 
-   .. attribute:: ommers_hash
+   
+
+   .. py:attribute:: ommers_hash
       :annotation: :ethereum.crypto.Hash32
 
       
 
-   .. attribute:: coinbase
+   
+
+   .. py:attribute:: coinbase
       :annotation: :Address
 
       
 
-   .. attribute:: state_root
+   
+
+   .. py:attribute:: state_root
       :annotation: :Root
 
       
 
-   .. attribute:: transactions_root
+   
+
+   .. py:attribute:: transactions_root
       :annotation: :Root
 
       
 
-   .. attribute:: receipt_root
+   
+
+   .. py:attribute:: receipt_root
       :annotation: :Root
 
       
 
-   .. attribute:: bloom
+   
+
+   .. py:attribute:: bloom
       :annotation: :Bloom
 
       
 
-   .. attribute:: difficulty
+   
+
+   .. py:attribute:: difficulty
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: number
+   
+
+   .. py:attribute:: number
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: gas_limit
+   
+
+   .. py:attribute:: gas_limit
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: gas_used
+   
+
+   .. py:attribute:: gas_used
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: timestamp
+   
+
+   .. py:attribute:: timestamp
       :annotation: :ethereum.base_types.U256
 
       
 
-   .. attribute:: extra_data
+   
+
+   .. py:attribute:: extra_data
       :annotation: :ethereum.base_types.Bytes
 
       
 
-   .. attribute:: mix_digest
+   
+
+   .. py:attribute:: mix_digest
       :annotation: :ethereum.base_types.Bytes32
 
       
 
-   .. attribute:: nonce
+   
+
+   .. py:attribute:: nonce
       :annotation: :ethereum.base_types.Bytes8
 
       
@@ -307,18 +380,24 @@ A complete block.
 
 .. class:: Block
 
-   .. attribute:: header
+   
+
+   .. py:attribute:: header
       :annotation: :Header
 
       
 
-   .. attribute:: transactions
-      :annotation: :List[Transaction]
+   
+
+   .. py:attribute:: transactions
+      :annotation: :Tuple[Transaction, Ellipsis]
 
       
 
-   .. attribute:: ommers
-      :annotation: :List[Header]
+   
+
+   .. py:attribute:: ommers
+      :annotation: :Tuple[Header, Ellipsis]
 
       
 
@@ -333,17 +412,23 @@ Data record produced during the execution of a transaction.
 
 .. class:: Log
 
-   .. attribute:: address
+   
+
+   .. py:attribute:: address
       :annotation: :Address
 
       
 
-   .. attribute:: topics
-      :annotation: :List[ethereum.crypto.Hash32]
+   
+
+   .. py:attribute:: topics
+      :annotation: :Tuple[ethereum.crypto.Hash32, Ellipsis]
 
       
 
-   .. attribute:: data
+   
+
+   .. py:attribute:: data
       :annotation: :bytes
 
       
@@ -359,33 +444,32 @@ Result of a transaction.
 
 .. class:: Receipt
 
-   .. attribute:: post_state
+   
+
+   .. py:attribute:: post_state
       :annotation: :Root
 
       
 
-   .. attribute:: cumulative_gas_used
+   
+
+   .. py:attribute:: cumulative_gas_used
       :annotation: :ethereum.base_types.Uint
 
       
 
-   .. attribute:: bloom
+   
+
+   .. py:attribute:: bloom
       :annotation: :Bloom
 
       
 
-   .. attribute:: logs
-      :annotation: :List[Log]
+   
+
+   .. py:attribute:: logs
+      :annotation: :Tuple[Log, Ellipsis]
 
       
 
-
-
-State
-~~~~~
-
-.. data:: State
-   
-
-   
 

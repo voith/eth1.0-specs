@@ -48,14 +48,14 @@ pop
    :returns: **value** -- The top element on the stack.
    :rtype: `U256`
 
-   :raises StackUnderflowError: If `stack` is empty.
+   :raises ethereum.frontier.vm.error.StackUnderflowError: If `stack` is empty.
 
 
 
 
 .. undocinclude:: /../src/ethereum/frontier/vm/stack.py
    :language: python
-   :lines: 22-44
+   :pyobject: pop
 
 push
 ~~~~
@@ -69,11 +69,11 @@ push
    :param stack: EVM stack.
    :param value: Item to be pushed onto `stack`.
 
-   :raises StackOverflowError: If `len(stack)` is `1024`.
+   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is `1024`.
 
 
 
 
 .. undocinclude:: /../src/ethereum/frontier/vm/stack.py
    :language: python
-   :lines: 47-67
+   :pyobject: push

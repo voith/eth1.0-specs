@@ -16,6 +16,7 @@ Subpackages
    :maxdepth: 3
 
    frontier/index.rst
+   utils/index.rst
 
 
 Submodules
@@ -26,6 +27,23 @@ Submodules
 
    base_types/index.rst
    crypto/index.rst
-   utils/index.rst
+   ethash/index.rst
 
+
+Package Contents
+----------------
+
+
+EVM_RECURSION_LIMIT
+~~~~~~~~~~~~~~~~~~~
+
+
+
+.. py:data:: EVM_RECURSION_LIMIT
+
+   
+
+.. undocinclude:: /../src/ethereum/__init__.py
+   :language: python
+   :lines: 12-12
 
