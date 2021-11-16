@@ -1,6 +1,6 @@
 """
-Optimized Implementations (Frontier)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Optimized Implementations (Homestead)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -53,7 +53,7 @@ def monkey_patch_optimized_spec() -> None:
     This function must be called before the spec interface is imported
     anywhere.
     """
-    import ethereum.frontier.spec as slow_spec
+    import ethereum.homestead.spec as slow_spec
 
     from . import spec as fast_spec
 

@@ -10,12 +10,12 @@ Introduction
 ------------
 
 This module contains functions can be monkey patched into
-`ethereum.frontier.spec` to use alternate optimized implementations.
+`ethereum.homestead.spec` to use alternate optimized implementations.
 """
 from ethereum.base_types import U256_CEIL_VALUE
 from ethereum.ethash import epoch
-from ethereum.frontier.eth_types import Header
-from ethereum.frontier.spec import generate_header_hash_for_pow
+from ethereum.homestead.eth_types import Header
+from ethereum.homestead.spec import generate_header_hash_for_pow
 from ethereum.utils.ensure import ensure
 
 try:
