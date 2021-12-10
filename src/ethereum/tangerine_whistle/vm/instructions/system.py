@@ -167,6 +167,20 @@ def call(evm: Evm) -> None:
     memory_output_start_position = Uint(pop(evm.stack))
     memory_output_size = pop(evm.stack)
 
+    gas_input_memory = calculate_gas_extend_memory(
+        evm.memory, memory_input_start_position, memory_input_size
+    )
+    evm.gas_left = subtract_gas(evm.gas_left, gas_input_memory)
+    extend_memory(evm.memory, memory_input_start_position, memory_input_size)
+    gas_output_memory = calculate_gas_extend_memory(
+        evm.memory, memory_output_start_position, memory_output_size
+    )
+    evm.gas_left = subtract_gas(evm.gas_left, gas_output_memory)
+    extend_memory(evm.memory, memory_output_start_position, memory_output_size)
+    call_data = memory_read_bytes(
+        evm.memory, memory_input_start_position, memory_input_size
+    )
+
     _account_exists = account_exists(evm.env.state, to)
     create_gas_cost = U256(0) if _account_exists else GAS_NEW_ACCOUNT
     transfer_gas_cost = U256(0) if value == 0 else GAS_CALL_VALUE
@@ -181,20 +195,6 @@ def call(evm: Evm) -> None:
     )
 
     evm.gas_left = subtract_gas(evm.gas_left, call_gas_fee)
-
-    gas_input_memory = calculate_gas_extend_memory(
-        evm.memory, memory_input_start_position, memory_input_size
-    )
-    evm.gas_left = subtract_gas(evm.gas_left, gas_input_memory)
-    extend_memory(evm.memory, memory_input_start_position, memory_input_size)
-    gas_output_memory = calculate_gas_extend_memory(
-        evm.memory, memory_output_start_position, memory_output_size
-    )
-    evm.gas_left = subtract_gas(evm.gas_left, gas_output_memory)
-    extend_memory(evm.memory, memory_output_start_position, memory_output_size)
-    call_data = memory_read_bytes(
-        evm.memory, memory_input_start_position, memory_input_size
-    )
     sender_balance = get_account(
         evm.env.state, evm.message.current_target
     ).balance
@@ -267,15 +267,6 @@ def callcode(evm: Evm) -> None:
     memory_output_size = pop(evm.stack)
     to = evm.message.current_target
 
-    transfer_gas_cost = U256(0) if value == 0 else GAS_CALL_VALUE
-    extra_gas = transfer_gas_cost
-    call_gas_fee = calculate_call_gas_cost(gas, evm.gas_left, extra_gas)
-    message_call_gas_fee = calculate_message_call_gas_stipend(
-        value, gas, evm.gas_left, extra_gas
-    )
-
-    evm.gas_left = subtract_gas(evm.gas_left, call_gas_fee)
-
     gas_input_memory = calculate_gas_extend_memory(
         evm.memory, memory_input_start_position, memory_input_size
     )
@@ -289,6 +280,16 @@ def callcode(evm: Evm) -> None:
     call_data = memory_read_bytes(
         evm.memory, memory_input_start_position, memory_input_size
     )
+
+    transfer_gas_cost = U256(0) if value == 0 else GAS_CALL_VALUE
+    extra_gas = transfer_gas_cost
+    call_gas_fee = calculate_call_gas_cost(gas, evm.gas_left, extra_gas)
+    message_call_gas_fee = calculate_message_call_gas_stipend(
+        value, gas, evm.gas_left, extra_gas
+    )
+
+    evm.gas_left = subtract_gas(evm.gas_left, call_gas_fee)
+
     sender_balance = get_account(
         evm.env.state, evm.message.current_target
     ).balance
@@ -396,14 +397,6 @@ def delegatecall(evm: Evm) -> None:
     value = evm.message.value
     to = evm.message.current_target
 
-    extra_gas = U256(0)
-    call_gas_fee = calculate_call_gas_cost(gas, evm.gas_left, extra_gas)
-    message_call_gas_fee = calculate_message_call_gas_stipend(
-        value, gas, evm.gas_left, extra_gas, call_stipend=U256(0)
-    )
-
-    evm.gas_left = subtract_gas(evm.gas_left, call_gas_fee)
-
     gas_input_memory = calculate_gas_extend_memory(
         evm.memory, memory_input_start_position, memory_input_size
     )
@@ -417,6 +410,14 @@ def delegatecall(evm: Evm) -> None:
     call_data = memory_read_bytes(
         evm.memory, memory_input_start_position, memory_input_size
     )
+
+    extra_gas = U256(0)
+    call_gas_fee = calculate_call_gas_cost(gas, evm.gas_left, extra_gas)
+    message_call_gas_fee = calculate_message_call_gas_stipend(
+        value, gas, evm.gas_left, extra_gas, call_stipend=U256(0)
+    )
+
+    evm.gas_left = subtract_gas(evm.gas_left, call_gas_fee)
 
     evm.pc += 1
 
