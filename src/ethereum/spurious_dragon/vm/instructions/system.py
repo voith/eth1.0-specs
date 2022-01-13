@@ -187,7 +187,9 @@ def call(evm: Evm) -> None:
     )
 
     _account_exists = account_exists(evm.env.state, to)
-    create_gas_cost = U256(0) if _account_exists else GAS_NEW_ACCOUNT
+    create_gas_cost = (
+        U256(0) if _account_exists or value == 0 else GAS_NEW_ACCOUNT
+    )
     transfer_gas_cost = U256(0) if value == 0 else GAS_CALL_VALUE
     extra_gas = u256_safe_add(
         create_gas_cost,
@@ -353,16 +355,20 @@ def selfdestruct(evm: Evm) -> None:
     evm.gas_left = subtract_gas(evm.gas_left, GAS_SELF_DESTRUCT)
     beneficiary = to_address(pop(evm.stack))
 
-    if not account_exists(evm.env.state, beneficiary):
-        evm.gas_left = subtract_gas(
-            evm.gas_left, GAS_SELF_DESTRUCT_NEW_ACCOUNT
-        )
-
     originator = evm.message.current_target
     beneficiary_balance = get_account(evm.env.state, beneficiary).balance
     originator_balance = get_account(evm.env.state, originator).balance
 
+    if (
+        not account_exists(evm.env.state, beneficiary)
+        and originator_balance != 0
+    ):
+        evm.gas_left = subtract_gas(
+            evm.gas_left, GAS_SELF_DESTRUCT_NEW_ACCOUNT
+        )
+
     # First Transfer to beneficiary
+    # This call will trigger state clearing if the beneficiary is EMPTY_ACCOUNT
     set_account_balance(
         evm.env.state, beneficiary, beneficiary_balance + originator_balance
     )

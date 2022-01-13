@@ -291,3 +291,4 @@ astuple
 base64
 
 dao
+precompiles

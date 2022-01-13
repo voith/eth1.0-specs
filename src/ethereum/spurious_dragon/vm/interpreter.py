@@ -22,11 +22,11 @@ from ..state import (
     begin_transaction,
     commit_transaction,
     get_account,
+    increment_nonce,
     move_ether,
     rollback_transaction,
     set_code,
     touch_account,
-    increment_nonce,
 )
 from ..vm import Message
 from ..vm.error import (
@@ -160,16 +160,16 @@ def process_message(message: Message, env: Environment) -> Evm:
     # take snapshot of state before processing the message
     begin_transaction(env.state)
 
-    touch_account(env.state, message.current_target)
-
     sender_balance = get_account(env.state, message.caller).balance
 
-    if message.should_transfer_value and message.value != 0:
+    if message.should_transfer_value:
         if sender_balance < message.value:
             rollback_transaction(env.state)
             raise InsufficientFunds(
                 f"Insufficient funds: {sender_balance} < {message.value}"
             )
+        # This call will trigger state clearing if the balance is zero and
+        # message.current_target is EMPTY_ACCOUNT
         move_ether(
             env.state, message.caller, message.current_target, message.value
         )
@@ -179,6 +179,10 @@ def process_message(message: Message, env: Environment) -> Evm:
         # revert state to the last saved checkpoint
         # since the message call resulted in an error
         rollback_transaction(env.state)
+
+        # This ensures that zero value calls trigger state clearing even if the
+        # call later reverts. This is only possible with precompiles.
+        touch_account(env.state, message.current_target)
     else:
         commit_transaction(env.state)
     return evm

@@ -152,8 +152,35 @@ def set_account(
     state: State, address: Address, account: Optional[Account]
 ) -> None:
     """
-    Set the `Account` object at an address. Setting to `None` deletes
-    the account (but not its storage, see `destroy_account()`).
+    Set the `Account` object at an address. This function treats
+    `EMPTY_ACCOUNT` and None as the same.
+
+    You may delete an account with this function even if it has storage.
+
+    Parameters
+    ----------
+    state: `State`
+        The state
+    address : `Address`
+        Address to set.
+    account : `Account`
+        Account to set at address.
+    """
+    if account is None or account == EMPTY_ACCOUNT:
+        destroy_account(state, address)
+    else:
+        set_account_internal(state, address, account)
+
+
+def set_account_internal(
+    state: State, address: Address, account: Optional[Account]
+) -> None:
+    """
+    Set the `Account` object at an address. This function treats
+    `EMPTY_ACCOUNT` and None as distinct.
+
+    You must not set an account to `None` with this function if it has non-zero
+    storage keys (use `destroy_account()`).
 
     Parameters
     ----------
@@ -184,7 +211,7 @@ def destroy_account(state: State, address: Address) -> None:
     """
     if address in state._storage_tries:
         del state._storage_tries[address]
-    set_account(state, address, None)
+    set_account_internal(state, address, None)
 
 
 def get_storage(state: State, address: Address, key: Bytes) -> U256:
@@ -306,7 +333,10 @@ def account_exists(state: State, address: Address) -> bool:
     account_exists : `bool`
         True if account exists in the state trie, False otherwise
     """
-    return get_account_optional(state, address) is not None
+    account = get_account_optional(state, address)
+    if account is None or account == EMPTY_ACCOUNT:
+        return False
+    return True
 
 
 def account_has_code_or_nonce(state: State, address: Address) -> bool:
@@ -384,7 +414,7 @@ def set_account_balance(state: State, address: Address, amount: U256) -> None:
 
 def touch_account(state: State, address: Address) -> None:
     """
-    Initializes an account to state.
+    Check if an account in the state is zero and if so, delete it.
 
     Parameters
     ----------
@@ -392,10 +422,10 @@ def touch_account(state: State, address: Address) -> None:
         The current state.
 
     address:
-        The address of the account that need to initialised.
+        The address of the account to check.
     """
-    if not account_exists(state, address):
-        set_account(state, address, EMPTY_ACCOUNT)
+    if get_account_optional(state, address) == EMPTY_ACCOUNT:
+        destroy_account(state, address)
 
 
 def increment_nonce(state: State, address: Address) -> None:
