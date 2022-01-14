@@ -382,22 +382,6 @@ def set_account_balance(state: State, address: Address, amount: U256) -> None:
     modify_state(state, address, set_balance)
 
 
-def touch_account(state: State, address: Address) -> None:
-    """
-    Initializes an account to state.
-
-    Parameters
-    ----------
-    state:
-        The current state.
-
-    address:
-        The address of the account that need to initialised.
-    """
-    if not account_exists(state, address):
-        set_account(state, address, EMPTY_ACCOUNT)
-
-
 def increment_nonce(state: State, address: Address) -> None:
     """
     Increments the nonce of an account.
