@@ -10,7 +10,7 @@ from ethereum.frontier.spec import BlockChain, get_last_256_block_hashes
 from ethereum.frontier.state import (
     State,
     close_state,
-    set_account,
+    set_account_internal,
     set_storage,
     storage_root,
 )
@@ -126,7 +126,7 @@ def json_to_state(raw: Any) -> State:
             balance=U256(hex_to_uint(acc_state.get("balance", "0x0"))),
             code=hex_to_bytes(acc_state.get("code", "")),
         )
-        set_account(state, addr, account)
+        set_account_internal(state, addr, account)
 
         for (k, v) in acc_state.get("storage", {}).items():
             set_storage(
@@ -136,7 +136,7 @@ def json_to_state(raw: Any) -> State:
                 U256.from_be_bytes(hex_to_bytes32(v)),
             )
 
-        set_account(state, addr, account)
+        set_account_internal(state, addr, account)
 
     return state
 

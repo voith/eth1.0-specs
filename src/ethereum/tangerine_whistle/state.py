@@ -152,8 +152,33 @@ def set_account(
     state: State, address: Address, account: Optional[Account]
 ) -> None:
     """
-    Set the `Account` object at an address. Setting to `None` deletes
-    the account (but not its storage, see `destroy_account()`).
+    Set the `Account` object at an address.
+
+    You may delete an account with this function even if it has storage.
+
+    Parameters
+    ----------
+    state: `State`
+        The state
+    address : `Address`
+        Address to set.
+    account : `Account`
+        Account to set at address.
+    """
+    if account is None:
+        destroy_account(state, address)
+    else:
+        set_account_internal(state, address, account)
+
+
+def set_account_internal(
+    state: State, address: Address, account: Optional[Account]
+) -> None:
+    """
+    Set the `Account` object at an address.
+
+    You must not set an account to `None` with this function if it has non-zero
+    storage keys (use `destroy_account()`).
 
     Parameters
     ----------
@@ -184,7 +209,7 @@ def destroy_account(state: State, address: Address) -> None:
     """
     if address in state._storage_tries:
         del state._storage_tries[address]
-    set_account(state, address, None)
+    set_account_internal(state, address, None)
 
 
 def get_storage(state: State, address: Address, key: Bytes) -> U256:

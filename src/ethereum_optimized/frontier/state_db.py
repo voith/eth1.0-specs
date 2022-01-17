@@ -323,7 +323,7 @@ def get_account(state: State, address: Address) -> Account:
         return res
 
 
-def set_account(
+def set_account_internal(
     state: State, address: Address, account: Optional[Account]
 ) -> None:
     """
