@@ -291,4 +291,5 @@ astuple
 base64
 
 dao
-precompiles
+precompile
+recurse

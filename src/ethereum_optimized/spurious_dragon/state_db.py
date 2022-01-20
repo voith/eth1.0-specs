@@ -222,7 +222,7 @@ def commit_transaction(state: State) -> None:
         state._dirty_accounts[-1][address] = account
     state._destroyed_accounts[-2] |= state._destroyed_accounts[-1]
     for address in state._destroyed_accounts.pop():
-        state._dirty_storage[-2].pop(address, None)
+        state._dirty_storage[-2].pop(address)
     for (address, cache) in state._dirty_storage.pop().items():
         if address not in state._dirty_storage[-1]:
             state._dirty_storage[-1][address] = {}
@@ -322,7 +322,7 @@ def get_account(state: State, address: Address) -> Account:
         return res
 
 
-def set_account_internal(
+def set_account(
     state: State, address: Address, account: Optional[Account]
 ) -> None:
     """

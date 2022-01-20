@@ -64,7 +64,7 @@ def test_trie() -> None:
         for insert_list in operations:
             for (key, value) in insert_list:
                 normal_trie.trie_set(trie_normal, key, value)
-                state_db.set_account_internal(state, key, value)  # type: ignore
+                state_db.set_account(state, key, value)  # type: ignore
             root = normal_trie.root(trie_normal)
             assert root == state_db.state_root(state)
     state_db.get_internal_key = backup_get_internal_key
@@ -77,7 +77,7 @@ def test_trie() -> None:
 def test_storage_key() -> None:
     def actions(impl: Any) -> Any:
         obj = impl.State()
-        impl.set_account_internal(obj, ADDRESS_FOO, EMPTY_ACCOUNT)
+        impl.set_account(obj, ADDRESS_FOO, EMPTY_ACCOUNT)
         impl.set_storage(obj, ADDRESS_FOO, b"", U256(42))
         impl.state_root(obj)
         return obj
@@ -99,12 +99,12 @@ def test_storage_key() -> None:
 def test_resurrection() -> None:
     def actions(impl: Any) -> Any:
         obj = impl.State()
-        impl.set_account_internal(obj, ADDRESS_FOO, EMPTY_ACCOUNT)
+        impl.set_account(obj, ADDRESS_FOO, EMPTY_ACCOUNT)
         impl.set_storage(obj, ADDRESS_FOO, b"", U256(42))
         impl.state_root(obj)
         impl.destroy_account(obj, ADDRESS_FOO)
         impl.state_root(obj)
-        impl.set_account_internal(obj, ADDRESS_FOO, EMPTY_ACCOUNT)
+        impl.set_account(obj, ADDRESS_FOO, EMPTY_ACCOUNT)
         return obj
 
     state_normal = actions(state)
