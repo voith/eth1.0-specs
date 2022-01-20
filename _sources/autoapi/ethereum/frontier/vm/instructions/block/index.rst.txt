@@ -50,8 +50,8 @@ block_hash
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `20`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `20`.
 
 
 
@@ -75,8 +75,8 @@ coinbase
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -100,8 +100,8 @@ timestamp
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -124,8 +124,8 @@ number
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -148,8 +148,8 @@ difficulty
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -172,8 +172,8 @@ gas_limit
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equal to `1024`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 

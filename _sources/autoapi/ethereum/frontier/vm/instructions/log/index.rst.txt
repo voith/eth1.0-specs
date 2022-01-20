@@ -60,7 +60,7 @@ log_n
    :param evm: The current EVM frame.
    :param num_topics: The number of topics to be included in the log entry.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2 + num_topics`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2 + num_topics`.
 
 
 

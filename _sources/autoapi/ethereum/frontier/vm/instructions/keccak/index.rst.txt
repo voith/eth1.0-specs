@@ -47,7 +47,7 @@ keccak
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
 
 
 

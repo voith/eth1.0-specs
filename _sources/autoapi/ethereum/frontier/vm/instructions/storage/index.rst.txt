@@ -46,8 +46,8 @@ sload
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `50`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `50`.
 
 
 
@@ -67,8 +67,8 @@ sstore
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `20000`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `20000`.
 
 
 

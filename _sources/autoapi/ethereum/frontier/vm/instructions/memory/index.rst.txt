@@ -49,8 +49,8 @@ mstore
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than
        `3` + gas needed to extend memeory.
 
 
@@ -73,8 +73,8 @@ mstore8
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than
        `3` + gas needed to extend memory.
 
 
@@ -95,8 +95,8 @@ mload
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than
        `3` + gas needed to extend memory.
 
 
@@ -117,7 +117,7 @@ msize
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`
 
 
 

@@ -55,8 +55,8 @@ add
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
 
 
 
@@ -77,8 +77,8 @@ sub
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
 
 
 
@@ -99,8 +99,8 @@ mul
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
 
 
 
@@ -121,8 +121,8 @@ div
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
 
 
 
@@ -143,8 +143,8 @@ sdiv
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
 
 
 
@@ -165,8 +165,8 @@ mod
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
 
 
 
@@ -187,8 +187,8 @@ smod
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
 
 
 
@@ -209,8 +209,8 @@ addmod
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `3`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `8`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `8`.
 
 
 
@@ -231,8 +231,8 @@ mulmod
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `3`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `8`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `8`.
 
 
 
@@ -253,7 +253,7 @@ exp
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
 
 
 
@@ -274,8 +274,8 @@ signextend
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `5`.
 
 
 

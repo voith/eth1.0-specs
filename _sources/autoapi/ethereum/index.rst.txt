@@ -15,7 +15,10 @@ Subpackages
    :titlesonly:
    :maxdepth: 3
 
+   dao_fork/index.rst
    frontier/index.rst
+   homestead/index.rst
+   tangerine_whistle/index.rst
    utils/index.rst
 
 
@@ -28,10 +31,25 @@ Submodules
    base_types/index.rst
    crypto/index.rst
    ethash/index.rst
+   rlp/index.rst
 
 
 Package Contents
 ----------------
+
+
+__version__
+~~~~~~~~~~~
+
+
+
+.. py:data:: __version__
+
+   
+
+.. undocinclude:: /../src/ethereum/__init__.py
+   :language: python
+   :lines: 9-9
 
 
 EVM_RECURSION_LIMIT
@@ -45,5 +63,5 @@ EVM_RECURSION_LIMIT
 
 .. undocinclude:: /../src/ethereum/__init__.py
    :language: python
-   :lines: 12-12
+   :lines: 14-14
 

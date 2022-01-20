@@ -64,7 +64,7 @@ Attributes
    ethereum.frontier.spec.GAS_LIMIT_ADJUSTMENT_FACTOR
    ethereum.frontier.spec.GAS_LIMIT_MINIMUM
    ethereum.frontier.spec.GENESIS_DIFFICULTY
-   ethereum.frontier.spec.MAX_UNCLE_DEPTH
+   ethereum.frontier.spec.MAX_OMMER_DEPTH
 
 
 Module Details
@@ -126,12 +126,12 @@ GENESIS_DIFFICULTY
    :lines: 57-57
 
 
-MAX_UNCLE_DEPTH
+MAX_OMMER_DEPTH
 ~~~~~~~~~~~~~~~
 
 
 
-.. py:data:: MAX_UNCLE_DEPTH
+.. py:data:: MAX_OMMER_DEPTH
 
    
 
@@ -169,7 +169,7 @@ apply_fork
 ~~~~~~~~~~
 
 
-.. function:: apply_fork(old: None) -> BlockChain
+.. function:: apply_fork(old: BlockChain) -> BlockChain
    :noindexentry:
 
    Transforms the state from the previous hard fork (`old`) into the block
@@ -563,10 +563,10 @@ calculate_block_difficulty
 
    Computes difficulty of a block using its header and parent header.
 
-   :param number: Block number of the block
-   :param timestamp: Timestmap of the block
-   :param parent_timestamp: Timestanp of the parent block
-   :param parent_difficulty: difficulty of the parent block
+   :param number: Block number of the block.
+   :param timestamp: Timestamp of the block.
+   :param parent_timestamp: Timestamp of the parent block.
+   :param parent_difficulty: difficulty of the parent block.
 
    :returns: **difficulty** -- Computed difficulty for a block.
    :rtype: `ethereum.base_types.Uint`

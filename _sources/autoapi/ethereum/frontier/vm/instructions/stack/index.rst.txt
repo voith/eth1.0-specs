@@ -118,8 +118,8 @@ pop
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -141,8 +141,8 @@ push_n
    :param num_bytes: The number of immediate bytes to be read from the code and pushed to
                      the stack.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equals `1024`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is equals `1024`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
 
 
 
@@ -164,7 +164,7 @@ dup_n
    :param item_number: The stack item number (0-indexed from top of stack) to be duplicated
                        to the top of stack.
 
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
 
 
 
@@ -190,7 +190,7 @@ swap_n
    :param item_number: The stack item number (0-indexed from top of stack) to be swapped
                        with the top of stack element.
 
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `3`.
 
 
 

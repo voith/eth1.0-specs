@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/dropdown.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
@@ -18,7 +19,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="ethereum.frontier.state" href="../state/index.html" />
-    <link rel="prev" title="ethereum.frontier.rlp" href="../rlp/index.html" />
+    <link rel="prev" title="ethereum.frontier.genesis" href="../genesis/index.html" />
    
   <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
   
@@ -32,6 +33,36 @@
     warning is removed, <em>always</em> double check against the
     <a href="https://github.com/ethereum/execution-specs/">original source</a>.
 </div>
+
+
+<nav class="menu">
+    <ol>
+        <li>
+            <button>Forks</button>
+            <ol class="submenu">
+                
+                <li class="active">
+                    <a href="">Frontier</a>
+                </li>
+                
+                <li>
+                    <a href="../../homestead/spec/index.html">Homestead</a>
+                </li>
+                
+                <li>
+                    <a href="../../dao_fork/spec/index.html">Dao_fork</a>
+                </li>
+                
+                <li>
+                    <a href="../../tangerine_whistle/spec/index.html">Tangerine_whistle</a>
+                </li>
+                
+            </ol>
+        </li>
+    </ol>
+</nav>
+
+
 
 
   
@@ -64,7 +95,7 @@
 <li><p><a class="reference internal" href="#gas-limit-adjustment-factor" id="id8">GAS_LIMIT_ADJUSTMENT_FACTOR</a></p></li>
 <li><p><a class="reference internal" href="#gas-limit-minimum" id="id9">GAS_LIMIT_MINIMUM</a></p></li>
 <li><p><a class="reference internal" href="#genesis-difficulty" id="id10">GENESIS_DIFFICULTY</a></p></li>
-<li><p><a class="reference internal" href="#max-uncle-depth" id="id11">MAX_UNCLE_DEPTH</a></p></li>
+<li><p><a class="reference internal" href="#max-ommer-depth" id="id11">MAX_OMMER_DEPTH</a></p></li>
 <li><p><a class="reference internal" href="#blockchain" id="id12">BlockChain</a></p></li>
 <li><p><a class="reference internal" href="#apply-fork" id="id13">apply_fork</a></p></li>
 <li><p><a class="reference internal" href="#get-last-256-block-hashes" id="id14">get_last_256_block_hashes</a></p></li>
@@ -193,7 +224,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.spec.GENESIS_DIFFICULTY" title="ethereum.frontier.spec.GENESIS_DIFFICULTY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GENESIS_DIFFICULTY</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.spec.MAX_UNCLE_DEPTH" title="ethereum.frontier.spec.MAX_UNCLE_DEPTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_UNCLE_DEPTH</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.spec.MAX_OMMER_DEPTH" title="ethereum.frontier.spec.MAX_OMMER_DEPTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_OMMER_DEPTH</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -246,14 +277,14 @@
 </pre></div>
 </div>
 </section>
-<section id="max-uncle-depth">
-<h4>MAX_UNCLE_DEPTH<a class="headerlink" href="#max-uncle-depth" title="Permalink to this headline">¶</a></h4>
+<section id="max-ommer-depth">
+<h4>MAX_OMMER_DEPTH<a class="headerlink" href="#max-ommer-depth" title="Permalink to this headline">¶</a></h4>
 <dl class="py data">
-<dt class="sig sig-object py" id="ethereum.frontier.spec.MAX_UNCLE_DEPTH">
-<span class="sig-name descname"><span class="pre">MAX_UNCLE_DEPTH</span></span><a class="headerlink" href="#ethereum.frontier.spec.MAX_UNCLE_DEPTH" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ethereum.frontier.spec.MAX_OMMER_DEPTH">
+<span class="sig-name descname"><span class="pre">MAX_OMMER_DEPTH</span></span><a class="headerlink" href="#ethereum.frontier.spec.MAX_OMMER_DEPTH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MAX_UNCLE_DEPTH</span> <span class="o">=</span> <span class="mi">6</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MAX_OMMER_DEPTH</span> <span class="o">=</span> <span class="mi">6</span>
 </pre></div>
 </div>
 </section>
@@ -280,7 +311,7 @@
 <h4>apply_fork<a class="headerlink" href="#apply-fork" title="Permalink to this headline">¶</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.frontier.spec.apply_fork">
-<span class="sig-name descname"><span class="pre">apply_fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#ethereum.frontier.spec.BlockChain" title="ethereum.frontier.spec.BlockChain"><span class="pre">BlockChain</span></a><a class="headerlink" href="#ethereum.frontier.spec.apply_fork" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">apply_fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#ethereum.frontier.spec.BlockChain" title="ethereum.frontier.spec.BlockChain"><span class="pre">BlockChain</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#ethereum.frontier.spec.BlockChain" title="ethereum.frontier.spec.BlockChain"><span class="pre">BlockChain</span></a><a class="headerlink" href="#ethereum.frontier.spec.apply_fork" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transforms the state from the previous hard fork (<cite>old</cite>) into the block
 chain object for this hard fork and returns it.</p>
 <dl class="field-list simple">
@@ -296,19 +327,17 @@ chain object for this hard fork and returns it.</p>
 </dl>
 </dd></dl>
 
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_fork</span><span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlockChain</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_fork</span><span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="n">BlockChain</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlockChain</span><span class="p">:</span>
     <span class="n">genesis</span> <span class="o">=</span> <span class="n">genesis_configuration</span><span class="p">(</span><span class="s2">&quot;mainnet.json&quot;</span><span class="p">)</span>
 
-    <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-
     <span class="k">for</span> <span class="n">account</span><span class="p">,</span> <span class="n">balance</span> <span class="ow">in</span> <span class="n">genesis</span><span class="o">.</span><span class="n">initial_balances</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">create_ether</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">balance</span><span class="p">)</span>
+        <span class="n">create_ether</span><span class="p">(</span><span class="n">old</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">balance</span><span class="p">)</span>
 
     <span class="n">genesis_header</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span>
         <span class="n">parent_hash</span><span class="o">=</span><span class="n">Hash32</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mi">32</span><span class="p">),</span>
         <span class="n">ommers_hash</span><span class="o">=</span><span class="n">rlp</span><span class="o">.</span><span class="n">rlp_hash</span><span class="p">(()),</span>
         <span class="n">coinbase</span><span class="o">=</span><span class="n">Address</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">),</span>
-        <span class="n">state_root</span><span class="o">=</span><span class="n">state_root</span><span class="p">(</span><span class="n">state</span><span class="p">),</span>
+        <span class="n">state_root</span><span class="o">=</span><span class="n">state_root</span><span class="p">(</span><span class="n">old</span><span class="o">.</span><span class="n">state</span><span class="p">),</span>
         <span class="n">transactions_root</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">Trie</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">receipt_root</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">Trie</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">bloom</span><span class="o">=</span><span class="n">Bloom</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mi">256</span><span class="p">),</span>
@@ -328,7 +357,9 @@ chain object for this hard fork and returns it.</p>
         <span class="n">ommers</span><span class="o">=</span><span class="p">(),</span>
     <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">BlockChain</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">[</span><span class="n">genesis_block</span><span class="p">],</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">old</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">genesis_block</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">old</span>
 </pre></div>
 </div>
 </section>
@@ -452,6 +483,9 @@ block number.</p>
         <span class="n">parent_header</span><span class="o">.</span><span class="n">difficulty</span><span class="p">,</span>
     <span class="p">)</span>
 
+    <span class="n">block_parent_hash</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">keccak256</span><span class="p">(</span><span class="n">rlp</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">parent_header</span><span class="p">))</span>
+
+    <span class="n">ensure</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">parent_hash</span> <span class="o">==</span> <span class="n">block_parent_hash</span><span class="p">)</span>
     <span class="n">ensure</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">==</span> <span class="n">block_difficulty</span><span class="p">)</span>
     <span class="n">ensure</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="n">parent_header</span><span class="o">.</span><span class="n">number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">ensure</span><span class="p">(</span><span class="n">check_gas_limit</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">,</span> <span class="n">parent_header</span><span class="o">.</span><span class="n">gas_limit</span><span class="p">))</span>
@@ -700,7 +734,7 @@ block.</p></li>
     <span class="c1"># Check that there are no duplicates in the ommers of current block</span>
     <span class="n">ensure</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ommers_hashes</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ommers_hashes</span><span class="p">)))</span>
 
-    <span class="n">recent_canonical_blocks</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">MAX_UNCLE_DEPTH</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:]</span>
+    <span class="n">recent_canonical_blocks</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">MAX_OMMER_DEPTH</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:]</span>
     <span class="n">recent_canonical_block_hashes</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">rlp</span><span class="o">.</span><span class="n">rlp_hash</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">header</span><span class="p">)</span> <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">recent_canonical_blocks</span>
     <span class="p">}</span>
@@ -725,7 +759,7 @@ block.</p></li>
         <span class="c1"># Ommer age with respect to the current block. For example, an age of</span>
         <span class="c1"># 1 indicates that the ommer is a sibling of previous block.</span>
         <span class="n">ommer_age</span> <span class="o">=</span> <span class="n">block_header</span><span class="o">.</span><span class="n">number</span> <span class="o">-</span> <span class="n">ommer</span><span class="o">.</span><span class="n">number</span>
-        <span class="n">ensure</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">ommer_age</span> <span class="o">&lt;=</span> <span class="n">MAX_UNCLE_DEPTH</span><span class="p">)</span>
+        <span class="n">ensure</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">ommer_age</span> <span class="o">&lt;=</span> <span class="n">MAX_OMMER_DEPTH</span><span class="p">)</span>
 
         <span class="n">ensure</span><span class="p">(</span><span class="n">ommer</span><span class="o">.</span><span class="n">parent_hash</span> <span class="ow">in</span> <span class="n">recent_canonical_block_hashes</span><span class="p">)</span>
         <span class="n">ensure</span><span class="p">(</span><span class="n">ommer</span><span class="o">.</span><span class="n">parent_hash</span> <span class="o">!=</span> <span class="n">block_header</span><span class="o">.</span><span class="n">parent_hash</span><span class="p">)</span>
@@ -934,9 +968,7 @@ execution is instantiated.</p>
 
     <span class="n">ensure</span><span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="mi">27</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="mi">28</span><span class="p">)</span>
     <span class="n">ensure</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">SECP256K1N</span><span class="p">)</span>
-
-    <span class="c1"># TODO: this causes error starting in block 46169 (or 46170?)</span>
-    <span class="c1"># assert 0&lt;s_int and s_int&lt;(SECP256K1N//2+1)</span>
+    <span class="n">ensure</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">SECP256K1N</span><span class="p">)</span>
 
     <span class="n">public_key</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">secp256k1_recover</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span> <span class="o">-</span> <span class="mi">27</span><span class="p">,</span> <span class="n">signing_hash</span><span class="p">(</span><span class="n">tx</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">Address</span><span class="p">(</span><span class="n">crypto</span><span class="o">.</span><span class="n">keccak256</span><span class="p">(</span><span class="n">public_key</span><span class="p">)[</span><span class="mi">12</span><span class="p">:</span><span class="mi">32</span><span class="p">])</span>
@@ -1077,10 +1109,10 @@ execution is instantiated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>number</strong> – Block number of the block</p></li>
-<li><p><strong>timestamp</strong> – Timestmap of the block</p></li>
-<li><p><strong>parent_timestamp</strong> – Timestanp of the parent block</p></li>
-<li><p><strong>parent_difficulty</strong> – difficulty of the parent block</p></li>
+<li><p><strong>number</strong> – Block number of the block.</p></li>
+<li><p><strong>timestamp</strong> – Timestamp of the block.</p></li>
+<li><p><strong>parent_timestamp</strong> – Timestamp of the parent block.</p></li>
+<li><p><strong>parent_difficulty</strong> – difficulty of the parent block.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1166,7 +1198,7 @@ execution is instantiated.</p>
   <li><a href="../../../index.html">API Reference</a><ul>
   <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
   <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier</span></code></a><ul>
-      <li>Previous: <a href="../rlp/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.rlp</span></code></a></li>
+      <li>Previous: <a href="../genesis/index.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.genesis</span></code></a></li>
       <li>Next: <a href="../state/index.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.frontier.state</span></code></a></li>
   </ul></li>
   </ul></li>

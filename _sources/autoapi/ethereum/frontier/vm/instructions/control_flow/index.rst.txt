@@ -68,13 +68,13 @@ jump
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.InvalidJumpDestError: If the jump destination doesn't meet any of the following criteria:
+   :raises ~ethereum.frontier.vm.error.InvalidJumpDestError: If the jump destination doesn't meet any of the following criteria:
            * The jump destination is less than the length of the code.
            * The jump destination should have the `JUMPDEST` opcode (0x5B).
            * The jump destination shouldn't be part of the data corresponding
            to `PUSH-N` opcodes.
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `8`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `1`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `8`.
 
 
 
@@ -96,13 +96,13 @@ jumpi
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.InvalidJumpDestError: If the jump destination doesn't meet any of the following criteria:
+   :raises ~ethereum.frontier.vm.error.InvalidJumpDestError: If the jump destination doesn't meet any of the following criteria:
            * The jump destination is less than the length of the code.
            * The jump destination should have the `JUMPDEST` opcode (0x5B).
            * The jump destination shouldn't be part of the data corresponding
            to `PUSH-N` opcodes.
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `10`.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `len(stack)` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `10`.
 
 
 
@@ -123,8 +123,8 @@ pc
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is more than `1023`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is more than `1023`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -145,8 +145,8 @@ gas_left
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is more than `1023`.
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is more than `1023`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -168,7 +168,7 @@ jumpdest
 
    :param evm: The current EVM frame.
 
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `1`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `evm.gas_left` is less than `1`.
 
 
 

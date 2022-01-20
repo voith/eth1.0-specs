@@ -1,0 +1,52 @@
+:mod:`ethereum.dao_fork.dao`
+============================
+
+.. py:module:: ethereum.dao_fork.dao
+
+Dao Fork
+^^^^^^^^
+
+.. contents:: Table of Contents
+    :backlinks: none
+    :local:
+
+Introduction
+------------
+
+The Dao Fork was an irregular state change that moved all Ether from a large
+collection of accounts (The Dao and all its children) to a recovery contract.
+
+The recovery contract was previously created using normal contract deployment.
+
+
+Module Contents
+---------------
+
+
+DAO_ACCOUNTS
+~~~~~~~~~~~~
+
+
+
+.. py:data:: DAO_ACCOUNTS
+
+   
+
+.. undocinclude:: /../src/ethereum/dao_fork/dao.py
+   :language: python
+   :lines: 20-138
+
+
+DAO_RECOVERY
+~~~~~~~~~~~~
+
+
+
+.. py:data:: DAO_RECOVERY
+
+   
+
+.. undocinclude:: /../src/ethereum/dao_fork/dao.py
+   :language: python
+   :lines: 142-142
+

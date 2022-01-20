@@ -48,7 +48,7 @@ pop
    :returns: **value** -- The top element on the stack.
    :rtype: `U256`
 
-   :raises ethereum.frontier.vm.error.StackUnderflowError: If `stack` is empty.
+   :raises ~ethereum.frontier.vm.error.StackUnderflowError: If `stack` is empty.
 
 
 
@@ -69,7 +69,7 @@ push
    :param stack: EVM stack.
    :param value: Item to be pushed onto `stack`.
 
-   :raises ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is `1024`.
+   :raises ~ethereum.frontier.vm.error.StackOverflowError: If `len(stack)` is `1024`.
 
 
 

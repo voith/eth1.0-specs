@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/dropdown.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
     <script src="../../../../../_static/jquery.js"></script>
@@ -32,6 +33,36 @@
     warning is removed, <em>always</em> double check against the
     <a href="https://github.com/ethereum/execution-specs/">original source</a>.
 </div>
+
+
+<nav class="menu">
+    <ol>
+        <li>
+            <button>Forks</button>
+            <ol class="submenu">
+                
+                <li class="active">
+                    <a href="">Frontier</a>
+                </li>
+                
+                <li>
+                    <a href="../../../homestead/vm/gas/index.html">Homestead</a>
+                </li>
+                
+                <li>
+                    <a href="../../../dao_fork/vm/gas/index.html">Dao_fork</a>
+                </li>
+                
+                <li>
+                    <a href="../../../tangerine_whistle/vm/gas/index.html">Tangerine_whistle</a>
+                </li>
+                
+            </ol>
+        </li>
+    </ol>
+</nav>
+
+
 
 
   
@@ -74,30 +105,32 @@
 <li><p><a class="reference internal" href="#gas-keccak256" id="id18">GAS_KECCAK256</a></p></li>
 <li><p><a class="reference internal" href="#gas-keccak256-word" id="id19">GAS_KECCAK256_WORD</a></p></li>
 <li><p><a class="reference internal" href="#gas-copy" id="id20">GAS_COPY</a></p></li>
-<li><p><a class="reference internal" href="#gas-external" id="id21">GAS_EXTERNAL</a></p></li>
-<li><p><a class="reference internal" href="#gas-log" id="id22">GAS_LOG</a></p></li>
-<li><p><a class="reference internal" href="#gas-log-data" id="id23">GAS_LOG_DATA</a></p></li>
-<li><p><a class="reference internal" href="#gas-log-topic" id="id24">GAS_LOG_TOPIC</a></p></li>
-<li><p><a class="reference internal" href="#gas-create" id="id25">GAS_CREATE</a></p></li>
-<li><p><a class="reference internal" href="#gas-code-deposit" id="id26">GAS_CODE_DEPOSIT</a></p></li>
-<li><p><a class="reference internal" href="#gas-zero" id="id27">GAS_ZERO</a></p></li>
-<li><p><a class="reference internal" href="#gas-call" id="id28">GAS_CALL</a></p></li>
-<li><p><a class="reference internal" href="#gas-new-account" id="id29">GAS_NEW_ACCOUNT</a></p></li>
-<li><p><a class="reference internal" href="#gas-call-value" id="id30">GAS_CALL_VALUE</a></p></li>
-<li><p><a class="reference internal" href="#gas-call-stipend" id="id31">GAS_CALL_STIPEND</a></p></li>
-<li><p><a class="reference internal" href="#refund-self-destruct" id="id32">REFUND_SELF_DESTRUCT</a></p></li>
-<li><p><a class="reference internal" href="#gas-ecrecover" id="id33">GAS_ECRECOVER</a></p></li>
-<li><p><a class="reference internal" href="#gas-sha256" id="id34">GAS_SHA256</a></p></li>
-<li><p><a class="reference internal" href="#gas-sha256-word" id="id35">GAS_SHA256_WORD</a></p></li>
-<li><p><a class="reference internal" href="#gas-ripemd160" id="id36">GAS_RIPEMD160</a></p></li>
-<li><p><a class="reference internal" href="#gas-ripemd160-word" id="id37">GAS_RIPEMD160_WORD</a></p></li>
-<li><p><a class="reference internal" href="#gas-identity" id="id38">GAS_IDENTITY</a></p></li>
-<li><p><a class="reference internal" href="#gas-identity-word" id="id39">GAS_IDENTITY_WORD</a></p></li>
-<li><p><a class="reference internal" href="#subtract-gas" id="id40">subtract_gas</a></p></li>
-<li><p><a class="reference internal" href="#calculate-memory-gas-cost" id="id41">calculate_memory_gas_cost</a></p></li>
-<li><p><a class="reference internal" href="#calculate-gas-extend-memory" id="id42">calculate_gas_extend_memory</a></p></li>
-<li><p><a class="reference internal" href="#calculate-call-gas-cost" id="id43">calculate_call_gas_cost</a></p></li>
-<li><p><a class="reference internal" href="#calculate-message-call-gas-stipend" id="id44">calculate_message_call_gas_stipend</a></p></li>
+<li><p><a class="reference internal" href="#gas-block-hash" id="id21">GAS_BLOCK_HASH</a></p></li>
+<li><p><a class="reference internal" href="#gas-external" id="id22">GAS_EXTERNAL</a></p></li>
+<li><p><a class="reference internal" href="#gas-balance" id="id23">GAS_BALANCE</a></p></li>
+<li><p><a class="reference internal" href="#gas-log" id="id24">GAS_LOG</a></p></li>
+<li><p><a class="reference internal" href="#gas-log-data" id="id25">GAS_LOG_DATA</a></p></li>
+<li><p><a class="reference internal" href="#gas-log-topic" id="id26">GAS_LOG_TOPIC</a></p></li>
+<li><p><a class="reference internal" href="#gas-create" id="id27">GAS_CREATE</a></p></li>
+<li><p><a class="reference internal" href="#gas-code-deposit" id="id28">GAS_CODE_DEPOSIT</a></p></li>
+<li><p><a class="reference internal" href="#gas-zero" id="id29">GAS_ZERO</a></p></li>
+<li><p><a class="reference internal" href="#gas-call" id="id30">GAS_CALL</a></p></li>
+<li><p><a class="reference internal" href="#gas-new-account" id="id31">GAS_NEW_ACCOUNT</a></p></li>
+<li><p><a class="reference internal" href="#gas-call-value" id="id32">GAS_CALL_VALUE</a></p></li>
+<li><p><a class="reference internal" href="#gas-call-stipend" id="id33">GAS_CALL_STIPEND</a></p></li>
+<li><p><a class="reference internal" href="#refund-self-destruct" id="id34">REFUND_SELF_DESTRUCT</a></p></li>
+<li><p><a class="reference internal" href="#gas-ecrecover" id="id35">GAS_ECRECOVER</a></p></li>
+<li><p><a class="reference internal" href="#gas-sha256" id="id36">GAS_SHA256</a></p></li>
+<li><p><a class="reference internal" href="#gas-sha256-word" id="id37">GAS_SHA256_WORD</a></p></li>
+<li><p><a class="reference internal" href="#gas-ripemd160" id="id38">GAS_RIPEMD160</a></p></li>
+<li><p><a class="reference internal" href="#gas-ripemd160-word" id="id39">GAS_RIPEMD160_WORD</a></p></li>
+<li><p><a class="reference internal" href="#gas-identity" id="id40">GAS_IDENTITY</a></p></li>
+<li><p><a class="reference internal" href="#gas-identity-word" id="id41">GAS_IDENTITY_WORD</a></p></li>
+<li><p><a class="reference internal" href="#subtract-gas" id="id42">subtract_gas</a></p></li>
+<li><p><a class="reference internal" href="#calculate-memory-gas-cost" id="id43">calculate_memory_gas_cost</a></p></li>
+<li><p><a class="reference internal" href="#calculate-gas-extend-memory" id="id44">calculate_gas_extend_memory</a></p></li>
+<li><p><a class="reference internal" href="#calculate-call-gas-cost" id="id45">calculate_call_gas_cost</a></p></li>
+<li><p><a class="reference internal" href="#calculate-message-call-gas-stipend" id="id46">calculate_message_call_gas_stipend</a></p></li>
 </ul>
 </li>
 </ul>
@@ -187,7 +220,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.gas.GAS_COPY" title="ethereum.frontier.vm.gas.GAS_COPY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_COPY</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.gas.GAS_EXTERNAL" title="ethereum.frontier.vm.gas.GAS_EXTERNAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_EXTERNAL</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.gas.GAS_BLOCK_HASH" title="ethereum.frontier.vm.gas.GAS_BLOCK_HASH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_BLOCK_HASH</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.gas.GAS_EXTERNAL" title="ethereum.frontier.vm.gas.GAS_EXTERNAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_EXTERNAL</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.frontier.vm.gas.GAS_BALANCE" title="ethereum.frontier.vm.gas.GAS_BALANCE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_BALANCE</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.frontier.vm.gas.GAS_LOG" title="ethereum.frontier.vm.gas.GAS_LOG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_LOG</span></code></a></p></td>
@@ -415,6 +454,17 @@
 </pre></div>
 </div>
 </section>
+<section id="gas-block-hash">
+<h4>GAS_BLOCK_HASH<a class="headerlink" href="#gas-block-hash" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.gas.GAS_BLOCK_HASH">
+<span class="sig-name descname"><span class="pre">GAS_BLOCK_HASH</span></span><a class="headerlink" href="#ethereum.frontier.vm.gas.GAS_BLOCK_HASH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">GAS_BLOCK_HASH</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 <section id="gas-external">
 <h4>GAS_EXTERNAL<a class="headerlink" href="#gas-external" title="Permalink to this headline">¶</a></h4>
 <dl class="py data">
@@ -423,6 +473,17 @@
 <dd></dd></dl>
 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">GAS_EXTERNAL</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="gas-balance">
+<h4>GAS_BALANCE<a class="headerlink" href="#gas-balance" title="Permalink to this headline">¶</a></h4>
+<dl class="py data">
+<dt class="sig sig-object py" id="ethereum.frontier.vm.gas.GAS_BALANCE">
+<span class="sig-name descname"><span class="pre">GAS_BALANCE</span></span><a class="headerlink" href="#ethereum.frontier.vm.gas.GAS_BALANCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">GAS_BALANCE</span> <span class="o">=</span> <span class="n">U256</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -638,7 +699,7 @@
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>ethereum.frontier.vm.error.OutOfGasError</strong></a> – If <cite>gas_left</cite> is less than <cite>amount</cite>.</p>
+<dd class="field-even"><p><a class="reference internal" href="../error/index.html#ethereum.frontier.vm.error.OutOfGasError" title="ethereum.frontier.vm.error.OutOfGasError"><strong>OutOfGasError</strong></a> – If <cite>gas_left</cite> is less than <cite>amount</cite>.</p>
 </dd>
 </dl>
 </dd></dl>

@@ -102,7 +102,7 @@ process_create_message
    :param env: External items required for EVM execution.
 
    :returns: **evm** -- Items containing execution specific objects.
-   :rtype: `ethereum.frontier.vm.Evm`
+   :rtype: :py:class:`~ethereum.frontier.vm.Evm`
 
 
 
@@ -124,7 +124,7 @@ process_message
    :param env: External items required for EVM execution.
 
    :returns: **evm** -- Items containing execution specific objects
-   :rtype: `ethereum.frontier.vm.Evm`
+   :rtype: :py:class:`~ethereum.frontier.vm.Evm`
 
 
 

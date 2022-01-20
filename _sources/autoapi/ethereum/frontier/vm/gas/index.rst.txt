@@ -54,7 +54,9 @@ Attributes
    ethereum.frontier.vm.gas.GAS_KECCAK256
    ethereum.frontier.vm.gas.GAS_KECCAK256_WORD
    ethereum.frontier.vm.gas.GAS_COPY
+   ethereum.frontier.vm.gas.GAS_BLOCK_HASH
    ethereum.frontier.vm.gas.GAS_EXTERNAL
+   ethereum.frontier.vm.gas.GAS_BALANCE
    ethereum.frontier.vm.gas.GAS_LOG
    ethereum.frontier.vm.gas.GAS_LOG_DATA
    ethereum.frontier.vm.gas.GAS_LOG_TOPIC
@@ -288,6 +290,20 @@ GAS_COPY
    :lines: 36-36
 
 
+GAS_BLOCK_HASH
+~~~~~~~~~~~~~~
+
+
+
+.. py:data:: GAS_BLOCK_HASH
+
+   
+
+.. undocinclude:: /../src/ethereum/frontier/vm/gas.py
+   :language: python
+   :lines: 37-37
+
+
 GAS_EXTERNAL
 ~~~~~~~~~~~~
 
@@ -299,7 +315,21 @@ GAS_EXTERNAL
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 37-37
+   :lines: 38-38
+
+
+GAS_BALANCE
+~~~~~~~~~~~
+
+
+
+.. py:data:: GAS_BALANCE
+
+   
+
+.. undocinclude:: /../src/ethereum/frontier/vm/gas.py
+   :language: python
+   :lines: 39-39
 
 
 GAS_LOG
@@ -313,7 +343,7 @@ GAS_LOG
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 38-38
+   :lines: 40-40
 
 
 GAS_LOG_DATA
@@ -327,7 +357,7 @@ GAS_LOG_DATA
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 39-39
+   :lines: 41-41
 
 
 GAS_LOG_TOPIC
@@ -341,7 +371,7 @@ GAS_LOG_TOPIC
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 40-40
+   :lines: 42-42
 
 
 GAS_CREATE
@@ -355,7 +385,7 @@ GAS_CREATE
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 41-41
+   :lines: 43-43
 
 
 GAS_CODE_DEPOSIT
@@ -369,7 +399,7 @@ GAS_CODE_DEPOSIT
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 42-42
+   :lines: 44-44
 
 
 GAS_ZERO
@@ -383,7 +413,7 @@ GAS_ZERO
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 43-43
+   :lines: 45-45
 
 
 GAS_CALL
@@ -397,7 +427,7 @@ GAS_CALL
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 44-44
+   :lines: 46-46
 
 
 GAS_NEW_ACCOUNT
@@ -411,7 +441,7 @@ GAS_NEW_ACCOUNT
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 45-45
+   :lines: 47-47
 
 
 GAS_CALL_VALUE
@@ -425,7 +455,7 @@ GAS_CALL_VALUE
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 46-46
+   :lines: 48-48
 
 
 GAS_CALL_STIPEND
@@ -439,7 +469,7 @@ GAS_CALL_STIPEND
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 47-47
+   :lines: 49-49
 
 
 REFUND_SELF_DESTRUCT
@@ -453,7 +483,7 @@ REFUND_SELF_DESTRUCT
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 48-48
+   :lines: 50-50
 
 
 GAS_ECRECOVER
@@ -467,7 +497,7 @@ GAS_ECRECOVER
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 49-49
+   :lines: 51-51
 
 
 GAS_SHA256
@@ -481,7 +511,7 @@ GAS_SHA256
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 50-50
+   :lines: 52-52
 
 
 GAS_SHA256_WORD
@@ -495,7 +525,7 @@ GAS_SHA256_WORD
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 51-51
+   :lines: 53-53
 
 
 GAS_RIPEMD160
@@ -509,7 +539,7 @@ GAS_RIPEMD160
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 52-52
+   :lines: 54-54
 
 
 GAS_RIPEMD160_WORD
@@ -523,7 +553,7 @@ GAS_RIPEMD160_WORD
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 53-53
+   :lines: 55-55
 
 
 GAS_IDENTITY
@@ -537,7 +567,7 @@ GAS_IDENTITY
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 54-54
+   :lines: 56-56
 
 
 GAS_IDENTITY_WORD
@@ -551,7 +581,7 @@ GAS_IDENTITY_WORD
 
 .. undocinclude:: /../src/ethereum/frontier/vm/gas.py
    :language: python
-   :lines: 55-55
+   :lines: 57-57
 
 
 subtract_gas
@@ -566,7 +596,7 @@ subtract_gas
    :param gas_left: The amount of gas left in the current frame.
    :param amount: The amount of gas the current operation requires.
 
-   :raises ethereum.frontier.vm.error.OutOfGasError: If `gas_left` is less than `amount`.
+   :raises ~ethereum.frontier.vm.error.OutOfGasError: If `gas_left` is less than `amount`.
 
 
 
