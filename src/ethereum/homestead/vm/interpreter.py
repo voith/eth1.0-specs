@@ -25,6 +25,7 @@ from ..state import (
     move_ether,
     rollback_transaction,
     set_code,
+    touch_account,
 )
 from ..vm import Message
 from ..vm.error import (
@@ -155,9 +156,11 @@ def process_message(message: Message, env: Environment) -> Evm:
     # take snapshot of state before processing the message
     begin_transaction(env.state)
 
+    touch_account(env.state, message.current_target)
+
     sender_balance = get_account(env.state, message.caller).balance
 
-    if message.should_transfer_value:
+    if message.should_transfer_value and message.value != 0:
         if sender_balance < message.value:
             rollback_transaction(env.state)
             raise InsufficientFunds(
